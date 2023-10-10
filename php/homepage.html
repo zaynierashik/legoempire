@@ -14,10 +14,9 @@
     <link rel="stylesheet" href="../css/homepage.css">
 </head>
 <body>
-
     <div class="container">
-    <!-- Navbar -->
-    
+
+    <div class="background-img">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="homepage.php">
@@ -31,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="register.php" class="nav-link me-3 register-btn">REGISTER</a>
+                        <a href="register.php" class="nav-link me-3 register-btn fw-bold">REGISTER</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn px-4 login-btn text-bg-dark" id="modal-btn" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">LOGIN</a>
@@ -41,16 +40,12 @@
         </div>
     </nav>
 
-    <!-- <div class="vl"></div> -->
     <div class="background-container">
         <div class="backgroundImgWrapper">
-            <img src="../images/background.jpg" class="backgroundImg" alt="Background Image">
-            <div class="text-overlay">
-                <h1>Explore the Gadgetverse.</h1>
-            </div>
+            <div class="text-overlay"></div>
         </div>
     </div>
-    
+
     <!-- Modal -->
 
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -59,130 +54,237 @@
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
+                    
             <div class="modal-body">
                 <div class="homepage-login-container">
-                    <form action="" method="POST" class="form">
-                        <div>
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Email address" required>
-                            <input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" required>
-                        </div>
-                        
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" value="" id="password" onclick="showPassword()">
-                            <label class="form-check-label" for="password">Show Password</label>
-                        </div>
-                        
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn text-bg-dark" name="login-submit" id="login-submit" value="Login" style="background-color: #2f904f; color: white;">Login</button>
-                        </div>
-                    </form>
+                <form action="" method="POST" class="form">
+                    <div>
+                        <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Email address" required>
+                        <input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" required>
+                    </div>
+                                
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="password" onclick="showPassword()">
+                        <label class="form-check-label" for="password">Show Password</label>
+                    </div>
+                                
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn text-bg-dark" name="login-submit" id="login-submit" value="Login">Login</button>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
     </div>
     </div>
 
-    <div class="container latest-container mt-5 mb-3">
-        <h4>LATEST RELEASES</h4>
-        <div class="row row-gap-3">
-            <?php
-                $sql = "SELECT * FROM gadget_data WHERE releaseDate >= '2023-09-15' ORDER BY releaseDate ASC LIMIT 4";
-                $stmt = $conn->query($sql);
-                if($stmt->rowCount() > 0){
-                    while($row = $stmt->fetch()){
-                        echo '<div class="col">
-                            <div class="card" style="width: 18.75rem;">
-                            <a href="gadgetdetails.php?gadgetId=' .$row['gadgetId']. '" class="card-link">
-                                <img src="../phone-images/' .$row['mainImg']. '" class="card-img-top" alt="' .$row['name']. '">
-                                <div class="card-body">
-                                    <h6 class="card-title">' .$row['name']. '</h6>
-                                    <p class="card-text" style="font-size: 0.87rem">Starting from NPR ' .$row['basePrice']. '</p>
-                                </div>
-                            </a>
-                            </div>
-                        </div>';
-                    }
-                }else{
-                    echo "<div class='container'>No Gadgets Found.</div>";
-                }
-            ?>
-        </div>
+    </div>
 
-        <div class="text-end mt-3">
-            <button id="prevButton" class="btn me-2 text-bg-dark"><i class="fa fa-arrow-left"data-slide="prev"></i></button>
-            <button id="nextButton" class="btn text-bg-dark"><i class="fa fa-arrow-right"></i></button>
+    <div class="container base-category mt-4 mb-3 text-center">
+        <div class="image-container">
+            <a href=""><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
+            <div class="image-text fw-bold">MARVEL</div>
+        </div>
+        <div class="image-container">
+            <a href=""><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
+            <div class="image-text fw-bold">HALLOWEEN</div>
+        </div>
+        <div class="image-container">
+            <a href=""><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
+            <div class="image-text fw-bold">LEGO</div>
+        </div>
+        <div class="image-container">
+            <a href=""><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
+            <div class="image-text fw-bold">OFFERS</div>
+        </div>
+        <div class="image-container">
+            <a href=""><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
+            <div class="image-text fw-bold">DC</div>
         </div>
     </div>
 
     <div class="container deals-container mt-5 mb-3">
-        <h4>BEST GADGET DEALS</h4>
-        <div class="row row-gap-3">
-            <div class="col" id="card1">
-                <div class="card" style="width: 18.75rem;">
-                <a href="gadgetdetails.php" class="card-link">
-                    <img src="../images/tuf15.jpg" class="card-img-top" alt="Asus TUF F15">
-                    <div class="card-body">
-                        <h5 class="card-title">Asus TUF F15</h5>
-                        <p class="card-text" style="font-size: 0.85rem;">15.6” 144Hz, Core i5-10300H, GTX 1650 Ti, 8GB RAM, 512GB SSD</p>
-                        <p class="card-text"><s>NPR 138,000</s> <span>NPR 120,000</span></p>
+        <h4 class="fw-bold">On Sale!</h4>
+        <div id="carouselExampleCaptions" class="carousel slide carousel-dark">
+            <!-- <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div> -->
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </a>
                 </div>
-            </div>
-            
-            <div class="col" id="card1">
-                <div class="card" style="width: 18.75rem;">
-                <a href="gadgetdetails.php" class="card-link">
-                    <img src="../images/macbookairm2.jpg" class="card-img-top" alt="MacBook Air M2">
-                    <div class="card-body">
-                        <h5 class="card-title">Apple MacBook Air M2</h5>
-                        <p class="card-text" style="font-size: 0.85rem;">13.6”, 8GB RAM, 256GB SSD, 8core CPU, 8core GPU</p>
-                        <p class="card-text"><s>NPR 185,000</s> <span>NPR 160,000</span></p>
+
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" style="width: 18.75rem; border-radius: 0;">
+                                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </a>
                 </div>
             </div>
 
-            <div class="col" id="card1">
-                <div class="card" style="width: 18.75rem;">
-                <a href="gadgetdetails.php" class="card-link">
-                    <img src="../images/strixg15.jpg" class="card-img-top" alt="Asus ROG Strix G15">
-                    <div class="card-body">
-                        <h5 class="card-title">Asus ROG Strix G15 2022</h5>
-                        <p class="card-text" style="font-size: 0.85rem;">15.6” 144Hz, Core i5-10300H, GTX 1650 Ti, 8GB RAM, 512GB SSD</p>
-                        <p class="card-text"><s>NPR 193,000</s> <span>NPR 165,000</span></p>
-                    </div>
-                </a>
-                </div>
-            </div>
+            <div>
+                <button class="carousel-control-prev" type="button" style="width: 1.77%;" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
 
-            <div class="col" id="card1">
-                <div class="card" style="width: 18.75rem;">
-                <a href="gadgetdetails.php" class="card-link">
-                    <img src="../images/zephyrusm16.jpg" class="card-img-top" alt="Asus ROG Zephyrus M16">
-                    <div class="card-body">
-                        <h5 class="card-title">Asus ROG Zephyrus M16</h5>
-                        <p class="card-text" style="font-size: 0.85rem;">16” WQXGA 165Hz, 12th Gen i9-12900H, RTX 3070 Ti, 32GB RAM, 1TB SSD</p>
-                        <p class="card-text"><s>NPR 385,000</s> <span>NPR 340,000</span></p>
-                    </div>
-                </a>
-                </div>
+                <button class="carousel-control-next" type="button" style="width: 1.77%;" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
             </div>
-        </div>
-
-        <div class="text-end mt-3">
-            <button id="exploredeals" class="btn text-bg-dark">Explore more deals ></button>
         </div>
     </div>
 
     <!-- Footer -->
 
-    <div class="container mt-3" style="height: 6vh;">
+    <div class="container mt-5" style="height: 6vh;">
         <div class="text-bg-dark w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
-                    <p>© GadgetVerse, All rights reserved 2023.</p>
+                    <p>© LegoEmpire, All rights reserved 2023.</p>
                 </div>
                 <div class="col text-end">
                     <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
@@ -220,38 +322,13 @@
 
     </div>
 
+    <div class="text-end fixed-top-container" id="top-container">
+        <a href="" id="scroll-to-top">
+            <i class="fa-solid fa-angle-up text-bg-dark" style="color: #ffffff; padding: 13px; font-size: larger;"></i>
+        </a>
+    </div>
+
     <!-- <script>
-        const cards = ["card1", "card2", "card3", "card4", "card5"];
-        let currentIndex = 0;
-
-        function showCards(startIndex){
-            for(let i = 0; i < cards.length; i++){
-                const card = document.getElementById(cards[i]);
-                if(i >= startIndex && i < startIndex + 4){
-                    card.style.display = "block";
-                }else{
-                    card.style.display = "none";
-                }
-            }
-        }
-
-        showCards(currentIndex);
-        document.getElementById("nextButton").addEventListener("click", function(){
-            if(currentIndex + 4 < cards.length){
-                currentIndex += 1;
-                showCards(currentIndex);
-            }
-        });
-
-        document.getElementById("prevButton").addEventListener("click", function(){
-            if(currentIndex > 0){
-                currentIndex -= 1;
-                showCards(currentIndex);
-            }
-        });
-    </script>
-
-    <script>
         document.addEventListener("DOMContentLoaded", function(){
             const exploreDeals = document.querySelector("#exploredeals");
             const successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
