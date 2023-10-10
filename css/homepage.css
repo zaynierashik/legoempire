@@ -1,0 +1,104 @@
+/* Homepage */
+
+    @import url('https://fonts.cdnfonts.com/css/louis-george-cafe');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Louis George Café', sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.navbar-brand{
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.vl{
+    background-color: #929497;
+    width: 98%;
+    height: 0.25vh;
+    margin: 1.5vh 0 0 0.87vw;
+}
+
+.background-container{
+    position: relative;
+    height: 67vh;
+    overflow: hidden;
+}
+
+.backgroundImgWrapper{
+    position: relative;
+    width: 99.05%;
+    padding: 0vh 0vw 3vh 0.87vw;
+}
+
+.backgroundImg{
+    width: 100%;
+    height: auto;
+}
+
+.text-overlay{
+    position: absolute;
+    top: 28.7%;
+    left: 22.5%;
+    transform: translate(-50%, -50%);
+    padding: 1vh 1.5vw;
+    border-radius: 50px;
+}
+
+.text-overlay h1{
+    margin: 0;
+    color: #000;
+}
+
+.homepage-register-container{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.homepage-register-container .form-control, .homepage-login-container .form-control,
+.homepage-register-container button, .homepage-login-container button{
+    font-size: 0.87rem;
+    height: 5.5vh;
+}
+
+.homepage-register-container .form-check-label, .homepage-login-container .form-check-label{
+    font-size: 0.87rem;
+}
+
+.login-btn{
+    transition: transform 0.35s;
+}
+
+.login-btn:hover{
+    background-color: black;
+    color: white;
+    transform: scale(1.05);
+}
+
+.latest-container .card a, .deals-container .card a{
+    text-decoration: none;
+    color: black;
+}
+
+.background-color{
+    background-color: #e6e9ef;
+}
+
+.top{
+    position: fixed;
+    bottom: 1.77vh;
+    right: 1.7vw;
+    z-index: 999;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}

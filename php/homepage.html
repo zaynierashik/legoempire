@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lego Empire</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
+    <link rel="stylesheet" href="../css/homepage.css">
+</head>
+<body>
+
+    <div class="container">
+    <!-- Navbar -->
+    
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="homepage.php">
+                <img src="../images/logo.png" alt="The Lego Empire" width="175">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="register.php" class="nav-link me-3 register-btn">REGISTER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn px-4 login-btn text-bg-dark" id="modal-btn" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">LOGIN</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- <div class="vl"></div> -->
+    <div class="background-container">
+        <div class="backgroundImgWrapper">
+            <img src="../images/background.jpg" class="backgroundImg" alt="Background Image">
+            <div class="text-overlay">
+                <h1>Explore the Gadgetverse.</h1>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="homepage-login-container">
+                    <form action="" method="POST" class="form">
+                        <div>
+                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Email address" required>
+                            <input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" required>
+                        </div>
+                        
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" value="" id="password" onclick="showPassword()">
+                            <label class="form-check-label" for="password">Show Password</label>
+                        </div>
+                        
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn text-bg-dark" name="login-submit" id="login-submit" value="Login" style="background-color: #2f904f; color: white;">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container latest-container mt-5 mb-3">
+        <h4>LATEST RELEASES</h4>
+        <div class="row row-gap-3">
+            <?php
+                $sql = "SELECT * FROM gadget_data WHERE releaseDate >= '2023-09-15' ORDER BY releaseDate ASC LIMIT 4";
+                $stmt = $conn->query($sql);
+                if($stmt->rowCount() > 0){
+                    while($row = $stmt->fetch()){
+                        echo '<div class="col">
+                            <div class="card" style="width: 18.75rem;">
+                            <a href="gadgetdetails.php?gadgetId=' .$row['gadgetId']. '" class="card-link">
+                                <img src="../phone-images/' .$row['mainImg']. '" class="card-img-top" alt="' .$row['name']. '">
+                                <div class="card-body">
+                                    <h6 class="card-title">' .$row['name']. '</h6>
+                                    <p class="card-text" style="font-size: 0.87rem">Starting from NPR ' .$row['basePrice']. '</p>
+                                </div>
+                            </a>
+                            </div>
+                        </div>';
+                    }
+                }else{
+                    echo "<div class='container'>No Gadgets Found.</div>";
+                }
+            ?>
+        </div>
+
+        <div class="text-end mt-3">
+            <button id="prevButton" class="btn me-2 text-bg-dark"><i class="fa fa-arrow-left"data-slide="prev"></i></button>
+            <button id="nextButton" class="btn text-bg-dark"><i class="fa fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="container deals-container mt-5 mb-3">
+        <h4>BEST GADGET DEALS</h4>
+        <div class="row row-gap-3">
+            <div class="col" id="card1">
+                <div class="card" style="width: 18.75rem;">
+                <a href="gadgetdetails.php" class="card-link">
+                    <img src="../images/tuf15.jpg" class="card-img-top" alt="Asus TUF F15">
+                    <div class="card-body">
+                        <h5 class="card-title">Asus TUF F15</h5>
+                        <p class="card-text" style="font-size: 0.85rem;">15.6” 144Hz, Core i5-10300H, GTX 1650 Ti, 8GB RAM, 512GB SSD</p>
+                        <p class="card-text"><s>NPR 138,000</s> <span>NPR 120,000</span></p>
+                    </div>
+                </a>
+                </div>
+            </div>
+            
+            <div class="col" id="card1">
+                <div class="card" style="width: 18.75rem;">
+                <a href="gadgetdetails.php" class="card-link">
+                    <img src="../images/macbookairm2.jpg" class="card-img-top" alt="MacBook Air M2">
+                    <div class="card-body">
+                        <h5 class="card-title">Apple MacBook Air M2</h5>
+                        <p class="card-text" style="font-size: 0.85rem;">13.6”, 8GB RAM, 256GB SSD, 8core CPU, 8core GPU</p>
+                        <p class="card-text"><s>NPR 185,000</s> <span>NPR 160,000</span></p>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div class="col" id="card1">
+                <div class="card" style="width: 18.75rem;">
+                <a href="gadgetdetails.php" class="card-link">
+                    <img src="../images/strixg15.jpg" class="card-img-top" alt="Asus ROG Strix G15">
+                    <div class="card-body">
+                        <h5 class="card-title">Asus ROG Strix G15 2022</h5>
+                        <p class="card-text" style="font-size: 0.85rem;">15.6” 144Hz, Core i5-10300H, GTX 1650 Ti, 8GB RAM, 512GB SSD</p>
+                        <p class="card-text"><s>NPR 193,000</s> <span>NPR 165,000</span></p>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div class="col" id="card1">
+                <div class="card" style="width: 18.75rem;">
+                <a href="gadgetdetails.php" class="card-link">
+                    <img src="../images/zephyrusm16.jpg" class="card-img-top" alt="Asus ROG Zephyrus M16">
+                    <div class="card-body">
+                        <h5 class="card-title">Asus ROG Zephyrus M16</h5>
+                        <p class="card-text" style="font-size: 0.85rem;">16” WQXGA 165Hz, 12th Gen i9-12900H, RTX 3070 Ti, 32GB RAM, 1TB SSD</p>
+                        <p class="card-text"><s>NPR 385,000</s> <span>NPR 340,000</span></p>
+                    </div>
+                </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-end mt-3">
+            <button id="exploredeals" class="btn text-bg-dark">Explore more deals ></button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <div class="container mt-3" style="height: 6vh;">
+        <div class="text-bg-dark w-100 h-100 d-inline-block ps-3 pt-3">
+            <div class="row" style="font-size: 0.77rem;">
+                <div class="col-7">
+                    <p>© GadgetVerse, All rights reserved 2023.</p>
+                </div>
+                <div class="col text-end">
+                    <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                    <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Message -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Message</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">You need to login first.</div>
+    </div>
+    </div>
+
+    <!-- Error Message -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Login Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="errorToastBody"></div>
+    </div>
+    </div>
+
+    </div>
+
+    <!-- <script>
+        const cards = ["card1", "card2", "card3", "card4", "card5"];
+        let currentIndex = 0;
+
+        function showCards(startIndex){
+            for(let i = 0; i < cards.length; i++){
+                const card = document.getElementById(cards[i]);
+                if(i >= startIndex && i < startIndex + 4){
+                    card.style.display = "block";
+                }else{
+                    card.style.display = "none";
+                }
+            }
+        }
+
+        showCards(currentIndex);
+        document.getElementById("nextButton").addEventListener("click", function(){
+            if(currentIndex + 4 < cards.length){
+                currentIndex += 1;
+                showCards(currentIndex);
+            }
+        });
+
+        document.getElementById("prevButton").addEventListener("click", function(){
+            if(currentIndex > 0){
+                currentIndex -= 1;
+                showCards(currentIndex);
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const exploreDeals = document.querySelector("#exploredeals");
+            const successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+
+            exploreDeals.addEventListener("click", function(event){
+                event.preventDefault();
+                successToast.show();
+            });
+        });
+    </script>
+
+    <script>
+    <?php
+        if(!$userauth || !password_verify($password, $userauth['password'])){
+            echo 'document.addEventListener("DOMContentLoaded", function() {
+                var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                document.getElementById("errorToastBody").innerText = "Incorrect email or password.";
+                errorToast.show();
+            });';
+        }
+    ?>
+    </script> -->
+    
+    <script src="../js/script.js"></script>
+    <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>
