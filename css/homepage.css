@@ -106,7 +106,7 @@ html{
     font-size: 1.1rem;
 }
 
-.latest-container .card a{
+.latest-container .card a, .news-container .card a{
     text-decoration: none;
     color: black;
 }
@@ -133,6 +133,39 @@ html{
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
     z-index: 999;
+}
+
+.slider{
+    padding-bottom: 1.7vh;
+    display: flex;
+    overflow-x: auto;
+}
+ 
+.slider-container{
+    display: flex;
+}
+
+.slider::-webkit-scrollbar{
+    height: 1vh;
+}
+  
+.slider::-webkit-scrollbar-track{
+    border-radius: 1.7px;
+    background: #f1f1f1;
+}
+
+.slider::-webkit-scrollbar-thumb {
+    border-radius: 1.7px;
+    background: #888; 
+}
+  
+.slider::-webkit-scrollbar-thumb:hover{
+    background: black; 
+}
+
+.letsplay{
+    width: 17.17%;
+    margin-left: 74.87vw;
 }
 
 .show{
