@@ -30,10 +30,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="register.php" class="nav-link me-3 register-btn fw-bold">REGISTER</a>
+                        <a href="register.html" class="nav-link me-3 register-btn fw-bold">REGISTER</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn px-4 login-btn text-bg-dark" id="modal-btn" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">LOGIN</a>
+                        <a href="signin.html" class="nav-link btn px-4 login-btn text-bg-dark" role="button">SIGN IN</a>
                     </li>
                 </ul>
             </div>
@@ -104,7 +104,7 @@
     </div>
 
     <div class="container sale-container mt-5">
-        <h4 class="fw-bold">On Sale!</h4>
+        <h3 class="fw-bold">On Sale!</h3>
         <div class="slider">
             <div class="slider-container">
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
@@ -243,7 +243,7 @@
     </div>
 
     <div class="container news-container">
-        <h4 class="fw-bold">Read All About It</h4>
+        <h3 class="fw-bold">Read All About It</h3>
         <div class="row">
             <div class="col">
                 <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
@@ -355,18 +355,6 @@
                 successToast.show();
             });
         });
-    </script>
-
-    <script>
-    <?php
-        if(!$userauth || !password_verify($password, $userauth['password'])){
-            echo 'document.addEventListener("DOMContentLoaded", function() {
-                var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                document.getElementById("errorToastBody").innerText = "Incorrect email or password.";
-                errorToast.show();
-            });';
-        }
-    ?>
     </script> -->
     
     <script src="../js/script.js"></script>
