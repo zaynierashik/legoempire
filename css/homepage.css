@@ -55,21 +55,6 @@ html{
     color: #000;
 }
 
-.homepage-register-container{
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-}
-
-.homepage-register-container .form-control, .homepage-login-container .form-control,
-.homepage-register-container button, .homepage-login-container button{
-    font-size: 0.87rem;
-    height: 5.5vh;
-}
-
-.homepage-register-container .form-check-label, .homepage-login-container .form-check-label{
-    font-size: 0.87rem;
-}
-
 .login-btn{
     border-radius: 0;
     transition: transform 0.35s;
@@ -171,6 +156,32 @@ html{
 .show{
     opacity: 1;
     pointer-events: auto;
+}
+
+.homepage-register-container{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.homepage-register-container .form-control, .homepage-login-container .form-control,
+.homepage-register-container button, .homepage-login-container button{
+    height: 5.5vh;
+}
+
+.input-wrapper{
+    position: relative;
+}
+
+.input-wrapper input{
+    padding-left: 2.25vw;
+}
+
+.input-wrapper i{
+    font-size: 0.95rem;
+    position: absolute;
+    top: 50%;
+    left: 0.7vw;
+    transform: translateY(-50%);
 }
 
 input[type=number]::-webkit-inner-spin-button,
