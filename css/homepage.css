@@ -152,7 +152,7 @@ html{
 /* Sign In */
 
 .register-container{
-    background-image: url('../images/signbg.png');
+    background-image: url('../images/loginbg.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
