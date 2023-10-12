@@ -11,8 +11,10 @@ html{
     scroll-behavior: smooth;
 }
 
+/* Homepage */
+
 .background-img{
-    background-image: url(../Images/batman.jpg);
+    background-image: url(../images/batman.jpg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
@@ -53,17 +55,6 @@ html{
 .text-overlay h1{
     margin: 0;
     color: #000;
-}
-
-.login-btn{
-    border-radius: 0;
-    transition: transform 0.35s;
-}
-
-.login-btn:hover{
-    background-color: black;
-    color: white;
-    transform: scale(1.05);
 }
 
 .base-category{
@@ -158,14 +149,19 @@ html{
     pointer-events: auto;
 }
 
-.homepage-register-container{
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+/* Sign In */
+
+.register-container{
+    background-image: url('../images/signbg.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
 
 .homepage-register-container .form-control, .homepage-login-container .form-control,
 .homepage-register-container button, .homepage-login-container button{
     height: 5.5vh;
+    border-radius: 0;
 }
 
 .input-wrapper{
@@ -184,8 +180,18 @@ html{
     transform: translateY(-50%);
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button{
+.login-btn{
+    border-radius: 0;
+    transition: transform 0.35s;
+}
+
+.login-btn:hover{
+    background-color: black;
+    color: white;
+    transform: scale(1.05);
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{
     -webkit-appearance: none;
     margin: 0;
 }

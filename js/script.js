@@ -36,25 +36,18 @@
         }
     }
 
-    // Toggle Form
-
-    const modalBtn = document.getElementById('modal-btn');
-    const loginModal = document.getElementById('loginModal');
-
-    modalBtn.addEventListener('click', function() {
-        loginModal.style.display = 'block';
-    });
-
-    const closeModal = document.querySelector('.fa-xmark');
-    closeModal.addEventListener('click', function() {
-        loginModal.style.display = 'none';
-    });
-
-    // Toggle Register Form
+    // Toggle Login & Register Form
 
     function showRegisterForm(){
-        var userForm = document.getElementById("register");
-        var orgForm = document.getElementById("organization-register");
-        userForm.style.display = "none";
-        orgForm.style.display = "block";
+        var loginForm = document.getElementById("login");
+        var registerForm = document.getElementById("register");
+        loginForm.style.display = "none";
+        registerForm.style.display = "block";
+    }
+
+    function showLoginForm(){
+        var loginForm = document.getElementById("login");
+        var registerForm = document.getElementById("register");
+        loginForm.style.display = "block";
+        registerForm.style.display = "none";
     }
