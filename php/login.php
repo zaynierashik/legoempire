@@ -1,3 +1,56 @@
+<?php
+    session_start();
+    include 'connect.php';
+
+    if(isset($_SESSION['username'])){
+        header('location: homepage.php');
+    }
+
+    if(isset($_POST['login-submit'])){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $stmt = $conn->prepare("SELECT * FROM user_data WHERE email=:email");
+        $stmt ->bindParam(':email', $email);
+        $stmt ->execute();
+        $userauth = $stmt->fetch();
+    
+        if($userauth){
+            if(password_verify($password, $userauth['password'])){
+                session_start();
+                $_SESSION['username'] = $userauth['email'];
+                $_SESSION['userId'] = $userauth['userId'];
+                header('location: userpage.php');
+                exit();
+            }
+        }
+    }
+
+    if(isset($_POST['register-submit'])){
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "SELECT * FROM user_data WHERE phone = ? OR email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt ->execute([$phone, $email]);
+        $result = $stmt->fetch();
+
+        if($result){
+            
+        }else{
+            $sql = "INSERT INTO user_data (name, phone, email, password) VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+
+            if($stmt->execute([$name, $phone, $email, $hashed_password])){
+                $success = 1;
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +71,7 @@
 
     <nav class="navbar ps-3 pt-5 container">
         <div class="container d-flex justify-content-center">
-            <a class="navbar-brand mt-3" href="homepage.html">
+            <a class="navbar-brand mt-3" href="homepage.php">
                 <img src="../images/logo.png" alt="The Lego Empire" width="175">
             </a>
         </div>
@@ -73,14 +126,14 @@
                         <i class="fa fa-envelope"></i>
                     </div>
                     <div class="input-wrapper">
-                        <input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{7,}" title="Must contain at least one number and one lowercase letter, and at least 7 or more characters" required>
+                        <input type="password" class="form-control mb-2" name="password" id="regpassword" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{7,}" title="Must contain at least one number and one lowercase letter, and at least 7 or more characters" required>
                         <i class="fa fa-lock"></i>
                     </div>
                 </div>                
                 
                 <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="showpassword" onclick="showPassword()">
-                    <small><label class="form-check-label" for="showpassword">Show Password</label></small>
+                    <input class="form-check-input" type="checkbox" value="" id="showregpassword" onclick="showRegPassword()">
+                    <small><label class="form-check-label" for="showregpassword">Show Password</label></small>
                 </div>
                 
                 <div class="d-grid">
@@ -92,6 +145,18 @@
         </div>
     </div>
     
+    </div>
+    </div>
+
+    <!-- Login Error Message -->
+    
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="loginErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Login Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="errorToastBody">Incorrect email or password.</div>
     </div>
     </div>
 
@@ -118,32 +183,19 @@
         <div class="toast-body" id="errorToastBody">User already exists.</div>
     </div>
     </div>
-
-    <!-- Login Message -->
-
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Message</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">You need to login first.</div>
-        </div>
-    </div>
     
-    <!-- Login Error Message -->
-    
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Login Error</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body" id="errorToastBody"></div>
-        </div>
-    </div>
+    <script>
+    <?php
+        if(!$userauth || !password_verify($password, $userauth['password'])){
+            echo 'document.addEventListener("DOMContentLoaded", function() {
+                var errorToast = new bootstrap.Toast(document.getElementById("loginErrorToast"));
+                errorToast.show();
+            });';
+        }
+    ?>
+    </script>
 
-    <!-- <script>
+    <script>
     <?php
         if(isset($success) && $success === 1){
             echo 'document.addEventListener("DOMContentLoaded", function() {
@@ -163,7 +215,7 @@
             });';
         }
     ?>
-    </script> -->
+    </script>
 
     <script src="../js/script.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>

@@ -19,7 +19,7 @@
     <div class="background-img">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="homepage.html">
+            <a class="navbar-brand" href="homepage.php">
                 <img src="../images/logo.png" alt="The Lego Empire" width="175">
             </a>
 
@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="signin.html" class="nav-link btn px-4 login-btn text-bg-dark" role="button">LOGIN</a>
+                        <a href="login.php" class="nav-link btn px-4 login-btn text-bg-dark" role="button">LOGIN</a>
                     </li>
                 </ul>
             </div>

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    include 'connect.php';
+
+    if(isset($_SESSION['username'])){
+        header('location: userpage.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,10 +39,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="cart.html" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
+                        <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a href="login.html" class="nav-link btn px-4 login-btn text-bg-dark" role="button">LOGIN</a>
+                        <a href="login.php" class="nav-link btn px-4 login-btn text-bg-dark" role="button">LOGIN</a>
                     </li>
                 </ul>
             </div>

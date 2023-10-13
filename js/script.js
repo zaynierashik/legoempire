@@ -10,10 +10,12 @@
     }
 
     window.addEventListener('scroll', toggleTopContainerVisibility);
+
     document.getElementById('scroll-to-top').addEventListener('click', function (event){
         event.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+    
     toggleTopContainerVisibility();
     
     // Show Password
@@ -27,8 +29,8 @@
         }
     }
 
-    function showOrgPassword(){
-        var x = document.getElementById("orgPassword");
+    function showRegPassword(){
+        var x = document.getElementById("regpassword");
         if(x.type == "password"){
             x.type = "text";
         }else{
