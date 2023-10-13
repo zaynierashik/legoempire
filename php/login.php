@@ -99,7 +99,7 @@
                 </div>
                 
                 <div class="d-grid">
-                    <button type="submit" class="btn text-bg-dark pt-1" name="login-submit" id="login-submit" value="Login" style="border: none;">Login</button>
+                    <button type="submit" class="btn pt-1" name="login-submit" id="login-submit" value="Login" style="border: none; background-color: black; color: white;">Login</button>
                 </div>
             </form>
 
@@ -137,7 +137,7 @@
                 </div>
                 
                 <div class="d-grid">
-                    <button type="submit" class="btn text-bg-dark pt-1" name="register-submit" id="register-submit" value="Register" style="border: none;">Create Account</button>
+                    <button type="submit" class="btn pt-1" name="register-submit" id="register-submit" value="Register" style="border: none; background-color: black; color: white;">Create Account</button>
                 </div>
             </form>
 

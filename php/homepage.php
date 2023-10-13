@@ -4,6 +4,8 @@
 
     if(isset($_SESSION['username'])){
         header('location: userpage.php');
+    }elseif(isset($_SESSION['adminname'])){
+        header('location: adminpage.php');
     }
 ?>
 
@@ -42,7 +44,7 @@
                         <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a href="login.php" class="nav-link btn px-4 login-btn text-bg-dark" role="button">LOGIN</a>
+                        <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
                     </li>
                 </ul>
             </div>
@@ -405,8 +407,8 @@
 
     <!-- Footer -->
 
-    <div class="container mt-3" style="height: 6vh;">
-        <div class="text-bg-dark w-100 h-100 d-inline-block ps-3 pt-3">
+    <div class="container mt-3" style="height: 6vh; background-color: black; color: white;">
+        <div class="w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
                     <p>© TheLegoEmpire, All rights reserved 2023.</p>
@@ -425,7 +427,7 @@
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
-            <i class="fa-solid fa-angle-up text-bg-dark" style="color: #ffffff; padding: 13px; font-size: larger;"></i>
+            <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
 

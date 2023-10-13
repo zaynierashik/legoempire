@@ -3,13 +3,8 @@
     include 'connect.php';
 
     if(!isset($_SESSION['adminname'])){
-        header('location: homepage.php');
+        header('location: adminauthentication.php');
     }
-
-    $adminCount = $conn->query("SELECT COUNT(adminId) FROM admin_data") -> fetchColumn();
-    $courseCount = $conn->query("SELECT COUNT(courseId) FROM course_data") -> fetchColumn();
-    $userCount = $conn->query("SELECT COUNT(userId) FROM user_data") -> fetchColumn();
-    $collegeCount = $conn->query("SELECT COUNT(collegeId) FROM college_data") -> fetchColumn();
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamro College</title>
+    <title>The Lego Empire</title>
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
@@ -28,208 +23,427 @@
 </head>
 <body>
 
-    <!-- Navbar -->
+<div class="container">
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="adminpage.php">
-                <img src="../images/logo.png" alt="GadgetVerse" width="200" height="50">
-            </a>
+<div class="background-img">
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="homepage.php">
+            <img src="../images/logo.png" alt="The Lego Empire" width="175">
+        </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="usernavbar navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page"><?php echo $_SESSION['adminname'] ?></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="logout.php" class="nav-link logout-nav" aria-current="page">logout</a>
-                    </li>
-                </ul>
-            </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
+                </li>
+            </ul>
         </div>
-    </nav>
-
-    <div class="link-container navbar navbar-expand-lg" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="adminpage.php" class="nav-link active" aria-current="page">Dashboard</a>
-            </li>
-            <li class="nav-item ps-1">
-                <a href="manageadmin.php" class="nav-link" aria-current="page">Manage Admin</a>
-            </li>
-            <li class="nav-item ps-1">
-                <a href="managecolleges.php" class="nav-link" aria-current="page">Manage Colleges</a>
-            </li>
-        </ul>
     </div>
+</nav>
 
-    <div class="background-color" style="min-height: 73.5vh;">
-        <div class="container admin-container">
-            <p class="admin-title">DASHBOARD</p>
-            <div class="container text-center admin-card">
-                <div class="row row-gap-4">
-                    <div class="col card-link">
-                        <div class="card" style="width: 14.7rem; height: auto; border-radius: 15px;">
-                            <div class="card-body">
-                                <i class="fa-solid fa-user-tie fa-lg mb-5 mt-5" style="color: #000000; font-size: 2.5rem;"></i>
-                                <p class="total-count">Admin Count: <?php echo $adminCount ?></p>
-                            </div>
-                        </div>
+<div class="background-container">
+    <div class="backgroundImgWrapper">
+        <div class="text-overlay"></div>
+    </div>
+</div>
+
+</div>
+
+<div class="container base-category mt-4 mb-3 text-center">
+    <div class="image-container">
+        <a href=""><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
+        <div class="image-text fw-bold">MARVEL</div>
+    </div>
+    <div class="image-container">
+        <a href=""><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
+        <div class="image-text fw-bold">HALLOWEEN</div>
+    </div>
+    <div class="image-container">
+        <a href=""><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
+        <div class="image-text fw-bold">LEGO</div>
+    </div>
+    <div class="image-container">
+        <a href=""><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
+        <div class="image-text fw-bold">OFFERS</div>
+    </div>
+    <div class="image-container">
+        <a href=""><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
+        <div class="image-text fw-bold">DC</div>
+    </div>
+</div>
+
+<div class="container sale-container mt-5">
+    <h3 class="fw-bold">On Sale!</h3>
+    <div class="slider">
+        <div class="slider-container">
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                     </div>
-                    <div class="col card-link" onclick="showcounttable('user-count-table')">
-                        <div class="card" style="width: 14.7rem; height: auto; border-radius: 15px;">
-                            <div class="card-body">
-                                <i class="fa-solid fa-user fa-lg mb-5 mt-5" style="color: #000000; font-size: 2.5rem;"></i>
-                                <p class="total-count" id="usercount">User Count: <?php echo $userCount ?></p>
-                            </div>
-                        </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                     </div>
-                    <div class="col card-link" onclick="showcounttable('college-count-table')">
-                        <div class="card" style="width: 14.7rem; height: auto; border-radius: 15px;">
-                            <div class="card-body">
-                                <i class="fa-solid fa-building-columns fa-lg mb-5 mt-5" style="color: #000000; font-size: 2.5rem;"></i>
-                                <p class="total-count" id="collegecount">College Count: <?php echo $collegeCount ?></p>
-                            </div>
-                        </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+    
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                     </div>
-                    <div class="col card-link" onclick="showcounttable('course-count-table')">
-                        <div class="card" style="width: 14.7rem; height: auto; border-radius: 15px;">
-                            <div class="card-body">
-                                <i class="fa-sharp fa-solid fa-graduation-cap fa-lg mb-5 mt-5" style="color: #000000; font-size: 2.5rem;"></i>
-                                <p class="total-count" id="coursecount">Course Count: <?php echo $courseCount ?></p>
-                            </div>
-                        </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+    
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                     </div>
-                    <div class="col card-link" onclick="showcounttable('feedback-count-table')">
-                        <div class="card" style="width: 14.7rem; height: auto; border-radius: 15px;">
-                            <div class="card-body">
-                                <i class="fa-solid fa-message fa-lg mb-5 mt-5" style="color: #000000; font-size: 2.5rem;"></i>
-                                <p class="total-count" id="feedback">View Feedback</p>
-                            </div>
-                        </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+    
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                     </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.85vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- User -->
+<div class="container sale-container mt-5">
+    <h3 class="fw-bold">Recommended For You</h3>
+    <div class="slider">
+        <div class="slider-container">
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+    
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+    
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
+    
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
 
-        <div class="container display-container" id="user-count-table" style="display: none;">
-            <p class="admin-title">USER</p>
-            <table class="table table-striped user-table">
-                <tr class="table-dark">
-                    <td class="table-SN">S.N.</td>
-                    <td class="table-body">Name</td>
-                    <td class="table-body">Email Address</td>
-                    <td class="table-body">Phone Number</td>
-                </tr>
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
 
-                <?php
-                    $stmt = $conn->prepare("SELECT * FROM user_data");
-                    $stmt ->execute();
-                    $count = 1;
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                ?>
-                <tr>
-                    <td class="table-SN"><?php echo $count++ ?></td>
-                    <td class="table-body"><?php echo $row['name'] ?></td>
-                    <td class="table-body"><?php echo $row['email'] ?></td>
-                    <td class="table-body"><?php echo $row['phone'] ?></td>
-                </tr>
-                <?php } ?>
-            </table>
-        </div>
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
 
-        <!-- College -->
-
-        <div class="container display-container" id="college-count-table" style="display: none;">
-            <p class="admin-title">COLLEGE</p>
-            <table class="table table-striped college-table">
-                <tr class="table-dark">
-                    <td class="table-SN">S.N.</td>
-                    <td class="table-body">College Name</td>
-                    <td class="table-body">Email Address</td>
-                    <td class="table-body">Phone Number</td>
-                </tr>
-                
-                <?php
-                    $stmt = $conn->prepare("SELECT * FROM institution_data WHERE status = 'Approved'");
-                    $stmt ->execute();
-                    $count = 1;
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                ?>
-                <tr>
-                    <td class="table-SN"><?php echo $count++ ?></td>
-                    <td class="table-body"><?php echo $row['name'] ?></td>
-                    <td class="table-body"><?php echo $row['email'] ?></td>
-                    <td class="table-body"><?php echo $row['phone'] ?></td>
-                </tr>
-                <?php } ?>
-            </table>
-        </div>
-
-        <!-- Course -->
-
-        <div class="container display-container" id="course-count-table" style="display: none;">
-            <p class="admin-title">COURSE</p>
-            <table class="table table-striped course-table">
-                <tr class="table-dark">
-                    <td class="table-SN">S.N.</td>
-                    <td class="table-body">Course Name</td>
-                    <td class="table-body">Abbreviation</td>
-                </tr>
-                
-                <?php
-                    $stmt = $conn->prepare("SELECT * FROM course_data");
-                    $stmt ->execute();
-                    $count = 1;
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                ?>
-                <tr>
-                    <td class="table-SN"><?php echo $count++ ?></td>
-                    <td class="table-body"><?php echo $row['title'] ?></td>
-                    <td class="table-body"><?php echo $row['abbreviation'] ?></td>
-                </tr>
-                <?php } ?>
-            </table>
-        </div>
-
-        <!-- Feedback -->
-
-        <div class="container display-container" id="feedback-count-table">
-            <p class="admin-title">FEEDBACK</p>
-            <table class="table table-striped feedback-table">
-                <tr class="table-dark">
-                    <td class="table-SN">S.N.</td>
-                    <td class="table-body">Name</td>
-                    <td class="table-body">Email Address</td>
-                    <td class="table-body">Feedback</td>
-                </tr>
-                
-                <?php
-                    $stmt = $conn->prepare("SELECT * FROM feedback_data");
-                    $stmt ->execute();
-                    $count = 1;
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                ?>
-                <tr>
-                    <td class="table-SN"><?php echo $count++ ?></td>
-                    <td class="table-body"><?php echo $row['username'] ?></td>
-                    <td class="table-body"><?php echo $row['email'] ?></td>
-                    <td class="table-body"><?php echo $row['feedback'] ?></td>
-                </tr>
-                <?php } ?>
-            </table>
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.85vw;">
+                <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                    <div>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                    </div>
+                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
+                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <script src="../js/adminscript.js"></script>
-    <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<div class="container news-container mt-5">
+    <h3 class="fw-bold">Read All About It</h3>
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
+                <a href="">
+                    <img src="../images/marvelnews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
+                    <div class="card-body px-0">
+                        <h5 class="card-title fw-bold fs-5 mb-3">Best LEGO® Marvel Sets & Toys</h5>
+                        <p style="text-align: justify;">Discover the best LEGO® sets for Marvel fans young and old. Relive your favorite scenes from the movies, or create your own adventures!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
+                <a href="">
+                    <img src="../images/dreamznews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
+                    <div class="card-body px-0">
+                        <h5 class="card-title fw-bold fs-5 mb-3">Behind the scenes of the LEGO® DREAMZzz™ TV show</h5>
+                        <p style="text-align: justify;">Discover all there is to know about the brand-new LEGO® TV show and theme!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
+                <a href="">
+                    <img src="../images/marvelnews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
+                    <div class="card-body px-0">
+                        <h5 class="card-title fw-bold fs-5 mb-3">Best LEGO® Marvel Sets & Toys</h5>
+                        <p style="text-align: justify;">Discover the best LEGO® sets for Marvel fans young and old. Relive your favorite scenes from the movies, or create your own adventures!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
+                <a href="">
+                    <img src="../images/dreamznews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
+                    <div class="card-body px-0">
+                        <h5 class="card-title fw-bold fs-5 mb-3">Behind the scenes of the LEGO® DREAMZzz™ TV show</h5>
+                        <p style="text-align: justify;">Discover all there is to know about the brand-new LEGO® TV show and theme!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+<div class="container mt-3" style="height: 6vh; background-color: black; color: white;">
+    <div class="w-100 h-100 d-inline-block ps-3 pt-3">
+        <div class="row" style="font-size: 0.77rem;">
+            <div class="col-7">
+                <p>© TheLegoEmpire, All rights reserved 2023.</p>
+            </div>
+            <div class="col text-end">
+                <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
+            </div>                
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="text-end fixed-top-container" id="top-container">
+    <a href="" id="scroll-to-top">
+        <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
+    </a>
+</div>
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const exploreDeals = document.querySelector("#exploredeals");
+        const successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+
+        exploreDeals.addEventListener("click", function(event){
+            event.preventDefault();
+            successToast.show();
+        });
+    });
+</script> -->
+
+<script src="../js/script.js"></script>
+<script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -1,28 +1,22 @@
-    // Toggle Table
+    // Back to Top
 
-    var currentManageTable = document.getElementById("feedback-count-table");
-
-    function showcounttable(tableId){
-        var manageTable = document.getElementById(tableId);
-        if(currentManageTable !== null && currentManageTable !== manageTable){
-            currentManageTable.style.display = "none";
-        }
-
-        if(manageTable.style.display === "none"){
-            manageTable.style.display = "block";
-            currentManageTable = manageTable;
+    function toggleTopContainerVisibility(){
+        const topContainer = document.getElementById('top-container');
+        if(window.scrollY >= 500){
+            topContainer.classList.add('show');
+        }else{
+            topContainer.classList.remove('show');
         }
     }
 
-    function hideAllManageTables(){
-        var manageTables = document.getElementsByClassName("user-count-table");
-        for(var i = 0; i < manageTables.length; i++){
-            manageTables[i].style.display = "none";
-        }
-        currentManageTable = null;
-    }
+    window.addEventListener('scroll', toggleTopContainerVisibility);
+
+    document.getElementById('scroll-to-top').addEventListener('click', function (event){
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     
-    currentManageTable.style.display = "block";
+    toggleTopContainerVisibility();
 
     // Show Password
 
@@ -35,11 +29,27 @@
         }
     }
 
-    function showAdminPassword(){
-        var x = document.getElementById("adminpassword");
+    function showRegPassword(){
+        var x = document.getElementById("regpassword");
         if(x.type == "password"){
             x.type = "text";
         }else{
             x.type = "password";
         }
+    }
+    
+    // Toggle Login & Register Form
+
+    function showRegisterForm(){
+        var loginForm = document.getElementById("login");
+        var registerForm = document.getElementById("register");
+        loginForm.style.display = "none";
+        registerForm.style.display = "block";
+    }
+
+    function showLoginForm(){
+        var loginForm = document.getElementById("login");
+        var registerForm = document.getElementById("register");
+        loginForm.style.display = "block";
+        registerForm.style.display = "none";
     }

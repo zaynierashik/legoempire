@@ -2,6 +2,30 @@
     session_start();
     include 'connect.php';
 
+    if(isset($_SESSION['adminname'])){
+        header('location: adminpage.php');
+    }
+
+    if(isset($_POST['login-submit'])){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $stmt = $conn->prepare("SELECT * FROM admin_data WHERE email=:email");
+        $stmt ->bindParam(':email', $email);
+        $stmt ->execute();
+        $userauth = $stmt->fetch();
+    
+        if($userauth){
+            if(password_verify($password, $userauth['password'])){
+                session_start();
+                $_SESSION['adminname'] = $userauth['email'];
+                $_SESSION['adminId'] = $userauth['adminId'];
+                header('location: adminpage.php');
+                exit();
+            }
+        }
+    }
+
     if(isset($_POST['register-submit'])){
         $name = $_POST['name'];
         $phone = $_POST['phone'];
@@ -9,7 +33,7 @@
         $password = $_POST['password'];
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "SELECT * FROM admin_data WHERE phone = ? AND email = ?";
+        $sql = "SELECT * FROM admin_data WHERE phone = ? OR email = ?";
         $stmt = $conn->prepare($sql);
         $stmt ->execute([$phone, $email]);
         $result = $stmt->fetch();
@@ -20,27 +44,8 @@
             $sql = "INSERT INTO admin_data (name, phone, email, password) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
 
-            if ($stmt->execute([$name, $phone, $email, $hashed_password])){
+            if($stmt->execute([$name, $phone, $email, $hashed_password])){
                 $success = 1;
-            }
-        }
-    }
-
-    if(isset($_POST['login-submit'])){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $stmt = $conn->prepare("SELECT * FROM admin_data WHERE email = :email");
-        $stmt ->bindParam(':email', $email);
-        $stmt ->execute();
-        $adminauth = $stmt->fetch();
-
-        if($adminauth){
-            if(password_verify($password, $adminauth['password'])){
-                session_start();
-                $_SESSION['adminname'] = $adminauth['email'];
-                header("location: adminpage.php");
-                exit();
             }
         }
     }
@@ -52,7 +57,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GadgetVerse</title>
+    <title>The Lego Empire</title>
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
@@ -61,64 +66,101 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
+    <div class="register-container">
+    <div class="container">
 
-    <!-- Navbar -->
-
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="adminauthentication.php">
-                <img src="../images/logo.png" alt="GadgetVerse" width="200" height="50">
+    <nav class="navbar ps-3 pt-5 container">
+        <div class="container d-flex justify-content-center">
+            <a class="navbar-brand mt-3" href="homepage.php">
+                <img src="../images/logo.png" alt="The Lego Empire" width="175">
             </a>
         </div>
     </nav>
 
-    <div class="background-color container mt-5">
-    <div class="row">
-        <div class="col-md-6">
-        <div class="container register-container">
+    <!-- Login Form -->
+
+    <div class="container mt-5">
+        <div class="container admin-login-container col-md-4" id="login">
             <form action="" method="POST" class="form py-4">
                 <div>
-                    <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Name" required>
-                    <input type="number" class="form-control mb-3" name="phone" id="phone" placeholder="Phone number" required>
-                    <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Email address" required>
-                    <input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{7,}" title="Must contain at least one number and one lowercase letter, and at least 7 or more characters" required>
-                </div>
+                    <div class="input-wrapper">
+                        <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Email address" required>
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" class="form-control mb-2" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{7,}" title="Must contain at least one number and one lowercase letter, and at least 7 or more characters" required>
+                        <i class="fa fa-lock"></i>
+                    </div>
+                </div>                
                 
                 <div class="form-check mb-4">
                     <input class="form-check-input" type="checkbox" value="" id="showpassword" onclick="showPassword()">
-                    <label class="form-check-label" for="showpassword">Show Password</label>
+                    <small><label class="form-check-label" for="showpassword">Show Password</label></small>
                 </div>
                 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary" name="register-submit" id="register-submit" value="Register" style="background-color: black; border: none;">Register</button>
+                    <button type="submit" class="btn pt-1" name="login-submit" id="login-submit" value="Login" style="border: none; background-color: black; color: white;">Login</button>
                 </div>
             </form>
+
+            <div class="text-center"><a onclick="showRegisterForm()" style="cursor: pointer; font-weight: bold;"> Create Admin Account</a></div>
         </div>
-        </div>
-            
-        <div class="col-md-5">
-        <div class="container login-container">
+    </div>
+
+    <!-- Registration Form -->
+
+    <div class="container">
+        <div class="container admin-register-container col-md-4" id="register" style="display: none;">
             <form action="" method="POST" class="form py-4">
                 <div>
-                    <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Email address" required>
-                    <input type="password" class="form-control mb-2" name="password" id="adminpassword" placeholder="Password" required>
-                </div>
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Name" required>
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="phone" id="phone" placeholder="Phone number" required>
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Email address" required>
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" class="form-control mb-2" name="password" id="regpassword" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{7,}" title="Must contain at least one number and one lowercase letter, and at least 7 or more characters" required>
+                        <i class="fa fa-lock"></i>
+                    </div>
+                </div>                
                 
                 <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="showpassword" onclick="showAdminPassword()">
-                    <label class="form-check-label" for="showpassword">Show Password</label>
+                    <input class="form-check-input" type="checkbox" value="" id="showregpassword" onclick="showRegPassword()">
+                    <small><label class="form-check-label" for="showregpassword">Show Password</label></small>
                 </div>
                 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary" name="login-submit" id="login-submit" value="Login" style="background-color: black; border: none;">Login</button>
+                    <button type="submit" class="btn pt-1" name="register-submit" id="register-submit" value="Register" style="border: none; background-color: black; color: white;">Create Account</button>
                 </div>
             </form>
+
+            <div class="text-center">Already a LEGO admin?<a onclick="showLoginForm()" style="cursor: pointer; font-weight: bold;"> Login</a></div>
         </div>
-        </div>  
+    </div>
+    
     </div>
     </div>
 
-    <!-- Success Message -->
+    <!-- Login Error Message -->
+    
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="loginErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Login Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="errorToastBody">Incorrect email or password.</div>
+    </div>
+    </div>
+
+    <!-- Registration Success Message -->
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -130,7 +172,7 @@
     </div>
     </div>
 
-    <!-- Error Message -->
+    <!-- Registration Error Message -->
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -141,16 +183,17 @@
         <div class="toast-body" id="errorToastBody">User already exists.</div>
     </div>
     </div>
-
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="adminErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto">Login Error</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body" id="adminErrorToastBody"></div>
-    </div>
-    </div>
+    
+    <script>
+    <?php
+        if(!$userauth || !password_verify($password, $userauth['password'])){
+            echo 'document.addEventListener("DOMContentLoaded", function() {
+                var errorToast = new bootstrap.Toast(document.getElementById("loginErrorToast"));
+                errorToast.show();
+            });';
+        }
+    ?>
+    </script>
 
     <script>
     <?php
@@ -168,18 +211,6 @@
         if(isset($result) && $result){
             echo 'document.addEventListener("DOMContentLoaded", function() {
                 var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                errorToast.show();
-            });';
-        }
-    ?>
-    </script>
-
-    <script>
-    <?php
-        if(!$adminauth || !password_verify($password, $adminauth['password'])){
-            echo 'document.addEventListener("DOMContentLoaded", function() {
-                var errorToast = new bootstrap.Toast(document.getElementById("adminErrorToast"));
-                document.getElementById("adminErrorToastBody").innerText = "Incorrect email or password.";
                 errorToast.show();
             });';
         }

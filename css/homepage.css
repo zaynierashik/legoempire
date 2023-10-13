@@ -181,6 +181,8 @@ html{
 }
 
 .login-btn{
+    background-color: black;
+    color: white;
     border-radius: 0;
     transition: transform 0.35s;
 }
