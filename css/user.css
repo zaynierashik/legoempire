@@ -1,5 +1,18 @@
 @import url(homepage.css);
 
+.sticky-top{
+    background-color: white;
+    font-size: 0.97rem;
+}
+
+.logout-nav{
+    margin-right: -0.5vw;
+}
+
+.background-img{
+    height: 75vh;
+}
+
 .offers-container .card a{
     text-decoration: none;
     color: black;
