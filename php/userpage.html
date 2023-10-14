@@ -29,6 +29,12 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <form action="datasearch.php" method="POST" id="search" class="d-flex" role="search">
+                            <input type="search" name="search" class="form-control d-flex search-bar" placeholder="Search..." aria-label="Search">
+                            <i id="searchIcon" class="fa-solid fa-magnifying-glass search-icon pe-1 ps-3"></i>
+                        </form>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link fw-bold" aria-current="page">zaynierashik@gmail.com</a>
                     </li>
                     <li class="nav-item">
@@ -38,15 +44,13 @@
             </div>
         </div>
     </nav>
+
     <div class="background-img">
-    
-
-    <div class="background-container">
-        <div class="backgroundImgWrapper">
-            <div class="text-overlay"></div>
+        <div class="background-container">
+            <div class="backgroundImgWrapper">
+                <div class="text-overlay"></div>
+            </div>
         </div>
-    </div>
-
     </div>
 
     <div class="container base-category mt-4 mb-3 text-center">
@@ -450,19 +454,25 @@
         </a>
     </div>
 
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const exploreDeals = document.querySelector("#exploredeals");
-            const successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+    <script>
+        // Get a reference to the search bar and the search icon
+        const searchBar = document.getElementById('search');
+        const searchIcon = document.getElementById('searchIcon');
 
-            exploreDeals.addEventListener("click", function(event){
-                event.preventDefault();
-                successToast.show();
-            });
+        // Add a click event listener to the search icon
+        searchIcon.addEventListener('click', function() {
+            // Toggle the visibility of the search bar
+            if (searchBar.style.display === 'none' || searchBar.style.display === '') {
+                searchBar.style.display = 'block';
+                searchIcon.style.display = 'none';
+            } else {
+                searchBar.style.display = 'none';
+                searchIcon.style.display = 'block';
+            }
         });
-    </script> -->
+    </script>
     
-    <script src="../js/script.js"></script>
+    <script src="../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 

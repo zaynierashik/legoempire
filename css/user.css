@@ -2,6 +2,21 @@
 
 .sticky-top{
     background-color: white;
+}
+
+.search-icon{
+    padding-top: 1.77vh;
+    color: #000000A6;
+    transition: transform 0.35s;
+}
+
+.search-icon:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.search-bar{
+    width: 15vw;
     font-size: 0.97rem;
 }
 
@@ -10,7 +25,7 @@
 }
 
 .background-img{
-    height: 75vh;
+    height: 70vh;
 }
 
 .offers-container .card a{
