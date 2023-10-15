@@ -214,3 +214,43 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     height: 0.25vh;
     margin: -1vh 0 0 0.87vw;
 }
+
+.quantity-btn{
+    width: max-content;
+    margin: 0 0 2vh 0;
+    border: 1px solid #ddd;
+}
+  
+.value-button, .number-field{
+    display: inline-block;
+    width: 3vw;
+    height: 5.7vh;
+    font-size: 1.25rem;
+    text-align: center;
+    vertical-align: middle;
+    background: #eee;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.number-field{
+    background: white;
+    width: 5vw;
+    border: none;
+}
+  
+.value-button:hover{
+    cursor: pointer;
+}
+
+.quantity-btn #increase{
+    margin-left: -0.25vw;
+}
+
+.quantity-btn #decrease{
+    margin-right: -0.25vw;
+}
