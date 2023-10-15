@@ -4,20 +4,26 @@
     background-color: white;
 }
 
-.search-icon{
-    padding-top: 1.77vh;
-    color: #000000A6;
-    transition: transform 0.35s;
-}
-
-.search-icon:hover{
-    color: black;
-    cursor: pointer;
-}
-
 .search-bar{
-    width: 15vw;
+    width: 17vw;
     font-size: 0.97rem;
+    border-radius: 0;
+}
+
+.search-wrapper{
+    position: relative;
+}
+
+.search-wrapper input{
+    padding-left: 2.25vw;
+}
+
+.search-wrapper i{
+    font-size: 0.95rem;
+    position: absolute;
+    top: 50%;
+    left: 0.7vw;
+    transform: translateY(-50%);
 }
 
 .logout-nav{

@@ -28,18 +28,18 @@
                 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                    <li class="nav-item search-wrapper">
                         <form action="datasearch.php" method="POST" id="search" class="d-flex" role="search">
+                            <i class="fa fa-search"></i>
                             <input type="search" name="search" class="form-control d-flex search-bar" placeholder="Search..." aria-label="Search">
-                            <i id="searchIcon" class="fa-solid fa-magnifying-glass search-icon pe-1 ps-3"></i>
                         </form>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link fw-bold" aria-current="page">zaynierashik@gmail.com</a>
                     </li>
                     <li class="nav-item">
                         <a href="logout.php" class="nav-link fw-bold logout-nav" aria-current="page">logout</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -453,24 +453,6 @@
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
-
-    <script>
-        // Get a reference to the search bar and the search icon
-        const searchBar = document.getElementById('search');
-        const searchIcon = document.getElementById('searchIcon');
-
-        // Add a click event listener to the search icon
-        searchIcon.addEventListener('click', function() {
-            // Toggle the visibility of the search bar
-            if (searchBar.style.display === 'none' || searchBar.style.display === '') {
-                searchBar.style.display = 'block';
-                searchIcon.style.display = 'none';
-            } else {
-                searchBar.style.display = 'none';
-                searchIcon.style.display = 'block';
-            }
-        });
-    </script>
     
     <script src="../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
