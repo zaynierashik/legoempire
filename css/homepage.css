@@ -152,7 +152,7 @@ html{
 /* Sign In */
 
 .register-container{
-    background-image: url('../images/loginbg.png');
+    background-image: url('../images/background.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -196,4 +196,21 @@ html{
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* Lego Details */
+
+.legobackground{
+    background-image: url(../images/background.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.vl{
+    background-color: #929497;
+    width: 98.05%;
+    height: 0.25vh;
+    margin: -1vh 0 0 0.87vw;
 }

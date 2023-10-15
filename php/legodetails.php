@@ -27,7 +27,6 @@
 <body>
     <div class="container">
 
-    <div class="background-img">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="homepage.php">
@@ -51,35 +50,14 @@
         </div>
     </nav>
 
-    <div class="background-container">
-        <div class="backgroundImgWrapper">
-            <div class="text-overlay"></div>
-        </div>
-    </div>
-    </div>
+    <nav class="container" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="homepage.php" class="nav-link">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">LEGO® Minifigures Marvel Series 2</li>
+        </ol>
+    </nav>
 
-    <div class="container base-category mt-4 mb-3 text-center">
-        <div class="image-container">
-            <a href=""><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
-            <div class="image-text fw-bold">MARVEL</div>
-        </div>
-        <div class="image-container">
-            <a href=""><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
-            <div class="image-text fw-bold">HALLOWEEN</div>
-        </div>
-        <div class="image-container">
-            <a href=""><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
-            <div class="image-text fw-bold">LEGO</div>
-        </div>
-        <div class="image-container">
-            <a href=""><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
-            <div class="image-text fw-bold">OFFERS</div>
-        </div>
-        <div class="image-container">
-            <a href=""><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
-            <div class="image-text fw-bold">DC</div>
-        </div>
-    </div>
+    <div class="vl"></div>
 
     <div class="container sale-container mt-5">
         <h3 class="fw-bold">On Sale!</h3>
