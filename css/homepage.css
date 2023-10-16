@@ -252,3 +252,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .quantity-btn #increase{
     margin-left: 0.1vw;
 }
+
+.rating-btn{
+    border-radius: 0;
+    background-color: black;
+    color: white;
+}
