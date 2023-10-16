@@ -90,9 +90,11 @@
         <div class="slider">
             <div class="slider-container">
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -106,9 +108,11 @@
                 </div>
                 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -122,9 +126,11 @@
                 </div>
         
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -138,9 +144,11 @@
                 </div>
         
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -154,9 +162,11 @@
                 </div>
         
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -170,9 +180,11 @@
                 </div>
 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -186,9 +198,11 @@
                 </div>
 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -202,9 +216,11 @@
                 </div>
 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.85vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -253,10 +269,12 @@
         <h3 class="fw-bold">Recommended For You</h3>
         <div class="slider">
             <div class="slider-container">
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -270,9 +288,11 @@
                 </div>
                 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -286,9 +306,11 @@
                 </div>
         
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -302,9 +324,11 @@
                 </div>
         
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -318,9 +342,11 @@
                 </div>
         
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -334,9 +360,11 @@
                 </div>
 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -350,9 +378,11 @@
                 </div>
 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -366,9 +396,11 @@
                 </div>
 
                 <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.85vw;">
+                <a href="legodetails.php" class="nav-link">
                     <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
+                </a>
                         <div>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
