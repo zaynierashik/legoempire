@@ -57,7 +57,7 @@ html{
     color: #000;
 }
 
-.base-category{
+.base-category, .basic-container{
     width: 75%;
     display: flex;
     justify-content: space-between;
@@ -216,18 +216,19 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 .quantity-btn{
+    display: flex;
     width: max-content;
     margin: 0 0 2vh 0;
     border: 1px solid #ddd;
 }
   
 .value-button, .number-field{
-    display: inline-block;
     width: 3vw;
-    height: 5.7vh;
-    font-size: 1.25rem;
+    height: 5.5vh;
     text-align: center;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #eee;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -239,8 +240,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .number-field{
     background: white;
-    width: 5vw;
+    width: 4.5vw;
     border: none;
+    font-size: 1.25rem;
 }
   
 .value-button:hover{
@@ -248,9 +250,5 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 .quantity-btn #increase{
-    margin-left: -0.25vw;
-}
-
-.quantity-btn #decrease{
-    margin-right: -0.25vw;
+    margin-left: 0.1vw;
 }
