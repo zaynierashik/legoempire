@@ -387,7 +387,7 @@
         <h3 class="fw-bold">Read All About It</h3>
         <div class="row">
             <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
+                <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
                     <a href="">
                         <img src="../images/marvelnews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
                         <div class="card-body px-0">
@@ -399,7 +399,7 @@
             </div>
 
             <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
+                <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
                     <a href="">
                         <img src="../images/dreamznews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
                         <div class="card-body px-0">
@@ -411,24 +411,12 @@
             </div>
 
             <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
+                <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
                     <a href="">
                         <img src="../images/village.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
                         <div class="card-body px-0">
                             <h5 class="card-title fw-bold fs-5 mb-3">Every set from the LEGO® Winter Village Collection</h5>
                             <p style="text-align: justify;">The LEGO® Winter Village collection has become an annual treat for LEGO fans. To celebrate the launch of our latest set, let’s look back at the festive history so far...</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/dreamznews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Behind the scenes of the LEGO® DREAMZzz™ TV show</h5>
-                            <p style="text-align: justify;">Discover all there is to know about the brand-new LEGO® TV show and theme!</p>
                         </div>
                     </a>
                 </div>
