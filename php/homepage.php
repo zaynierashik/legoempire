@@ -386,41 +386,28 @@
     <div class="container news-container mt-5">
         <h3 class="fw-bold">Read All About It</h3>
         <div class="row">
-            <div class="col">
-                <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/marvelnews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Best LEGO® Marvel Sets & Toys</h5>
-                            <p style="text-align: justify;">Discover the best LEGO® sets for Marvel fans young and old. Relive your favorite scenes from the movies, or create your own adventures!</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/dreamznews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Behind the scenes of the LEGO® DREAMZzz™ TV show</h5>
-                            <p style="text-align: justify;">Discover all there is to know about the brand-new LEGO® TV show and theme!</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/village.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Every set from the LEGO® Winter Village Collection</h5>
-                            <p style="text-align: justify;">The LEGO® Winter Village collection has become an annual treat for LEGO fans. To celebrate the launch of our latest set, let’s look back at the festive history so far...</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <?php
+                $sql = "SELECT * FROM article_data ORDER BY RAND() LIMIT 3";
+                $stmt = $conn->query($sql);
+                if($stmt->rowCount() > 0){
+                    while($row = $stmt->fetch()){
+                        echo '<div class="col">
+                            <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
+                            <a href="article.php?articleId=' .$row['articleId'].'">
+                                <img src="../news-images/' .$row['main-image']. '" class="card-img-top" style="border-radius: 0;" alt="...">
+                                <div class="card-body px-0">
+                                    <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>
+                                    <p style="text-align: justify;">' .$row['subtext']. '</p>
+                                </div>
+                            </a>
+                            </div>
+                        </div>';
+                    }
+                }else{
+                    echo "<div class='container'>No Articles Found.</div>";
+                }
+            ?>
+        </div>
         </div>
     </div>
 
@@ -449,18 +436,6 @@
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
-
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const exploreDeals = document.querySelector("#exploredeals");
-            const successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
-
-            exploreDeals.addEventListener("click", function(event){
-                event.preventDefault();
-                successToast.show();
-            });
-        });
-    </script> -->
     
     <script src="../js/script.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2023 at 08:18 PM
+-- Generation Time: Oct 17, 2023 at 11:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -52,15 +52,50 @@ CREATE TABLE `article_data` (
   `articleId` int(11) NOT NULL,
   `title` text NOT NULL,
   `subtext` text NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `rem-description` text NOT NULL,
+  `main-image` text NOT NULL,
+  `display-image` text NOT NULL,
+  `image-one` text NOT NULL,
+  `image-two` text NOT NULL,
+  `image-three` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `article_data`
 --
 
-INSERT INTO `article_data` (`articleId`, `title`, `subtext`, `description`) VALUES
-(1, 'Vikings return! Why the new LEGO® Ideas Viking Village was worth the wait', 'Step into a world of Nordic legends and myths with our latest LEGO® Ideas set. Our LEGO designers tell you everything you need to know...', 'Pop culture and movies catapulted stories of Nordic adventures into the mainstream, and unbeknownst to some, this popularity of the Vikings crossed over in the LEGO® brick world too.\r\n\r\nIn fact, it wasn’t that long ago that these ocean-going Scandinavian explorers had their own range of LEGO sets. The LEGO Vikings line, released in the mid-2000s, featured a range of Vikings defending their fortresses and ships from terrifying creatures inspired by the elaborate and rich world of Nordic mythology. Ever since that line ended, there has been a distinctly Viking-shaped hole in the hearts of many LEGO fans and designers worldwide.\r\n\r\nWell, now the Vikings are back, bigger and better than ever, and to celebrate, we met the design team behind the Nordic-inspired new set.');
+INSERT INTO `article_data` (`articleId`, `title`, `subtext`, `description`, `rem-description`, `main-image`, `display-image`, `image-one`, `image-two`, `image-three`) VALUES
+(1, 'Vikings return! Why the new LEGO® Ideas Viking Village was worth the wait', 'Step into a world of Nordic legends and myths with our latest LEGO® Ideas set. Our LEGO designers tell you everything you need to know...', 'Pop culture and movies catapulted stories of Nordic adventures into the mainstream, and unbeknownst to some, this popularity of the Vikings crossed over in the LEGO® brick world too. In fact, it wasn’t that long ago that these ocean-going Scandinavian explorers had their own range of LEGO sets. The LEGO Vikings line, released in the mid-2000s, featured a range of Vikings defending their fortresses and ships from terrifying creatures inspired by the elaborate and rich world of Nordic mythology. Ever since that line ended, there has been a distinctly Viking-shaped hole in the hearts of many LEGO fans and designers worldwide. Well, now the Vikings are back, bigger and better than ever, and to celebrate, we met the design team behind the Nordic-inspired new set.', 'The LEGO Viking Village began life on LEGO Ideas, the fan-generated ideas platform. It came from the mind of fan designer BrickHammer, who worked closely with the team through the development of this set. Jordan Scott, a design manager at LEGO Ideas, tells us the whole story. “The first Viking Village iteration got 10,000 votes (this is what you need for your idea to be considered), but when it went into review, other products were chosen for production,” says Jordan. “But the Viking theme is very popular, so when Target wanted to do a new set, we suggested some sets that had reached 10,000 votes but weren’t approved. This one was up against a few others in a public vote, but – in the end – this won.” And so, the Viking set has the rare honor of being voted for not once but twice. Once victorious, our expert LEGO design teams set to task to elaborate and bring the original fan vision to life.<br><br>“I did a lot of research on clothing styles and what kind of materials and colors they were using,” says Johanna Wurm Jensen, graphic designer on the project. Johanna was responsible for designing the shields’ elaborate iconography and the minifigures’ clothing. “We imagined how Vikings would have dressed and tried to include small detailing on the jewelry and necklaces that were common in the era. We also tried to use colors to create a natural theme.” <br><br>“I really love the shields! They bring a new color combination; we had never had a green-and-yellow shield before, and the intricate printed details on them worked out very well.” While they tried to keep the set more on the realistic side, there are some fun nods to mythology with fantastical elements. For example, Vikings didn’t actually have horns on their helmets! They also included some tributes to classic Viking sets of the past, including a dragon logo from the original theme, which has been used on the runestone and barrels, plus a little Easter egg to pay homage to the original fan designer (try to spot it). <br><br>It’s wonderful to welcome the Vikings back into the LEGO set line-up, and we think that fans both old and new will love building the LEGO Ideas Viking Village. In stories, songs, films and LEGO sets, Vikings have been going strong for over eight hundred years. There’s no reason why they should stop now.', 'viking-news.jpg', 'viking-display.jpg', 'viking-one.jpeg', 'viking-two.jpeg', 'viking-three.jpeg'),
+(2, 'LEGO® Star Wars™ Black Friday Sets', 'May the Force be with you this Black Friday! Channel your inner Jedi with LEGO® Star Wars™ building toys for all ages and abilities, guaranteed to bring that \"galaxy far, far away\" much closer.', 'Ready your Lightsabers and prepare for an epic Black Friday adventure to across the galaxy!\n\nWhether you’re recreating iconic scenes from the saga or teaming up with beloved characters like Luke Skywalker, Princess Leia, the Mandalorian™, Ahsoka Tano and more, our collection of LEGO® Star Wars™ building sets has something for fans of all ages and skill levels.\n\nDiscover our best LEGO® Star Wars™ sets for Black Friday below!', 'From the swamps of Dagobah™ to the halls of the infamous Death Star, our collection of LEGO® Star Wars™ dioramas puts adult fans right at the heart of iconic scenes from the saga. Each diorama depicts action from recognizable Star Wars™ locations, complete with authentic details to bring the display to life. Join Luke Skywalker, Han Solo, Princess Leia and Chewbacca to escape the Death Star’s trash compactor, complete Jedi training alongside Luke and Yoda on Dagobah, or fly through the forests of Endor™ on a speeder bike. Whichever scene you choose to recreate, a rewarding and nostalgic building experience awaits! LEGO minifigures of beloved Star Wars™ characters accompany the dioramas, as well as plaques inscribed with legendary lines like Luke’s “I am a Jedi, like my father before me” and Darth Vader’s “The Force is strong with this one”. With 5 breathtaking diorama models available, this Black Friday is the perfect time to start collecting – or add exciting new scenes to a growing collection of LEGO® Star Wars™ sets! <br><br>Another spectacular addition to the LEGO® Star Wars™ Ultimate Collector Series, this build-and-display model of a Republic Gunship lets fans relive the Battle of Geonosis in glorious detail.  The 3,292-piece set is filled with authentic features, including pilot cockpits, swing-out spherical gun turrets, 2 cannons, super-long wings, opening sides and rear hatch, and interior details. Plus, the display stand features an information plaque and space for the 2 included LEGO® minifigures: a clone trooper Commander and legendary Jedi Master Mace Windu!  Gear up, assemble your troops, and create memories that will last a lifetime with the Ultimate Collector Series Republic Gunship. <br><br>Whether you’re a valiant rebel fighter or a temptingly powerful Sith Lord, there’s no better way to showcase your loyalty – or demonstrate your LEGO building prowess – than with our range of beautifully crafted LEGO® Star Wars™ Helmets.  Show your respect for a fearless 501st Legion Clone Commander with the build-and-display Captain Rex Helmet (75349) model, straight out of Star Wars: The Clone Wars™ and into your hands. Capture the smooth metallic sheen of beskar armor as you build a stunning LEGO recreation of the Mandalorian’s™ helmet (75328), and pair it with a buildable Dark Trooper Helmet (75343) as seen in Star Wars: The Mandalorian™ Season 2.  Prepare to take on the Empire with the Luke Skywalker (Red Five) Helmet (75327) – or if you\'re yearning for the dark side, let our menacing replica of the mighty Darth Vader™ Helmet (75305) be your ultimate symbol of power. <br><br> No matter which iconic helmet calls your name, each of these strikingly detailed build-and-display models are guaranteed to bring some serious Star Wars™ style into any home.', 'starwars-news.jpg', 'starwars-display.jpg', 'starwars-one.jpeg', 'starwars-two.jpg', 'starwars-three.jpeg'),
+(3, 'Best Halloween Gifts for Kids & Adults', 'Explore haunted hideouts and face fearsome creatures with the very best LEGO® Halloween gifts for kids and adults!', 'Get your cauldron brewing and prepare for a ghoulishly good time with the very best LEGO® Halloween gifts for kids and adults!\n\nWhether you\'re looking to surprise a loved one with a bewitching building set, or searching for the perfect Halloween toys for goodie bags, we\'ve got you covered with these fantastic treats. And with a wide variety of builds that are ideal for kids and parents to build together too, there’s plenty of opportunity to create a magical Halloween for your family.\n\nFrom haunted hideouts to bone-chilling monster trucks, these LEGO sets will send shivers of excitement down everyone’s spines.', 'Give the cute Baby Groot a gruesome Halloween makeover with the LEGO® Marvel Venomized Groot figure, oozing eerie features from head to toe. Marvel fans aged 10 and up can delight in bringing this Venomized version of Baby Groot to life, altering the appearance with more bricks as the alien Venom fully takes over. Venom’s grisly long tongue, razor-sharp teeth and terrifying tentacles complete the transformation, making a truly frightful figure! Featuring movable arms, legs, hips and head, this Venomized Groot figure is a great Halloween gift for kids aged 10+ and young adults who love Marvel.<br><br>\nFans of Disney’s The Haunted Mansion ride can recreate its chilling atmosphere in their own home with this scarily good miniature model. Feel the thrill as you build and spot details from the ride, including the ghoulishly entertaining dining room, chandelier and gallery. Keep a keen eye out for recognizable paintings of the Hitchhiking Ghosts, Madame Leota and the Gravekeeper too, as well as an exclusive Butler minifigure to watch over the eerie house. Full of ghostly fun and scary surprises, this model is perfect for both play and display, making it a spine-tingling treat for fans aged 12 and up this Halloween.<br><br>\nFor young fans of the hugely popular video game Minecraft®, there’s no better way to celebrate Halloween than with bone-chilling LEGO® Minecraft® sets packed with creepy characters and captivating features to explore! Kids aged 8+ can pay a visit to The Pumpkin Farm (21248), building a cozy pumpkin-shaped house and tending to the pumpkin patch before teaming up with hero Steve to fend off a fearsome witch. But the adventure doesn’t end there – they can also continue their journey to The Skeleton Dungeon (21189) and take on scary skeletons, journeying through stalagmites and stalactites to reach the dungeon and defeat the malicious mobs.<br><br>\n And for players aged 10 and up, there\'s an extra treat in store. They can take home their very own version of the game\'s most iconic hostile mob with the LEGO BrickHeadz™ Zombie (40626), building and displaying the frightful figure in all its blocky glory!', 'halloween-news.jpg', 'halloween-display.jpg', 'halloween-one.jpeg', 'halloween-two.jpeg', 'halloween-three.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lego_data`
+--
+
+CREATE TABLE `lego_data` (
+  `legoId` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `price` float NOT NULL,
+  `stock` text NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `age` int(11) NOT NULL,
+  `pieces` int(11) NOT NULL,
+  `points` int(11) NOT NULL,
+  `item-number` int(11) NOT NULL,
+  `specifications` text NOT NULL,
+  `specifications-point` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lego_data`
+--
+
+INSERT INTO `lego_data` (`legoId`, `title`, `price`, `stock`, `quantity`, `age`, `pieces`, `points`, `item-number`, `specifications`, `specifications-point`) VALUES
+(1, 'LEGO® Minifigures Marvel Series 2', 5.55, 'Available Now', 0, 5, 10, 32, 71039, 'Marvel fans and kids aged 5+ can recreate action scenes with this incredible set of LEGO® Marvel Minifigures (71039) blind boxes. This eagerly anticipated sequel to the popular Series 1 features iconic characters from some of Marvel Studio’s most beloved Disney+ shows and can be collected, displayed or used to enjoy gripping role play.<br><br>\n\nOpen the blind box for a surprise!<br>\nLittle builders will be excited to discover which Marvel character is in their sealed, sustainable box. The collection features 12 unique characters: Agatha Harkness, Kate Bishop, Hawkeye, Moon Knight, Mr. Knight, She-Hulk, The Werewolf, Goliath, Storm, Beast, Wolverine and Echo.<br><br>\n\nBest gifts for Marvel fans<br>\nAll 12 highly detailed LEGO minifigure Marvel characters come with at least 1 authentic accessory. This is the perfect way to treat a LEGO fan and quickly provide them with lots of play possibilities.', 'Surprise characters – Kids can dive into the exciting world of Marvel Studios with these LEGO® Minifigures Marvel Series 2 (71039) characters. There is a surprise minifigure in every blind box\nCollectible Marvel heroes – Marvel fans can build their collections with 1 of 12 characters from iconic Disney+ shows in every box\nHighly detailed accessories – Each character is accompanied by at least 1 authentic accessory and a collector’s leaflet\nRole-play action – These highly detailed Marvel minifigures let kids aged 5+ play out famous scenes or create their own action-packed stories\nGifts for Marvel fans – These durable LEGO® minifigures can be given to kids aged 5+ and adults as an unexpected treat to expand their collections\nHigh quality – For more than 6 decades, LEGO® building pieces have been made to ensure they are consistent, compatible and work every time\nAlways in safe hands – LEGO® building pieces meet stringent global safety standards');
 
 -- --------------------------------------------------------
 
@@ -100,6 +135,12 @@ ALTER TABLE `article_data`
   ADD PRIMARY KEY (`articleId`);
 
 --
+-- Indexes for table `lego_data`
+--
+ALTER TABLE `lego_data`
+  ADD PRIMARY KEY (`legoId`);
+
+--
 -- Indexes for table `user_data`
 --
 ALTER TABLE `user_data`
@@ -119,7 +160,13 @@ ALTER TABLE `admin_data`
 -- AUTO_INCREMENT for table `article_data`
 --
 ALTER TABLE `article_data`
-  MODIFY `articleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `articleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `lego_data`
+--
+ALTER TABLE `lego_data`
+  MODIFY `legoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_data`

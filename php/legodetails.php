@@ -1,6 +1,10 @@
 <?php
     session_start();
     include 'connect.php';
+
+    if(isset($_GET['legoId'])){
+        $legoId = $_GET['legoId'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -35,30 +39,39 @@
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <?php
-                        if(isset($_SESSION['username'])){
-                            echo '<li class="nav-item">
-                                    <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
-                                </li>';
-                        }else{
-                            echo '<li class="nav-item">
-                                <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
-                                    </li>';
-                        }
-                    ?>
-                    </li>
+                <?php
+                    if(isset($_SESSION['username'])){
+                        echo '<li class="nav-item">
+                            <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
+                        </li>';
+                    }else{
+                        echo '<li class="nav-item">
+                            <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
+                        </li>';
+                    }
+                ?>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <?php
+        $sql = "SELECT * FROM lego_data WHERE legoId = :legoId";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    ?>
+
     <nav class="container" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="homepage.php" class="nav-link">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">LEGO® Minifigures Marvel Series 2</li>
+            <li class="breadcrumb-item active" aria-current="page"><?php echo $row['title'] ?></li>
         </ol>
     </nav>
 
@@ -94,7 +107,7 @@
 
             <div class="col-4">
                 <div>
-                    <h5 class="fw-bold pt-2">LEGO® Minifigures Marvel Series 2</h5>
+                    <h5 class="fw-bold pt-2"><?php echo $row['title'] ?></h5>
                     <div style="font-size: 0.87rem;">
                         <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                         <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -102,8 +115,8 @@
                         <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                         <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                     </div>
-                    <h5 class="fw-bold mt-3">$5.55</h5>
-                    <p class="fw-bold text-success">Available Now</p>
+                    <h5 class="fw-bold mt-3">$<?php echo $row['price'] ?></h5>
+                    <p class="fw-bold text-success"><?php echo $row['stock'] ?></p>
                 </div>
 
                 <form class="quantity-btn">
@@ -138,19 +151,19 @@
 
     <div class="container basic-container mt-4 mb-3 text-center">
         <div>
-            <h1>5+</h1>
+            <h1><?php echo $row['age'] ?>+</h1>
             <div class="fw-bold">Ages</div>
         </div>
         <div>
-            <h1>10</h1>
+            <h1><?php echo $row['pieces'] ?></h1>
             <div class="fw-bold">Pieces</div>
         </div>
         <div>
-            <h1>32</h1>
+            <h1><?php echo $row['points'] ?></h1>
             <div class="fw-bold">Insiders Points</div>
         </div>
         <div>
-            <h1>#71039</h1>
+            <h1>#<?php echo $row['item-number'] ?></h1>
             <div class="fw-bold">Item</div>
         </div>
     </div>
@@ -244,22 +257,17 @@
             <div class="collapse" id="collapseSpecification">
             <div class="card card-body border-0 p-0 pt-3">
                 <div style="text-align: justify;">
-                    Marvel fans and kids aged 5+ can recreate action scenes with this incredible set of LEGO® Marvel Minifigures (71039) blind boxes. This eagerly anticipated sequel to the popular Series 1 features iconic characters from some of Marvel Studio’s most beloved Disney+ shows and can be collected, displayed or used to enjoy gripping role play.<br><br>
-                    Open the blind box for a surprise! <br>
-                    Little builders will be excited to discover which Marvel character is in their sealed, sustainable box. The collection features 12 unique characters: Agatha Harkness, Kate Bishop, Hawkeye, Moon Knight, Mr. Knight, She-Hulk, The Werewolf, Goliath, Storm, Beast, Wolverine and Echo.<br><br>
-                    Best gifts for Marvel fans <br>
-                    All 12 highly detailed LEGO minifigure Marvel characters come with at least 1 authentic accessory. This is the perfect way to treat a LEGO fan and quickly provide them with lots of play possibilities.
+                    <?php echo $row['specifications'] ?>
 
                     <div>
-                        <ul class="mt-3">
-                            <li class="mt-2">Surprise characters – Kids can dive into the exciting world of Marvel Studios with these LEGO® Minifigures Marvel Series 2 (71039) characters. There is a surprise minifigure in every blind box</li>
-                            <li class="mt-2">Collectible Marvel heroes – Marvel fans can build their collections with 1 of 12 characters from iconic Disney+ shows in every box</li>
-                            <li class="mt-2">Highly detailed accessories – Each character is accompanied by at least 1 authentic accessory and a collector’s leaflet</li>
-                            <li class="mt-2">Role-play action – These highly detailed Marvel minifigures let kids aged 5+ play out famous scenes or create their own action-packed stories</li>
-                            <li class="mt-2">Gifts for Marvel fans – These durable LEGO® minifigures can be given to kids aged 5+ and adults as an unexpected treat to expand their collections</li>
-                            <li class="mt-2">High quality – For more than 6 decades, LEGO® building pieces have been made to ensure they are consistent, compatible and work every time</li>
-                            <li class="mt-2">Always in safe hands – LEGO® building pieces meet stringent global safety standards</li>
-                        </ul>
+                        <?php
+                            $specificationspoints = explode("\n", $row['specifications-point']);
+                            echo "<ul class='mt-3'>";
+                            foreach($specificationspoints as $point){
+                                echo "<li class='mt-2'>$point</li>";
+                            }
+                            echo "</ul>";
+                        ?>
                     </div>
                 </div>
             </div>
@@ -301,6 +309,8 @@
             </div>
         </div>
     </div>
+
+    <?php } ?>
 
     <!-- Footer -->
 
@@ -351,14 +361,14 @@
     </script>
     
     <script>
-        $(document).ready(function () {
-            $(".nav-link").on("click", function () {
+        $(document).ready(function (){
+            $(".nav-link").on("click", function (){
                 var icon = $(this).find("i");
         
-                if (icon.hasClass("fa-plus")) {
+                if(icon.hasClass("fa-plus")){
                     icon.removeClass("fa-plus").addClass("fa-minus");
                     icon.css("transition", "transform 1s");
-                } else {
+                }else{
                     icon.removeClass("fa-minus").addClass("fa-plus");
                     icon.css("transition", "transform 1s");
                 }
