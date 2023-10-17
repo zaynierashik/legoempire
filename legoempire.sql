@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2023 at 11:18 AM
+-- Generation Time: Oct 17, 2023 at 03:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -87,15 +87,23 @@ CREATE TABLE `lego_data` (
   `points` int(11) NOT NULL,
   `item-number` int(11) NOT NULL,
   `specifications` text NOT NULL,
-  `specifications-point` text NOT NULL
+  `specifications-point` text NOT NULL,
+  `title-one` text NOT NULL,
+  `title-two` text NOT NULL,
+  `title-three` text NOT NULL,
+  `main-image` text NOT NULL,
+  `secondary-image` text NOT NULL,
+  `image-one` text NOT NULL,
+  `image-two` text NOT NULL,
+  `image-three` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lego_data`
 --
 
-INSERT INTO `lego_data` (`legoId`, `title`, `price`, `stock`, `quantity`, `age`, `pieces`, `points`, `item-number`, `specifications`, `specifications-point`) VALUES
-(1, 'LEGO® Minifigures Marvel Series 2', 5.55, 'Available Now', 0, 5, 10, 32, 71039, 'Marvel fans and kids aged 5+ can recreate action scenes with this incredible set of LEGO® Marvel Minifigures (71039) blind boxes. This eagerly anticipated sequel to the popular Series 1 features iconic characters from some of Marvel Studio’s most beloved Disney+ shows and can be collected, displayed or used to enjoy gripping role play.<br><br>\n\nOpen the blind box for a surprise!<br>\nLittle builders will be excited to discover which Marvel character is in their sealed, sustainable box. The collection features 12 unique characters: Agatha Harkness, Kate Bishop, Hawkeye, Moon Knight, Mr. Knight, She-Hulk, The Werewolf, Goliath, Storm, Beast, Wolverine and Echo.<br><br>\n\nBest gifts for Marvel fans<br>\nAll 12 highly detailed LEGO minifigure Marvel characters come with at least 1 authentic accessory. This is the perfect way to treat a LEGO fan and quickly provide them with lots of play possibilities.', 'Surprise characters – Kids can dive into the exciting world of Marvel Studios with these LEGO® Minifigures Marvel Series 2 (71039) characters. There is a surprise minifigure in every blind box\nCollectible Marvel heroes – Marvel fans can build their collections with 1 of 12 characters from iconic Disney+ shows in every box\nHighly detailed accessories – Each character is accompanied by at least 1 authentic accessory and a collector’s leaflet\nRole-play action – These highly detailed Marvel minifigures let kids aged 5+ play out famous scenes or create their own action-packed stories\nGifts for Marvel fans – These durable LEGO® minifigures can be given to kids aged 5+ and adults as an unexpected treat to expand their collections\nHigh quality – For more than 6 decades, LEGO® building pieces have been made to ensure they are consistent, compatible and work every time\nAlways in safe hands – LEGO® building pieces meet stringent global safety standards');
+INSERT INTO `lego_data` (`legoId`, `title`, `price`, `stock`, `quantity`, `age`, `pieces`, `points`, `item-number`, `specifications`, `specifications-point`, `title-one`, `title-two`, `title-three`, `main-image`, `secondary-image`, `image-one`, `image-two`, `image-three`) VALUES
+(1, 'LEGO® Minifigures Marvel Series 2', 5.55, 'Available Now', 0, 5, 10, 32, 71039, 'Marvel fans and kids aged 5+ can recreate action scenes with this incredible set of LEGO® Marvel Minifigures (71039) blind boxes. This eagerly anticipated sequel to the popular Series 1 features iconic characters from some of Marvel Studio’s most beloved Disney+ shows and can be collected, displayed or used to enjoy gripping role play.<br><br>\n\nOpen the blind box for a surprise!<br>\nLittle builders will be excited to discover which Marvel character is in their sealed, sustainable box. The collection features 12 unique characters: Agatha Harkness, Kate Bishop, Hawkeye, Moon Knight, Mr. Knight, She-Hulk, The Werewolf, Goliath, Storm, Beast, Wolverine and Echo.<br><br>\n\nBest gifts for Marvel fans<br>\nAll 12 highly detailed LEGO minifigure Marvel characters come with at least 1 authentic accessory. This is the perfect way to treat a LEGO fan and quickly provide them with lots of play possibilities.', 'Surprise characters – Kids can dive into the exciting world of Marvel Studios with these LEGO® Minifigures Marvel Series 2 (71039) characters. There is a surprise minifigure in every blind box\nCollectible Marvel heroes – Marvel fans can build their collections with 1 of 12 characters from iconic Disney+ shows in every box\nHighly detailed accessories – Each character is accompanied by at least 1 authentic accessory and a collector’s leaflet\nRole-play action – These highly detailed Marvel minifigures let kids aged 5+ play out famous scenes or create their own action-packed stories\nGifts for Marvel fans – These durable LEGO® minifigures can be given to kids aged 5+ and adults as an unexpected treat to expand their collections\nHigh quality – For more than 6 decades, LEGO® building pieces have been made to ensure they are consistent, compatible and work every time\nAlways in safe hands – LEGO® building pieces meet stringent global safety standards', 'Marvel Heroes Unite!', 'Recreate scenes from Hawkeye', 'A Hero and his alter ego', 'marvel-main.jpg', 'marvel-sec.jpg', 'marvel-one.jpg', 'marvel-two.jpg', 'marvel-three.jpg');
 
 -- --------------------------------------------------------
 

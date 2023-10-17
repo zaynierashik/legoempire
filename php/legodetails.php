@@ -83,14 +83,14 @@
             <div id="carouselExample" class="carousel slide carousel-dark">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../lego-images/marvel.jpg" class="d-block w-100" alt="...">
+                        <img src="../lego-images/<?php echo $row['main-image'] ?>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="../lego-images/marvel-one.jpg" class="d-block w-100" alt="...">
+                        <img src="../lego-images/<?php echo $row['secondary-image'] ?>" class="d-block w-100" alt="...">
                     </div>
-                    <div class="carousel-item">
-                        <img src="../lego-images/marvel.jpg" class="d-block w-100" alt="...">
-                    </div>
+                    <!-- <div class="carousel-item">
+                        <img src="../lego-images/<?php echo $row['image-two'] ?>" class="d-block w-100" alt="...">
+                    </div> -->
                 </div>
     
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -135,7 +135,7 @@
                 </div>
 
                 <div class="border mt-3 py-3">
-                    <img src="../lego-images/marvel.jpg" class="w-25" alt="">
+                    <img src="../lego-images/<?php echo $row['main-image'] ?>" class="w-25" alt="">
                     <small class="fw-bold">Gift with LEGO® purchases of $100 or more*</small>
                 </div>
 
@@ -186,54 +186,27 @@
                 <div class="row text-center">
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/marvel-two.jpg" alt="...">
+                            <img src="../lego-images/<?php echo $row['image-one'] ?>" alt="...">
                             <div class="card-body">
-                                <h6 class="card-title fw-bold">Marvel Heroes Unite!</h6>
+                                <h6 class="card-title fw-bold"><?php echo $row['title-one'] ?></h6>
                             </div>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/marvel-three.jpg" alt="...">
+                            <img src="../lego-images/<?php echo $row['image-two'] ?>" alt="...">
                             <div class="card-body">
-                                <h6 class="card-title fw-bold">Recreate scenes from Hawkeye</h6>
+                                <h6 class="card-title fw-bold"><?php echo $row['title-two'] ?></h6>
                             </div>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/marvel-four.jpg" alt="...">
+                            <img src="../lego-images/<?php echo $row['image-three'] ?>" alt="...">
                             <div class="card-body">
-                                <h6 class="card-title fw-bold">A Hero and his alter ego</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/marvel-five.jpg" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title fw-bold">X-Men ’97 adventures</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/marvel-six.jpg" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title fw-bold">Wolverine to the rescue</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/marvel-seven.jpg" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title fw-bold">The witch and the monster</h6>
+                                <h6 class="card-title fw-bold"><?php echo $row['title-three'] ?></h6>
                             </div>
                         </div>
                     </div>
