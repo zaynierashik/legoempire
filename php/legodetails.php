@@ -106,33 +106,35 @@
             </div>
 
             <div class="col-4">
-                <div>
-                    <h5 class="fw-bold pt-2"><?php echo $row['title'] ?></h5>
-                    <div style="font-size: 0.87rem;">
-                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                <form action="" method="POST">
+                    <div>
+                        <h5 class="fw-bold pt-2" name="title"><?php echo $row['title'] ?></h5>
+                        <div style="font-size: 0.87rem;">
+                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3" name="price">$<?php echo $row['price'] ?></h5>
+                        <p class="fw-bold text-success"><?php echo $row['stock'] ?></p>
                     </div>
-                    <h5 class="fw-bold mt-3">$<?php echo $row['price'] ?></h5>
-                    <p class="fw-bold text-success"><?php echo $row['stock'] ?></p>
-                </div>
 
-                <form class="quantity-btn">
-                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="fa fa-minus"></i></div>
-                    <input class="number-field fw-bold" type="number" id="number" value="1">
-                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
+                    <div class="quantity-btn">
+                        <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="fa fa-minus"></i></div>
+                        <input class="number-field fw-bold" type="number" name="quantity" id="number" value="1">
+                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
+                    </div>
+
+                    <div class="row pe-2">
+                        <div class="col pe-0">
+                            <a href="order.php" class="nav-link cart-btn text-center pb-1 pt-2"><h5 class="fw-bold">Add to Cart</h5></a>
+                        </div>
+                        <div class="col-2 text-center">
+                            <i class="fa-regular fa-heart fa-lg mt-3 pt-1" style="color: #000000;"></i>
+                        </div>
+                    </div>
                 </form>
-
-                <div class="row pe-2">
-                    <div class="col pe-0">
-                        <a href="cart.php" class="nav-link cart-btn text-center pb-1 pt-2"><h5 class="fw-bold">Add to Cart</h5></a>
-                    </div>
-                    <div class="col-2 text-center">
-                        <i class="fa-regular fa-heart fa-lg mt-3 pt-1" style="color: #000000;"></i>
-                    </div>
-                </div>
 
                 <div class="border mt-3 py-3">
                     <img src="../lego-images/<?php echo $row['main-image'] ?>" class="w-25" alt="">

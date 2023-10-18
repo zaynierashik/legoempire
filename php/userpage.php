@@ -89,149 +89,33 @@
         <h3 class="fw-bold">On Sale!</h3>
         <div class="slider">
             <div class="slider-container">
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-                
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-        
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-        
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-        
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.85vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
+            <?php
+                $sql = "SELECT * FROM lego_data ORDER BY RAND() LIMIT 8";
+                $stmt = $conn->query($sql);
+                if($stmt->rowCount() > 0){
+                    while($row = $stmt->fetch()){
+                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                            <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
+                                <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
+                            </a>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>';
+                    }
+                }else{
+                    echo "<div class='container'>No Products Found.</div>";
+                }
+            ?>
             </div>
         </div>
     </div>
@@ -269,149 +153,33 @@
         <h3 class="fw-bold">Recommended For You</h3>
         <div class="slider">
             <div class="slider-container">
-            <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-                
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-        
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-        
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-        
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 1vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
-
-                <div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.85vw;">
-                <a href="legodetails.php" class="nav-link">
-                    <img src="../lego-images/marvel.jpg" class="card-img-top my-3" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold fs-6">LEGO® Minifigures Marvel Series 2</h5>
-                </a>
-                        <div>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                        </div>
-                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$5.55</span></p>
-                        <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                    </div>
-                </div>
+            <?php
+                $sql = "SELECT * FROM lego_data ORDER BY RAND() LIMIT 8";
+                $stmt = $conn->query($sql);
+                if($stmt->rowCount() > 0){
+                    while($row = $stmt->fetch()){
+                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                            <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
+                                <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
+                            </a>
+                                    <div>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                    </div>
+                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
+                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                </div>
+                            </div>';
+                    }
+                }else{
+                    echo "<div class='container'>No Products Found.</div>";
+                }
+            ?>
             </div>
         </div>
     </div>
@@ -419,53 +187,27 @@
     <div class="container news-container mt-5">
         <h3 class="fw-bold">Read All About It</h3>
         <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/marvelnews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Best LEGO® Marvel Sets & Toys</h5>
-                            <p style="text-align: justify;">Discover the best LEGO® sets for Marvel fans young and old. Relive your favorite scenes from the movies, or create your own adventures!</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/dreamznews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Behind the scenes of the LEGO® DREAMZzz™ TV show</h5>
-                            <p style="text-align: justify;">Discover all there is to know about the brand-new LEGO® TV show and theme!</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/village.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Best LEGO® Marvel Sets & Toys</h5>
-                            <p style="text-align: justify;">Discover the best LEGO® sets for Marvel fans young and old. Relive your favorite scenes from the movies, or create your own adventures!</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card" style="width: 18.75rem; border-radius: 0; border: none;">
-                    <a href="">
-                        <img src="../images/dreamznews.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
-                        <div class="card-body px-0">
-                            <h5 class="card-title fw-bold fs-5 mb-3">Behind the scenes of the LEGO® DREAMZzz™ TV show</h5>
-                            <p style="text-align: justify;">Discover all there is to know about the brand-new LEGO® TV show and theme!</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <?php
+                $sql = "SELECT * FROM article_data ORDER BY RAND() LIMIT 3";
+                $stmt = $conn->query($sql);
+                if($stmt->rowCount() > 0){
+                    while($row = $stmt->fetch()){
+                        echo '<div class="col">
+                            <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
+                            <a href="article.php?articleId=' .$row['articleId'].'">
+                                <img src="../news-images/' .$row['main-image']. '" class="card-img-top" style="border-radius: 0;" alt="...">
+                                <div class="card-body px-0">
+                                    <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>
+                                    <p style="text-align: justify;">' .$row['subtext']. '</p>
+                                </div>
+                            </a>
+                            </div>
+                        </div>';
+                    }
+                }else{
+                    echo "<div class='container'>No Articles Found.</div>";
+                }
+            ?>
         </div>
     </div>
 
