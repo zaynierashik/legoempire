@@ -1,6 +1,10 @@
 <?php
     session_start();
     include 'connect.php';
+
+    if(!isset($_SESSION['username'])){
+        header('location: homepage.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,13 +36,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </nav>
 
@@ -53,49 +57,38 @@
     <div class="container text-center mt-4 pt-2">
         <i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i>
         <div class="mt-3">
-            <h5 class="fw-bold">You don't have anything in your cart.</h5>
-            <p>Login to see your cart and get shopping!</p>
-        </div>
-    </div>
-
-    <div class="container sale-container mt-5">
-        <h3 class="fw-bold">Recommended For You</h3>
-        <div class="slider">
-            <div class="slider-container">
-            <?php
-                $sql = "SELECT * FROM lego_data ORDER BY RAND() LIMIT 8";
-                $stmt = $conn->query($sql);
-                if($stmt->rowCount() > 0){
-                    while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
-                            <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
-                            </a>
-                                    <div>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                    </div>
-                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
-                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                                </div>
-                            </div>';
-                    }
-                }else{
-                    echo "<div class='container'>No Products Found.</div>";
+        <?php
+            if(isset($_SESSION['cart']) && is_array($_SESSION['cart']) && count($_SESSION['cart']) > 0){
+                echo "<h4>Shopping Cart</h4>";
+                echo "<table class='d-flex justify-content-center mt-5'>";
+                echo "<tr>
+                        <td>Lego ID</td>
+                        <td>Title</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Total</td>
+                    </tr>";
+                foreach ($_SESSION['cart'] as $product) {
+                    echo "<tr>";
+                    echo "<td>" . $product['legoId'] . "</td>";
+                    echo "<td>" . $product['title'] . "</td>";
+                    echo "<td>" . $product['price'] . "</td>";
+                    echo "<td>" . $product['quantity'] . "</td>";
+                    echo "<td>" . $product['quantity'] . "</td>";
+                    echo "</tr>";
                 }
-            ?>
-            </div>
+                echo "</table>";
+            } else {
+                echo "<h5 class='fw-bold'>You don't have anything in your cart.</h5>";
+                echo "<p>Login to see your cart and get shopping!</p>";
+            }
+        ?>
         </div>
     </div>
 
     <!-- Footer -->
 
-    <div class="container mt-3" style="height: 6vh; background-color: black; color: white;">
+    <div class="container mt-5" style="height: 6vh; background-color: black; color: white;">
         <div class="w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
@@ -118,18 +111,6 @@
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
-
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const exploreDeals = document.querySelector("#exploredeals");
-            const successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
-
-            exploreDeals.addEventListener("click", function(event){
-                event.preventDefault();
-                successToast.show();
-            });
-        });
-    </script> -->
     
     <script src="../js/script.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
