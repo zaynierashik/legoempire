@@ -14,8 +14,8 @@
 
         $productExists = false;
         if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])){
-            foreach ($_SESSION['cart'] as $item){
-                if($item['legoId'] == $legoId){
+            foreach ($_SESSION['cart'] as $product){
+                if($product['legoId'] == $legoId){
                     $productExists = true;
                     break;
                 }
@@ -68,6 +68,11 @@
                     if(isset($_SESSION['username'])){
                         echo '<li class="nav-item">
                             <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <div id="total-price-container">
+                                Total Price: $<?php echo $_SESSION["cartTotal"] ?>
+                            </div>
                         </li>';
                     }else{
                         echo '<li class="nav-item">

@@ -20,12 +20,11 @@
     <link rel="manifest" href="../favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
-    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
     <div class="container">
 
-    <div class="background-img">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="homepage.php">
@@ -46,43 +45,54 @@
         </div>
     </nav>
 
-    <div class="background-container">
-        <div class="backgroundImgWrapper">
-            <div class="text-overlay"></div>
-        </div>
-    </div>
-
-    </div>
-
     <div class="container text-center mt-4 pt-2">
         <i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i>
         <div class="mt-3">
         <?php
             if(isset($_SESSION['cart']) && is_array($_SESSION['cart']) && count($_SESSION['cart']) > 0){
-                echo "<h4>Shopping Cart</h4>";
-                echo "<table class='d-flex justify-content-center mt-5'>";
-                echo "<tr>
-                        <td>Lego ID</td>
-                        <td>Title</td>
-                        <td>Price</td>
-                        <td>Quantity</td>
-                        <td>Total</td>
-                    </tr>";
-                foreach ($_SESSION['cart'] as $product) {
-                    echo "<tr>";
-                    echo "<td>" . $product['legoId'] . "</td>";
-                    echo "<td>" . $product['title'] . "</td>";
-                    echo "<td>" . $product['price'] . "</td>";
-                    echo "<td>" . $product['quantity'] . "</td>";
-                    echo "<td>" . $product['quantity'] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            } else {
-                echo "<h5 class='fw-bold'>You don't have anything in your cart.</h5>";
-                echo "<p>Login to see your cart and get shopping!</p>";
-            }
         ?>
+                <h4 class="fw-bold">Shopping Cart</h4>
+                <table class='d-flex justify-content-center mt-5 table table-bordered table-striped'>
+                <tr>
+                    <td class="fs-5 fw-bold">S.N.</td>
+                    <td class="fs-5 fw-bold">Lego ID</td>
+                    <td class="fs-5 fw-bold">Lego Name</td>
+                    <td class="fs-5 fw-bold">Unit Price</td>
+                    <td class="fs-5 fw-bold">Quantity</td>
+                    <td class="fs-5 fw-bold">Total Price</td>
+                </tr>
+
+                <?php
+                    $count = 0;
+                    $cartTotal = 0;
+
+                    foreach ($_SESSION['cart'] as $product){
+                        $legoId = $product['legoId'];
+                        $title = $product['title'];
+                        $price = $product['price'];
+                        $quantity = $product['quantity'];
+                        $totalPrice = $price * $quantity;
+
+                        $cartTotal += $totalPrice;
+                        $count++;
+
+                        echo "<tr>";
+                            echo "<td class='fs-5'>$count</td>";
+                            echo "<td class='fs-5'>$legoId</td>";
+                            echo "<td class='fs-5' style='text-align: left'>$title</td>";
+                            echo "<td class='fs-5'>$price</td>";
+                            echo "<td class='fs-5'>$quantity</td>";
+                            echo "<td class='fs-5'>$totalPrice</td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                    echo "<h5 class='fw-bold'>Cart Total: $cartTotal</h5>";
+                    $_SESSION['cartTotal'] = $cartTotal;
+                }else{
+                    echo "<h5 class='fw-bold'>You don't have anything in your cart.</h5>";
+                    echo "<p>Login to see your cart and get shopping!</p>";
+                }
+            ?>
         </div>
     </div>
 
@@ -112,7 +122,7 @@
         </a>
     </div>
     
-    <script src="../js/script.js"></script>
+    <script src="../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
