@@ -5,6 +5,43 @@
     if(isset($_GET['legoId'])){
         $legoId = $_GET['legoId'];
     }
+    
+    if(isset($_POST['order-submit'])){
+        if(isset($_POST['quantity'])){
+            $quantity = $_POST['quantity'];
+    
+            // Retrieve 'title' and 'price' from the database based on $legoId
+            $sql_select = "SELECT title, price FROM lego_data WHERE legoId = :legoId";
+            $stmt_select = $conn->prepare($sql_select);
+            $stmt_select->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+            $stmt_select->execute();
+    
+            if ($stmt_select->rowCount() > 0) {
+                $row = $stmt_select->fetch(PDO::FETCH_ASSOC);
+                $title = $row['title'];
+                $price = $row['price'];
+    
+                // Add the legoId, title, price, and quantity to your SQL INSERT statement
+                $sql_insert = "INSERT INTO order_data(legoId, title, price, quantity) VALUES (:legoId, :title, :price, :quantity)";
+                $stmt_insert = $conn->prepare($sql_insert);
+                $stmt_insert->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                $stmt_insert->bindParam(':title', $title, PDO::PARAM_STR);
+                $stmt_insert->bindParam(':price', $price, PDO::PARAM_STR);
+                $stmt_insert->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+    
+                // Execute the statement
+                if ($stmt_insert->execute()) {
+                    echo "<script>alert('Item added to cart!')</script>";
+                } else {
+                    echo "<script>alert('Failed to add item to cart!')</script>";
+                }
+            } else {
+                echo "<script>alert('Lego ID not found in the database!')</script>";
+            }
+        } else {
+            echo "<script>alert('Incomplete data submitted! Please fill in all required fields.')</script>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -128,7 +165,8 @@
 
                     <div class="row pe-2">
                         <div class="col pe-0">
-                            <a href="order.php" class="nav-link cart-btn text-center pb-1 pt-2"><h5 class="fw-bold">Add to Cart</h5></a>
+                            <!-- <a type="submit" class="nav-link cart-btn text-center pb-1 pt-2" name="order-submit"><h5 class="fw-bold">Add to Cart</h5></a> -->
+                            <button class="nav-link cart-btn text-center pb-1 pt-2" name="order-submit">add</button>
                         </div>
                         <div class="col-2 text-center">
                             <i class="fa-regular fa-heart fa-lg mt-3 pt-1" style="color: #000000;"></i>
