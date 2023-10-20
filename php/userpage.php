@@ -37,12 +37,17 @@
                 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="fs-5" style="color: black;"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
+                    </li>
+
                     <li class="nav-item search-wrapper">
                         <form action="datasearch.php" method="POST" id="search" class="d-flex" role="search">
                             <i class="fa fa-search"></i>
                             <input type="search" name="search" class="form-control d-flex search-bar" placeholder="Search..." aria-label="Search">
                         </form>
                     </li>
+                    
                     <!-- <li class="nav-item">
                         <a class="nav-link fw-bold" aria-current="page">zaynierashik@gmail.com</a>
                     </li>

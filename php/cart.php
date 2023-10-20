@@ -90,7 +90,6 @@
                     $_SESSION['cartTotal'] = $cartTotal;
                 }else{
                     echo "<h5 class='fw-bold'>You don't have anything in your cart.</h5>";
-                    echo "<p>Login to see your cart and get shopping!</p>";
                 }
             ?>
         </div>
@@ -98,7 +97,7 @@
 
     <!-- Footer -->
 
-    <div class="container mt-5" style="height: 6vh; background-color: black; color: white;">
+    <!-- <div class="container mt-5" style="height: 6vh; background-color: black; color: white;">
         <div class="w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
@@ -112,7 +111,7 @@
                 </div>                
             </div>
         </div>
-    </div>
+    </div> -->
 
     </div>
 

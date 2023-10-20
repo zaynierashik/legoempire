@@ -67,12 +67,7 @@
                 <?php
                     if(isset($_SESSION['username'])){
                         echo '<li class="nav-item">
-                            <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <div id="total-price-container">
-                                Total Price: $<?php echo $_SESSION["cartTotal"] ?>
-                            </div>
+                            <a href="cart.php" class="nav-link pe-0"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="fs-5" style="color: black;"> [$' .$_SESSION["cartTotal"]. '] </span></a>
                         </li>';
                     }else{
                         echo '<li class="nav-item">
