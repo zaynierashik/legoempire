@@ -37,3 +37,12 @@
     text-decoration: none;
     color: black;
 }
+
+/* Cart */
+
+.cart-container{
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}

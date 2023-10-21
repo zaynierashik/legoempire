@@ -90,7 +90,7 @@
                 $stmt = $conn->query($sql);
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.60vw; margin-right: 0.60vw;">
                             <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
                                 <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">

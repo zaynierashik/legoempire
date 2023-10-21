@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
+    <div class="cart-container">
     <div class="container">
 
     <nav class="navbar navbar-expand-lg">
@@ -107,6 +108,7 @@
         <a href="" id="scroll-to-top">
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
+    </div>
     </div>
 
     <script>
