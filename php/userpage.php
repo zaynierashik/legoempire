@@ -37,23 +37,18 @@
                 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
-                    <li class="nav-item pe-2">
-                        <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="fs-5" style="color: black;"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
-                    </li>
-
-                    <li class="nav-item search-wrapper">
+                    <li class="nav-item search-wrapper me-2">
                         <form action="datasearch.php" method="POST" id="search" class="d-flex" role="search">
                             <i class="fa fa-search"></i>
                             <input type="search" name="search" class="form-control d-flex search-bar" placeholder="Search..." aria-label="Search">
                         </form>
                     </li>
-                    
-                    <!-- <li class="nav-item">
-                        <a class="nav-link fw-bold" aria-current="page">zaynierashik@gmail.com</a>
+                    <li class="nav-item">
+                        <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="fw-semibold" style="color: black;"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="logout.php" class="nav-link fw-bold logout-nav" aria-current="page">logout</a>
-                    </li> -->
+                        <a href="logout.php" class="nav-link pe-0 fw-semibold" style="color: black;" aria-current="page">logout</a>
+                    </li>
                 </ul>
             </div>
         </div>

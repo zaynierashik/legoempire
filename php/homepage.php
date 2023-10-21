@@ -242,38 +242,31 @@
         </div>
     </div>
 
-    <div class="container sale-container mt-5">
-        <h3 class="fw-bold">Recommended For You</h3>
-        <div class="slider">
-            <div class="slider-container">
-            <?php
-                $sql = "SELECT * FROM lego_data ORDER BY RAND() LIMIT 8";
-                $stmt = $conn->query($sql);
-                if($stmt->rowCount() > 0){
-                    while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
-                            <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
-                            </a>
-                                    <div>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                    </div>
-                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
-                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                                </div>
-                            </div>';
-                    }
-                }else{
-                    echo "<div class='container'>No Products Found.</div>";
-                }
-            ?>
-            </div>
+    <div class="container features-container text-center mt-5 pb-3 px-0">
+        <div class="image-container">
+            <img src="../images/return.png" class="img-fluid" alt="Marvel">
+            <div class="image-text fw-bold">Easy Return</div>
+            <div>Return any item before 7 days.</div>
+        </div>
+        <div class="image-container">
+            <img src="../images/shipping.png" class="img-fluid" alt="Halloween">
+            <div class="image-text fw-bold">Free Shipping</div>
+            <div>Enjoy free shipping inside Nepal.</div>
+        </div>
+        <div class="image-container mt-4">
+            <img src="../images/guarantee.png" class="img-fluid" alt="LEGO">
+            <div class="image-text fw-bold">Satisfaction Guarantee</div>
+            <div>We guarantee you with our quality satisfaction.</div>
+        </div>
+        <div class="image-container">
+            <img src="../images/fast-shipping.png" class="img-fluid" alt="Halloween">
+            <div class="image-text fw-bold">Fast Shipping</div>
+            <div>Items are shipped within 24 hours.</div>
+        </div>
+        <div class="image-container">
+            <img src="../images/money-return.png" class="img-fluid" alt="LEGO">
+            <div class="image-text fw-bold">Money Back Guarantee</div>
+            <div>We offer money back guarantee.</div>
         </div>
     </div>
 
