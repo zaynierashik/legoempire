@@ -1,6 +1,6 @@
 <?php
-    session_start();
     include 'connect.php';
+    include 'carttotal.php'; 
 
     if (isset($_GET['legoId'])) {
         $legoId = $_GET['legoId'];
