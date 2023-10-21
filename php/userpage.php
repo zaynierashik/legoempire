@@ -36,8 +36,8 @@
             </button>
                 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li class="nav-item pe-2">
                         <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="fs-5" style="color: black;"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
                     </li>
 
@@ -241,6 +241,12 @@
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
+
+    <script>
+        if( window.history.replaceState ){
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
     
     <script src="../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>

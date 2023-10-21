@@ -378,6 +378,12 @@
             });
         });
     </script>
+
+    <script>
+        if( window.history.replaceState ){
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
     
     <script src="../js/script.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>

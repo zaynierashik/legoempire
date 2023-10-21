@@ -1,10 +1,6 @@
 <?php
     session_start();
     include 'connect.php';
-
-    if(!isset($_SESSION['username'])){
-        header('location: homepage.php');
-    }
 ?>
 
 <!DOCTYPE html>
@@ -112,6 +108,12 @@
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
+
+    <script>
+        if( window.history.replaceState ){
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
     
     <script src="../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
