@@ -37,17 +37,17 @@
                 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
-                    <li class="nav-item search-wrapper me-2">
+                    <li class="nav-item search-wrapper me-4">
                         <form action="datasearch.php" method="POST" id="search" class="d-flex" role="search">
                             <i class="fa fa-search"></i>
                             <input type="search" name="search" class="form-control d-flex search-bar" placeholder="Search..." aria-label="Search">
                         </form>
                     </li>
-                    <li class="nav-item">
-                        <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="" style="color: black; font-size: 1.11rem"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
+                    <li class="nav-item me-4">
+                        <a href="dashboard.php" class="nav-link p-0"><i class="fa-solid fa-house" style="color: #000000;"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a href="logout.php" class="nav-link pe-0 " style="color: black; font-size: 1.11rem" aria-current="page">logout</a>
+                    <li class="nav-item me-0">
+                        <a href="cart.php" class="nav-link p-0"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="" style="color: black; font-size: 1.11rem"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
                     </li>
                 </ul>
             </div>
@@ -64,23 +64,23 @@
 
     <div class="container base-category mt-4 mb-3 text-center">
         <div class="image-container">
-            <a href=""><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
+            <a href="category.php?category=Marvel"><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
             <div class="image-text fw-bold">MARVEL</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
+            <a href="category.php?category=Halloween"><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
             <div class="image-text fw-bold">HALLOWEEN</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
+            <a href="category.php?category=LEGO"><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
             <div class="image-text fw-bold">LEGO</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
+            <a href="category.php?category=Offers"><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
             <div class="image-text fw-bold">OFFERS</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
+            <a href="category.php?category=DC"><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
             <div class="image-text fw-bold">DC</div>
         </div>
     </div>
