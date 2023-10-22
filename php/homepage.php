@@ -104,7 +104,7 @@
                                         <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                                     </div>
                                     <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
-                                    <a class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                    <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                 </div>
                             </div>';
                     }

@@ -44,10 +44,10 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="fw-semibold" style="color: black;"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
+                        <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="" style="color: black; font-size: 1.11rem"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="logout.php" class="nav-link pe-0 fw-semibold" style="color: black;" aria-current="page">logout</a>
+                        <a href="logout.php" class="nav-link pe-0 " style="color: black; font-size: 1.11rem" aria-current="page">logout</a>
                     </li>
                 </ul>
             </div>
@@ -94,7 +94,7 @@
                 $stmt = $conn->query($sql);
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.60vw; margin-right: 0.60vw;">
                             <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
                                 <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
@@ -158,7 +158,7 @@
                 $stmt = $conn->query($sql);
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.85vw; margin-right: 1vw;">
+                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.60vw; margin-right: 0.60vw;">
                             <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
                                 <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
