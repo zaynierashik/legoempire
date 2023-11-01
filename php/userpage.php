@@ -37,22 +37,18 @@
             </button>
                 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto d-flex align-items-center">
-                    <li class="nav-item search-wrapper me-4">
-                        <form action="datasearch.php" method="POST" id="search" class="d-flex" role="search">
-                            <i class="fa fa-search"></i>
-                            <input type="search" name="search" class="form-control d-flex search-bar" placeholder="Search..." aria-label="Search">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-2">
+                        <form action="datasearch.php" method="POST" id="search" role="search">
+                            <input type="search" name="search" class="form-control" placeholder="Search..." aria-label="Search">
                         </form>
                     </li>
-                    <li class="nav-item me-3">
-                        <a href="dashboard.php" class="nav-link p-0"><i class="fa-solid fa-user fa-lg" style="color: #000000;"></i></a>
+                    <li class="nav-item">
+                        <a href="dashboard.php" class="nav-link"><i class="fa-solid fa-user" style="color: #000000; font-size: 1.1rem;"></i></a>
                     </li>
-                    <li class="nav-item position-relative">
+                    <li class="nav-item">
                         <a href="cart.php" class="nav-link pe-0">
-                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
-                            <span class="position-absolute top-25 translate-middle badge rounded-circle" id="cart-badge">
-                                0
-                            </span>
+                            <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                         </a>
                     </li>
                 </ul>

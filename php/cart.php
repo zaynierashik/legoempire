@@ -1,6 +1,10 @@
 <?php
+    session_start();
     include 'connect.php';
-    include 'carttotal.php'; 
+
+    if (isset($_SESSION['userId'])){
+        $userId = $_SESSION['userId'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -35,52 +39,84 @@
     </nav>
 
     <div class="container text-center mt-4 pt-2">
-        <i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i>
+        <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
+        <h5 class="fw-bold mt-2">Shopping Cart</h5>
+
         <div class="mt-3">
-        <?php
-            if(isset($_SESSION['cart']) && is_array($_SESSION['cart']) && count($_SESSION['cart']) > 0){
+        <?php 
+            $sql = "SELECT * FROM cart_data WHERE userId = :userId";
+            $stmt = $conn->prepare($sql);
+            $stmt ->bindParam(':userId', $userId);
+            $stmt ->execute();
         ?>
-                <h4 class="fw-bold">Shopping Cart</h4>
-                <table class='d-flex justify-content-center mt-5 table table-bordered table-striped'>
-                <tr>
-                    <td class="fs-5 fw-bold">S.N.</td>
-                    <td class="fs-5 fw-bold">Lego ID</td>
-                    <td class="fs-5 fw-bold">Lego Name</td>
-                    <td class="fs-5 fw-bold">Unit Price</td>
-                    <td class="fs-5 fw-bold">Quantity</td>
-                    <td class="fs-5 fw-bold">Total Price</td>
-                </tr>
+            <div class="row">
+                <div class="col">
+                    <table class='table'>
+                    <tr>
+                        <td class="fw-bold">S.N.</td>
+                        <td class="fw-bold">Lego ID</td>
+                        <td class="fw-bold">Lego Name</td>
+                        <td class="fw-bold">Unit Price</td>
+                        <td class="fw-bold">Quantity</td>
+                        <td class="fw-bold">Sub Total</td>
+                    </tr>
 
-                <?php
-                    $count = 0;
-                    $cartTotal = 0;
+                    <?php
+                        $count = 1;
+                        $total = 0;
 
-                    foreach ($_SESSION['cart'] as $product){
-                        $legoId = $product['legoId'];
-                        $title = $product['title'];
-                        $price = $product['price'];
-                        $quantity = $product['quantity'];
-                        $totalPrice = $price * $quantity;
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                            $legoId = $row['legoId'];
+                            $title = $row['title'];
+                            $price = $row['price'];
+                            $quantity = $row['quantity'];
 
-                        $cartTotal += $totalPrice;
-                        $count++;
+                            $subTotal = $price * $quantity;
+                            $total += $subTotal;
+    
+                            echo '<tr>';
+                            echo '<td>' . $count . '</td>';
+                            echo '<td>' . $legoId . '</td>';
+                            echo '<td class="text-start">' . $title . '</td>';
+                            echo '<td>' . '$' . $price . '</td>';
+                            echo '<td>' . $quantity . '</td>';
+                            echo '<td>' . '$' . $subTotal . '</td>';
+                            echo '</tr>';
+    
+                            $count++;
+                        }
+                    ?>
 
-                        echo "<tr>";
-                            echo "<td class='fs-5'>$count</td>";
-                            echo "<td class='fs-5'>$legoId</td>";
-                            echo "<td class='fs-5' style='text-align: left'>$title</td>";
-                            echo "<td class='fs-5'>$price</td>";
-                            echo "<td class='fs-5'>$quantity</td>";
-                            echo "<td class='fs-5'>$totalPrice</td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                    echo "<h5 class='fw-bold'>Cart Total: $cartTotal</h5>";
-                    $_SESSION['cartTotal'] = $cartTotal;
-                }else{
-                    echo "<h5 class='fw-bold'>You don't have anything in your cart.</h5>";
-                }
-            ?>
+                    <tr>
+                        <td colspan="4" class="fw-bold">Total</td>
+                        <td class="fw-bold" colspan="2"><?php echo '$' . $total; ?></td>
+                    </tr>
+                    </table>
+                </div>
+
+                <div class="col">
+                    <div class="card" style="width: 17rem; border-radius: 0">
+                        <div class="card-header">
+                            <h5 class="fw-bold">Order Summary</h5>
+                        </div>
+
+                        <table class='table text-start'>
+                        <tr>
+                            <td>Order Subtotal</td>
+                            <td><?php echo '$' . $subTotal; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Delivery Cost</td>
+                            <td>$5</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Total</td>
+                            <td class="fw-bold"><?php echo '$' . $total; ?></td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

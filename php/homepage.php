@@ -40,12 +40,9 @@
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item position-relative me-4">
+                    <li class="nav-item me-4">
                         <a href="cart.php" class="nav-link pe-0">
-                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
-                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">
-                                0
-                            </span>
+                            <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                         </a>
                     </li>
                     <li class="nav-item">

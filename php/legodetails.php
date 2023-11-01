@@ -9,6 +9,7 @@
     if(isset($_POST['order-submit'])){
         $userId = $_SESSION['userId'];
         $legoId = $_POST['legoId'];
+        $title = $_POST['title'];
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
@@ -21,17 +22,17 @@
         if($stmt->rowCount() > 0){
             echo "<script>alert('Product already exists in the cart!')</script>";
         }else{
-            $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, price, quantity) VALUES (:userId, :legoId, :price, :quantity)");
+            $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, title, price, quantity) VALUES (:userId, :legoId, :title, :price, :quantity)");
             $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
             $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-            $stmt ->bindParam(':price', $price, PDO::PARAM_INT);
+            $stmt ->bindParam(':title', $title, PDO::PARAM_STR);
+            $stmt ->bindParam(':price', $price, PDO::PARAM_STR);
             $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $stmt ->execute();
 
             echo "<script>alert('Item added to cart!')</script>";
         }
-        }
-    
+    }
 ?>
 
 <!DOCTYPE html>
@@ -68,10 +69,9 @@
                 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item position-relative">
+                    <li class="nav-item">
                         <a href="cart.php" class="nav-link pe-0">
-                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
-                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                            <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                         </a>
                     </li>
                 </ul>
@@ -91,10 +91,9 @@
                 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item position-relative me-4">
+                    <li class="nav-item me-4">
                         <a href="cart.php" class="nav-link pe-0">
-                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
-                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                            <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -158,6 +157,7 @@
                 <form action="" method="POST">
                     <div>
                         <input type="hidden" name="legoId" id="legoId" value="<?php echo $row['legoId'] ?>">
+                        <input type="hidden" name="title" id="title" value="<?php echo $row['title'] ?>">
                         <h5 class="fw-bold pt-2" name="title"><?php echo $row['title'] ?></h5>
                         <div style="font-size: 0.87rem;">
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
