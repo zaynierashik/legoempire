@@ -5,6 +5,13 @@
     if (isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
     }
+
+    $sql = "SELECT COUNT(itemId) AS item_count FROM cart_data WHERE userId = :userId";
+    $stmt = $conn->prepare($sql);
+    $stmt ->bindParam(':userId', $userId);
+    $stmt ->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $itemCount = $result['item_count'];
 ?>
 
 <!DOCTYPE html>
@@ -25,126 +32,160 @@
 <body>
     <div class="cart-container">
     <div class="container">
-
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="homepage.php">
-                <img src="../images/logo.png" alt="The Lego Empire" width="175">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
-
-    <div class="container text-center mt-4 pt-2">
-        <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
-        <h5 class="fw-bold mt-2">Shopping Cart</h5>
-
-        <div class="mt-3">
-        <?php 
-            $sql = "SELECT * FROM cart_data WHERE userId = :userId";
-            $stmt = $conn->prepare($sql);
-            $stmt ->bindParam(':userId', $userId);
-            $stmt ->execute();
-        ?>
-            <div class="row">
-                <div class="col">
-                    <table class='table'>
-                    <tr>
-                        <td class="fw-bold">S.N.</td>
-                        <td class="fw-bold">Lego ID</td>
-                        <td class="fw-bold">Lego Name</td>
-                        <td class="fw-bold">Unit Price</td>
-                        <td class="fw-bold">Quantity</td>
-                        <td class="fw-bold">Sub Total</td>
-                    </tr>
-
-                    <?php
-                        $count = 1;
-                        $total = 0;
-
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                            $legoId = $row['legoId'];
-                            $title = $row['title'];
-                            $price = $row['price'];
-                            $quantity = $row['quantity'];
-
-                            $subTotal = $price * $quantity;
-                            $total += $subTotal;
-    
-                            echo '<tr>';
-                            echo '<td>' . $count . '</td>';
-                            echo '<td>' . $legoId . '</td>';
-                            echo '<td class="text-start">' . $title . '</td>';
-                            echo '<td>' . '$' . $price . '</td>';
-                            echo '<td>' . $quantity . '</td>';
-                            echo '<td>' . '$' . $subTotal . '</td>';
-                            echo '</tr>';
-    
-                            $count++;
-                        }
-                    ?>
-
-                    <tr>
-                        <td colspan="4" class="fw-bold">Total</td>
-                        <td class="fw-bold" colspan="2"><?php echo '$' . $total; ?></td>
-                    </tr>
-                    </table>
+        <?php
+            if(isset($_SESSION['username'])){
+                echo '<nav class="navbar navbar-expand-lg sticky-top">
+                <div class="container">
+                    <a class="navbar-brand" href="homepage.php">
+                        <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                    </a>
+        
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="cart.php" class="nav-link pe-0">
+                                <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    </div>
                 </div>
+                </nav>';
+            }else{
+                echo '<nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="homepage.php">
+                        <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                    </a>
+        
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item me-4">
+                            <a href="cart.php" class="nav-link pe-0">
+                                <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                </nav>';
+            }
+        ?>
 
-                <div class="col">
-                    <div class="card" style="width: 17rem; border-radius: 0">
-                        <div class="card-header">
-                            <h5 class="fw-bold">Order Summary</h5>
-                        </div>
+        <div class="mt-5">
+            <div class="cart-content p-3">
+                <?php 
+                    $sql = "SELECT * FROM cart_data WHERE userId = :userId";
+                    $stmt = $conn->prepare($sql);
+                    $stmt ->bindParam(':userId', $userId);
+                    $stmt ->execute();
+                ?>
+                
+                <h4 class="fw-bold">Shopping Cart</h4>
+                <p>You currently have <?php echo $itemCount; ?> item(s) in your cart.</p>
 
-                        <table class='table text-start'>
-                        <tr>
-                            <td>Order Subtotal</td>
-                            <td><?php echo '$' . $subTotal; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Delivery Cost</td>
-                            <td>$5</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">Total</td>
-                            <td class="fw-bold"><?php echo '$' . $total; ?></td>
-                        </tr>
+                <div class="row">
+                    <div class="col">
+                        <div class="container">
+                        <table class='table'>
+                            <tr class="text-start">
+                                <td class="fw-bold text-center">Item</td>
+                                <td class="fw-bold">Lego Name</td>
+                                <td class="fw-bold">Unit Price</td>
+                                <td class="fw-bold">Unit</td>
+                                <td class="fw-bold">Sub Total</td>
+                            </tr>
+
+                            <?php
+                                $count = 1;
+                                $total = 0;
+                                $charge = 5;
+
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                    $title = $row['title'];
+                                    $price = $row['price'];
+                                    $quantity = $row['quantity'];
+
+                                    $subTotal = $price * $quantity;
+                                    $total += $subTotal;
+                                    $cartTotal = $total + $charge;
+            
+                                    echo '<tr>';
+                                        echo '<td class="text-center">' . $count . '</td>';
+                                        echo '<td>' . $title . '</td>';
+                                        echo '<td>' . '$' . $price . '</td>';
+                                        echo '<td class="ps-3">' . $quantity . '</td>';
+                                        echo '<td>' . '$' . $subTotal . '</td>';
+                                    echo '</tr>';
+            
+                                    $count++;
+                                }
+                            ?>
                         </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="order-summary">
+                            <table class='table text-start'>
+                                <tr>
+                                    <td class="fw-bold text-center" colspan="2">Order Summary</td>
+                                </tr>
+                                
+                            <tr>
+                                <td>Order Subtotal</td>
+                                <td><?php echo '$' . $total; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Delivery Cost</td>
+                                <td><?php echo '$' . $charge; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Total</td>
+                                <td class="fw-bold"><?php echo '$' . $cartTotal; ?></td>
+                            </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
+        <!-- Footer -->
 
-    <div class="container mb-1 fixed-bottom" style="height: 6vh; background-color: black; color: white;">
-        <div class="w-100 h-100 d-inline-block ps-3 pt-3">
-            <div class="row" style="font-size: 0.77rem;">
-                <div class="col-7">
-                    <p>© TheLegoEmpire, All rights reserved 2023.</p>
+        <div class="container mb-1 fixed-bottom" style="height: 6vh; background-color: black; color: white;">
+            <div class="w-100 h-100 d-inline-block ps-3 pt-3">
+                <div class="row" style="font-size: 0.77rem;">
+                    <div class="col-7">
+                        <p>© TheLegoEmpire, All rights reserved 2023.</p>
+                    </div>
+                    <div class="col text-end">
+                        <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                        <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
+                    </div>                
                 </div>
-                <div class="col text-end">
-                    <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
-                    <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
-                    <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-                    <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
-                </div>                
             </div>
         </div>
     </div>
-
     </div>
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
-    </div>
     </div>
 
     <script>

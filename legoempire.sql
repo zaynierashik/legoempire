@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 06:41 PM
+-- Generation Time: Nov 01, 2023 at 02:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -73,13 +73,37 @@ INSERT INTO `article_data` (`articleId`, `title`, `subtext`, `description`, `rem
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart_data`
+--
+
+CREATE TABLE `cart_data` (
+  `itemId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `legoId` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_data`
+--
+
+INSERT INTO `cart_data` (`itemId`, `userId`, `legoId`, `title`, `price`, `quantity`) VALUES
+(1, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 5),
+(2, 1, 2, 'Endgame Final Battle', 99.99, 3),
+(3, 1, 5, 'Endgame Final Battle', 99.99, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lego_data`
 --
 
 CREATE TABLE `lego_data` (
   `legoId` int(11) NOT NULL,
   `title` text NOT NULL,
-  `price` float NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `stock` text NOT NULL,
   `quantity` int(11) NOT NULL,
   `age` int(11) NOT NULL,
@@ -161,6 +185,14 @@ ALTER TABLE `article_data`
   ADD PRIMARY KEY (`articleId`);
 
 --
+-- Indexes for table `cart_data`
+--
+ALTER TABLE `cart_data`
+  ADD PRIMARY KEY (`itemId`),
+  ADD KEY `userId` (`userId`),
+  ADD KEY `legoId` (`legoId`);
+
+--
 -- Indexes for table `lego_data`
 --
 ALTER TABLE `lego_data`
@@ -195,6 +227,12 @@ ALTER TABLE `article_data`
   MODIFY `articleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `cart_data`
+--
+ALTER TABLE `cart_data`
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `lego_data`
 --
 ALTER TABLE `lego_data`
@@ -211,6 +249,17 @@ ALTER TABLE `order_data`
 --
 ALTER TABLE `user_data`
   MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart_data`
+--
+ALTER TABLE `cart_data`
+  ADD CONSTRAINT `cart_data_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user_data` (`userId`),
+  ADD CONSTRAINT `cart_data_ibfk_2` FOREIGN KEY (`legoId`) REFERENCES `lego_data` (`legoId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
