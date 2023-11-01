@@ -1,6 +1,6 @@
 <?php
+    session_start();
     include 'connect.php';
-    include 'carttotal.php'; 
 
     if(!isset($_SESSION['username'])){
         header('location: homepage.php');
@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
+    
     <div class="container">
     
     <nav class="navbar navbar-expand-lg sticky-top">
@@ -43,11 +44,16 @@
                             <input type="search" name="search" class="form-control d-flex search-bar" placeholder="Search..." aria-label="Search">
                         </form>
                     </li>
-                    <li class="nav-item me-4">
-                        <a href="dashboard.php" class="nav-link p-0"><i class="fa-solid fa-house" style="color: #000000;"></i></a>
+                    <li class="nav-item me-3">
+                        <a href="dashboard.php" class="nav-link p-0"><i class="fa-solid fa-user fa-lg" style="color: #000000;"></i></a>
                     </li>
-                    <li class="nav-item me-0">
-                        <a href="cart.php" class="nav-link p-0"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="" style="color: black; font-size: 1.11rem"> [$<?php echo $_SESSION["cartTotal"] ?>]</span></a>
+                    <li class="nav-item position-relative">
+                        <a href="cart.php" class="nav-link pe-0">
+                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
+                            <span class="position-absolute top-25 translate-middle badge rounded-circle" id="cart-badge">
+                                0
+                            </span>
+                        </a>
                     </li>
                 </ul>
             </div>

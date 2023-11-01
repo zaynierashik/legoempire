@@ -1,35 +1,37 @@
 <?php
+    session_start();
     include 'connect.php';
-    include 'carttotal.php'; 
 
-    if (isset($_GET['legoId'])) {
+    if(isset($_GET['legoId'])){
         $legoId = $_GET['legoId'];
     }
 
-    if (isset($_POST['order-submit'])) {
+    if(isset($_POST['order-submit'])){
+        $userId = $_SESSION['userId'];
         $legoId = $_POST['legoId'];
-        $title = $_POST['title'];
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
-        $productExists = false;
-        if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])){
-            foreach ($_SESSION['cart'] as $product){
-                if($product['legoId'] == $legoId){
-                    $productExists = true;
-                    break;
-                }
-            }
-        }
+        $sql = "SELECT legoId FROM cart_data WHERE userId = :userId AND legoId = :legoId";
+        $stmt = $conn->prepare($sql);
+        $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+        $stmt ->execute();
 
-        if($productExists){
+        if($stmt->rowCount() > 0){
             echo "<script>alert('Product already exists in the cart!')</script>";
         }else{
-            $newProduct = ['legoId' => $legoId, 'title' => $title, 'price' => $price, 'quantity' => $quantity];
-            $_SESSION['cart'][] = $newProduct;
+            $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, price, quantity) VALUES (:userId, :legoId, :price, :quantity)");
+            $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+            $stmt ->bindParam(':price', $price, PDO::PARAM_INT);
+            $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $stmt ->execute();
+
             echo "<script>alert('Item added to cart!')</script>";
         }
-    }
+        }
+    
 ?>
 
 <!DOCTYPE html>
@@ -47,41 +49,63 @@
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
     <div class="container">
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="homepage.php">
-                <img src="../images/logo.png" alt="The Lego Empire" width="175">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
+    <?php
+        if(isset($_SESSION['username'])){
+            echo '<nav class="navbar navbar-expand-lg sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="homepage.php">
+                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                </a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                <?php
-                    if(isset($_SESSION['username'])){
-                        echo '<li class="nav-item">
-                            <a href="cart.php" class="nav-link pe-0"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i><span class="fs-5" style="color: black;"> [$' .$_SESSION["cartTotal"]. '] </span></a>
-                        </li>';
-                    }else{
-                        echo '<li class="nav-item">
-                            <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
-                        </li>';
-                    }
-                ?>
+                    <li class="nav-item position-relative">
+                        <a href="cart.php" class="nav-link pe-0">
+                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
+                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                        </a>
+                    </li>
                 </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+            </nav>';
+        }else{
+            echo '<nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="homepage.php">
+                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                </a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item position-relative me-4">
+                        <a href="cart.php" class="nav-link pe-0">
+                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
+                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+            </nav>';
+        }
+    ?>
 
     <?php
         $sql = "SELECT * FROM lego_data WHERE legoId = :legoId";
@@ -134,7 +158,6 @@
                 <form action="" method="POST">
                     <div>
                         <input type="hidden" name="legoId" id="legoId" value="<?php echo $row['legoId'] ?>">
-                        <input type="hidden" name="title" id="title" value="<?php echo $row['title'] ?>">
                         <h5 class="fw-bold pt-2" name="title"><?php echo $row['title'] ?></h5>
                         <div style="font-size: 0.87rem;">
                             <i class="fa-solid fa-star" style="color: #ffb234;"></i>
@@ -154,14 +177,8 @@
                         <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
                     </div>
 
-                    <div class="row pe-2">
-                        <div class="col pe-0">
-                            <!-- <a type="submit" class="nav-link cart-btn text-center pb-1 pt-2" name="order-submit"><h5 class="fw-bold">Add to Cart</h5></a> -->
-                            <button class="cart-btn text-center fs-5 fw-bold pb-1 pt-2 w-100" name="order-submit">Add to Cart</button>
-                        </div>
-                        <div class="col-2 text-center">
-                            <i class="fa-regular fa-heart fa-lg mt-3 pt-1" style="color: #000000;"></i>
-                        </div>
+                    <div>
+                        <button class="nav-link btn cart-btn mt-1 py-2 fw-bold w-100" name="order-submit">Add to Cart</button>
                     </div>
                 </form>
 
@@ -367,7 +384,7 @@
         $(document).ready(function (){
             $(".nav-link").on("click", function (){
                 var icon = $(this).find("i");
-        
+
                 if(icon.hasClass("fa-plus")){
                     icon.removeClass("fa-plus").addClass("fa-minus");
                     icon.css("transition", "transform 1s");
@@ -385,7 +402,7 @@
         }
     </script>
     
-    <script src="../js/script.js"></script>
+    <script src="../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 

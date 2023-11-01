@@ -26,6 +26,11 @@ html{
     font-weight: 500;
 }
 
+.badge{
+    background-color: #ca9d0d;
+    color: black;
+}
+
 .background-container{
     position: relative;
     height: 70vh;
@@ -200,75 +205,4 @@ html{
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{
     -webkit-appearance: none;
     margin: 0;
-}
-
-/* Lego Details */
-
-.legobackground{
-    background-image: url(../images/background.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-    background-attachment: fixed;
-}
-
-.vl{
-    background-color: #929497;
-    width: 98.05%;
-    height: 0.25vh;
-    margin: -1vh 0 0 0.87vw;
-}
-
-.quantity-btn{
-    display: flex;
-    width: max-content;
-    margin: 0 0 2vh 0;
-    border: 1px solid #ddd;
-}
-  
-.value-button, .number-field{
-    width: 3vw;
-    height: 5.5vh;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #eee;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.number-field{
-    background: white;
-    width: 4.5vw;
-    border: none;
-    font-size: 1.25rem;
-}
-  
-.value-button:hover{
-    cursor: pointer;
-}
-
-.quantity-btn #increase{
-    margin-left: 0.1vw;
-}
-
-.feature-container, .specification-container, .review-container{
-    background-color: rgb(248, 248, 248);
-    border: 1px solid #ddd;
-    padding: 1.5vh 1.5vw;
-}
-
-.feature-container .card-body, .specification-container .card-body, .review-container .card-body{
-    background-color: rgb(248, 248, 248);
-}
-
-.rating-btn{
-    border-radius: 0;
-    background-color: black;
-    color: white;
 }

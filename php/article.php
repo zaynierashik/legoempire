@@ -22,41 +22,64 @@
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
+    
     <div class="container">
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="homepage.php">
-                <img src="../images/logo.png" alt="The Lego Empire" width="175">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
+    <?php
+        if(isset($_SESSION['username'])){
+            echo '<nav class="navbar navbar-expand-lg sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="homepage.php">
+                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                </a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                <?php
-                    if(isset($_SESSION['username'])){
-                        echo '<li class="nav-item">
-                            <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
-                        </li>';
-                    }else{
-                        echo '<li class="nav-item">
-                            <a href="cart.php" class="nav-link me-3"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
-                        </li>';
-                    }
-                ?>
+                    <li class="nav-item position-relative">
+                        <a href="cart.php" class="nav-link pe-0">
+                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
+                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                        </a>
+                    </li>
                 </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+            </nav>';
+        }else{
+            echo '<nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="homepage.php">
+                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                </a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item position-relative me-4">
+                        <a href="cart.php" class="nav-link pe-0">
+                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
+                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+            </nav>';
+        }
+    ?>
 
     <?php
         $sql = "SELECT * FROM article_data WHERE articleId = :articleId";
@@ -129,7 +152,7 @@
         </a>
     </div>
     
-    <script src="../js/script.js"></script>
+    <script src="../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
