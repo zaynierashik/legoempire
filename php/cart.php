@@ -97,13 +97,12 @@
 
                 <div class="row">
                     <div class="col">
-                        <div class="container">
-                        <table class='table'>
+                        <table class="table">
                             <tr class="text-start">
                                 <td class="fw-bold text-center">Item</td>
                                 <td class="fw-bold">Lego Name</td>
                                 <td class="fw-bold">Unit Price</td>
-                                <td class="fw-bold">Unit</td>
+                                <td class="fw-bold">Quantity</td>
                                 <td class="fw-bold">Sub Total</td>
                             </tr>
 
@@ -125,7 +124,7 @@
                                         echo '<td class="text-center">' . $count . '</td>';
                                         echo '<td>' . $title . '</td>';
                                         echo '<td>' . '$' . $price . '</td>';
-                                        echo '<td class="ps-3">' . $quantity . '</td>';
+                                        echo '<td class="ps-4">' . $quantity . '</td>';
                                         echo '<td>' . '$' . $subTotal . '</td>';
                                     echo '</tr>';
             
@@ -133,30 +132,43 @@
                                 }
                             ?>
                         </table>
+
+                        <div class="mt-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="userpage.php" class="nav-link btn cart-btn py-2 fw-bold" role="button"><i class="fa-solid fa-chevron-left fa-2xs me-1"></i>Continue Shopping</a>
+                                </div>
+                                <div class="col text-end">
+                                    <button class="btn cart-btn px-5 py-2 fw-bold">Update Cart</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 border-start border-2">
                         <div class="order-summary">
-                            <table class='table text-start'>
+                            <table class="table text-start">
                                 <tr>
                                     <td class="fw-bold text-center" colspan="2">Order Summary</td>
                                 </tr>
-                                
-                            <tr>
-                                <td>Order Subtotal</td>
-                                <td><?php echo '$' . $total; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Delivery Cost</td>
-                                <td><?php echo '$' . $charge; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold">Total</td>
-                                <td class="fw-bold"><?php echo '$' . $cartTotal; ?></td>
-                            </tr>
+                                <tr>
+                                    <td>Order Subtotal</td>
+                                    <td><?php echo '$' . $total; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery Cost</td>
+                                    <td><?php echo '$' . $charge; ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Total</td>
+                                    <td class="fw-bold"><?php echo '$' . $cartTotal; ?></td>
+                                </tr>
                             </table>
-                        </div>
+
+                            <div class="mt-5">
+                                <a href="checkout.php" class="nav-link btn cart-btn py-2 fw-bold" role="button">Checkout</a>
+                            </div>
+                        <div>
                     </div>
                 </div>
             </div>
@@ -170,6 +182,7 @@
                     <div class="col-7">
                         <p>© TheLegoEmpire, All rights reserved 2023.</p>
                     </div>
+                    
                     <div class="col text-end">
                         <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
                         <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
