@@ -28,6 +28,10 @@
     color: black;
 }
 
+.quantity-change{
+    width: 10vw;
+}
+
 /* Lego Details */
 
 .legobackground{

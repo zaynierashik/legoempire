@@ -2,7 +2,7 @@
     session_start();
     include 'connect.php';
 
-    if (isset($_SESSION['userId'])){
+    if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
     }
 
@@ -12,6 +12,18 @@
     $stmt ->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $itemCount = $result['item_count'];
+
+    if(isset($_POST['delete']) && isset($_POST['legoId'])){
+        $legoId = $_POST['legoId'];
+
+        $stmt = $conn->prepare("DELETE FROM cart_data WHERE userId = :userId AND legoId = :legoId");
+        $stmt ->bindParam(':userId', $userId);
+        $stmt ->bindParam(':legoId', $legoId);
+        $stmt ->execute();
+
+        header('location: cart.php');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +40,48 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
     <link rel="stylesheet" href="../css/user.css">
+
+    <style>
+        .quantity-btn{
+            display: flex;
+            width: max-content;
+            margin: 0 0 0 0;
+            border: 1px solid #ddd;
+        }
+  
+        .value-button, .number-field{
+            width: 2vw;
+            height: 3.5vh;
+            font-size: 0.7rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eee;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .number-field{
+            background: white;
+            width: 3.7vw;
+            border: none;
+            font-size: 1.05rem;
+            padding-top: 0;
+        }
+        
+        .value-button:hover{
+            cursor: pointer;
+        }
+
+        .quantity-btn #increase{
+            margin-left: 0vw;
+        }
+    </style>
 </head>
 <body>
     <div class="cart-container">
@@ -98,12 +152,13 @@
                 <div class="row">
                     <div class="col">
                         <table class="table">
-                            <tr class="text-start">
+                            <tr>
                                 <td class="fw-bold text-center">Item</td>
                                 <td class="fw-bold">Lego Name</td>
                                 <td class="fw-bold">Unit Price</td>
-                                <td class="fw-bold">Quantity</td>
+                                <td class="fw-bold text-center">Quantity</td>
                                 <td class="fw-bold">Sub Total</td>
+                                <td></td>
                             </tr>
 
                             <?php
@@ -112,6 +167,7 @@
                                 $charge = 5;
 
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                    $legoId = $row['legoId'];
                                     $title = $row['title'];
                                     $price = $row['price'];
                                     $quantity = $row['quantity'];
@@ -124,8 +180,21 @@
                                         echo '<td class="text-center">' . $count . '</td>';
                                         echo '<td>' . $title . '</td>';
                                         echo '<td>' . '$' . $price . '</td>';
-                                        echo '<td class="ps-4">' . $quantity . '</td>';
+                                        // echo '<td class="text-center quantity-change px-5"><input type="number" class="form-control border-0 text-center p-0" name="quantity" value="'. $quantity .'"></td>';
+                                        echo '<td class="text-center quantity-change px-5">
+                                            <div class="quantity-btn">
+                                                <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="fa fa-minus"></i></div>
+                                                <input class="number-field" type="number" name="quantity" id="number" value="'. $quantity .'">
+                                                <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
+                                            </div>
+                                        </td>';
                                         echo '<td>' . '$' . $subTotal . '</td>';
+                                        echo '<td>
+                                            <form method="POST" action="">
+                                                <input type="hidden" name="legoId" value="' . $legoId . '">
+                                                <i class="fa-solid fa-trash" style="color: #cfcfcf; cursor: pointer" id="showDeleteConfirmation" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
+                                            <!-- </form> -->
+                                        </td>';
                                     echo '</tr>';
             
                                     $count++;
@@ -176,7 +245,7 @@
 
         <!-- Footer -->
 
-        <div class="container mb-1 fixed-bottom" style="height: 6vh; background-color: black; color: white;">
+        <!-- <div class="container mb-1 fixed-bottom" style="height: 6vh; background-color: black; color: white;">
             <div class="w-100 h-100 d-inline-block ps-3 pt-3">
                 <div class="row" style="font-size: 0.77rem;">
                     <div class="col-7">
@@ -191,7 +260,7 @@
                     </div>                
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     </div>
 
@@ -200,6 +269,46 @@
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
+
+    <!-- Delete Confirmation -->
+
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            Are you sure you want to remove the item(s)?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <button type="submit" class="btn btn-primary" name="delete" id="delete">Remove Item</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script>
+        function increaseValue(){
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+
+            if(value < 15){
+                value++;
+            }
+            document.getElementById('number').value = value;
+        }
+
+        function decreaseValue(){
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+
+            if(value > 1){
+                value--;
+            }
+            document.getElementById('number').value = value;
+        }
+    </script>
 
     <script>
         if( window.history.replaceState ){
