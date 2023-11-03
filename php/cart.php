@@ -24,6 +24,33 @@
         header('location: cart.php');
         exit();
     }
+
+    if (isset($_POST['update-cart'])) {
+        if (isset($_POST['quantity']) && is_array($_POST['quantity'])) {
+            $quantities = $_POST['quantity'];
+    
+            foreach ($quantities as $legoId => $newQuantity) {
+                $legoId = intval($legoId);
+                $newQuantity = intval($newQuantity);
+    
+                if($newQuantity <= 0){
+                    $stmt = $conn->prepare("DELETE FROM cart_data WHERE userId = :userId AND legoId = :legoId");
+                    $stmt ->bindParam(':userId', $userId);
+                    $stmt ->bindParam(':legoId', $legoId);
+                    $stmt ->execute();
+                }else{
+                    $stmt = $conn->prepare("UPDATE cart_data SET quantity = :quantity WHERE userId = :userId AND legoId = :legoId");
+                    $stmt ->bindParam(':userId', $userId);
+                    $stmt ->bindParam(':legoId', $legoId);
+                    $stmt ->bindParam(':quantity', $newQuantity);
+                    $stmt ->execute();
+                }
+            }
+    
+            header('location: cart.php');
+            exit();
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -40,48 +67,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
     <link rel="stylesheet" href="../css/user.css">
-
-    <style>
-        .quantity-btn{
-            display: flex;
-            width: max-content;
-            margin: 0 0 0 0;
-            border: 1px solid #ddd;
-        }
-  
-        .value-button, .number-field{
-            width: 2vw;
-            height: 3.5vh;
-            font-size: 0.7rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #eee;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .number-field{
-            background: white;
-            width: 3.7vw;
-            border: none;
-            font-size: 1.05rem;
-            padding-top: 0;
-        }
-        
-        .value-button:hover{
-            cursor: pointer;
-        }
-
-        .quantity-btn #increase{
-            margin-left: 0vw;
-        }
-    </style>
 </head>
 <body>
     <div class="cart-container">
@@ -180,14 +165,7 @@
                                         echo '<td class="text-center">' . $count . '</td>';
                                         echo '<td>' . $title . '</td>';
                                         echo '<td>' . '$' . $price . '</td>';
-                                        // echo '<td class="text-center quantity-change px-5"><input type="number" class="form-control border-0 text-center p-0" name="quantity" value="'. $quantity .'"></td>';
-                                        echo '<td class="text-center quantity-change px-5">
-                                            <div class="quantity-btn">
-                                                <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="fa fa-minus"></i></div>
-                                                <input class="number-field" type="number" name="quantity" id="number" value="'. $quantity .'">
-                                                <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
-                                            </div>
-                                        </td>';
+                                        echo '<td class="text-center quantity-change px-5"><input type="number" class="form-control text-center p-0" name="quantity[]" value="'. $quantity .'"></td>';
                                         echo '<td>' . '$' . $subTotal . '</td>';
                                         echo '<td>
                                             <form method="POST" action="">
@@ -208,7 +186,7 @@
                                     <a href="userpage.php" class="nav-link btn cart-btn py-2 fw-bold" role="button"><i class="fa-solid fa-chevron-left fa-2xs me-1"></i>Continue Shopping</a>
                                 </div>
                                 <div class="col text-end">
-                                    <button class="btn cart-btn px-5 py-2 fw-bold">Update Cart</button>
+                                    <button class="btn cart-btn px-5 py-2 fw-bold" name="update-cart">Update Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -287,28 +265,6 @@
     </div>
     </div>
     </div>
-
-    <script>
-        function increaseValue(){
-            var value = parseInt(document.getElementById('number').value, 10);
-            value = isNaN(value) ? 0 : value;
-
-            if(value < 15){
-                value++;
-            }
-            document.getElementById('number').value = value;
-        }
-
-        function decreaseValue(){
-            var value = parseInt(document.getElementById('number').value, 10);
-            value = isNaN(value) ? 0 : value;
-
-            if(value > 1){
-                value--;
-            }
-            document.getElementById('number').value = value;
-        }
-    </script>
 
     <script>
         if( window.history.replaceState ){
