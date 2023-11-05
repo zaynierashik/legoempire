@@ -2,6 +2,8 @@
     session_start();
     include 'connect.php';
 
+    $cartTotal = 0;
+
     if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
     }
@@ -24,7 +26,7 @@
         $email = $_POST['email'];
 
         if(empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['email'])){
-            $success = 0;
+            $update = 0;
         }else{
             $sql = "UPDATE user_data SET name = :name, phone = :phone, email = :email WHERE userId = :userId";
             $stmt = $conn->prepare($sql);
@@ -41,8 +43,8 @@
             $stmt ->bindParam(':phone', $phone);
             $stmt ->bindParam(':email', $email);
 
-            if($stmt ->execute()){
-                $success = 1;
+            if($stmt->execute()){
+                $update = 1;
             }
         }
     }
@@ -53,9 +55,9 @@
         $confirmPassword = $_POST['confirmPassword'];
     
         if(empty($oldPassword) || empty($newPassword) || empty($confirmPassword)){
-            $success = 0;
+            $change = 3;
         }else if($newPassword !== $confirmPassword){
-            $success = 0;
+            $change = 2;
         }else{
             $sql = "SELECT password FROM user_data WHERE userId = :userId";
             $stmt = $conn->prepare($sql);
@@ -63,25 +65,23 @@
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
-            if($result){
+            if($result) {
                 $storedPassword = $result['password'];
-
+            
                 if(password_verify($oldPassword, $storedPassword)){
                     $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
+            
                     $sql = "UPDATE user_data SET password = :newPassword WHERE userId = :userId";
                     $stmt = $conn->prepare($sql);
                     $stmt ->bindParam(':userId', $userId);
                     $stmt ->bindParam(':newPassword', $hashedNewPassword);
-    
+            
                     if($stmt->execute()){
-                        $success = 1;
+                        $change = 0;
                     }
                 }else{
-                    $success = 0; // Old password doesn't match
+                    $change = 1;
                 }
-            } else {
-                $success = 0; // Unable to retrieve old password
             }
         }
     }
@@ -94,7 +94,7 @@
         $landmark = $_POST['landmark'];
 
         if(empty($_POST['province']) || empty($_POST['city']) || empty($_POST['area']) || empty($_POST['address']) || empty($_POST['landmark'])){
-            $success = 0;
+            $billing = 0;
         }else{
             $sql = "UPDATE profile_data SET province = :province, city = :city, area = :area, address = :address, landmark = :landmark WHERE userId = :userId";
             $stmt = $conn->prepare($sql);
@@ -105,8 +105,8 @@
             $stmt ->bindParam(':address', $address);
             $stmt ->bindParam(':landmark', $landmark);
 
-            if($stmt ->execute()){
-                $success = 1;
+            if($stmt->execute()){
+                $billing = 1;
             }
         }
     }
@@ -239,7 +239,7 @@
                                             <label for="password" class="form-label fw-bold">New Password</label>
                                             <input type="text" class="form-control" name="newPassword" id="password">
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="password" class="form-label fw-bold">Confirm New Password</label>
                                             <input type="text" class="form-control" name="confirmPassword" id="password">
                                         </div>
@@ -279,7 +279,7 @@
                                             <label for="address" class="form-label fw-bold">Address</label>
                                             <input type="text" class="form-control" name="address" placeholder="Enter building/ street/ house no." id="address" value="<?php echo $result['address'] ?>">
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="landmark" class="form-label fw-bold">Landmark</label>
                                             <input type="text" class="form-control" name="landmark" placeholder="Example: beside bank" id="landmark" value="<?php echo $result['landmark'] ?>">
                                         </div>
@@ -292,32 +292,71 @@
                             </div>
 
                             <div class="tab-pane fade" id="list-order" role="tabpanel" aria-labelledby="list-order-list">
+                                <div class="update-content-container" id="update">
+                                    <div class="cart-content">
+                                        <?php 
+                                            $sql = "SELECT * FROM pending_data WHERE userId = :userId";
+                                            $stmt = $conn->prepare($sql);
+                                            $stmt ->bindParam(':userId', $userId);
+                                            $stmt ->execute();
+                                        ?>
+                                        
+                                        <h4 class="fw-bold">My Orders</h4>
 
+                                        <div class="row">
+                                            <div class="col">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td class="fw-bold text-center">Item</td>
+                                                        <td class="fw-bold">Lego Name</td>
+                                                        <td class="fw-bold">Invoice</td>
+                                                        <td class="fw-bold text-center">Quantity</td>
+                                                        <td class="fw-bold">Total</td>
+                                                        <td class="fw-bold">Payment</td>
+                                                        <td class="fw-bold"></td>
+                                                    </tr>
+
+                                                    <?php
+                                                        $count = 1;
+                                                        $total = 0;
+                                                        $charge = 5;
+
+                                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                                            $legoId = $row['legoId'];
+                                                            $title = $row['title'];
+                                                            $invoiceNumber = $row['invoiceNumber'];
+                                                            $quantity = $row['quantity'];
+                                                            $price = $row['price'];
+                                                            $status = $row['status'];
+
+                                                            $subTotal = $price * $quantity;
+                                                            $total += $subTotal;
+                                                            $cartTotal = $total + $charge;
+                                    
+                                                            echo '<tr>';
+                                                                echo '<td class="text-center">' . $count . '</td>';
+                                                                echo '<td>' . $title . '</td>';
+                                                                echo '<td>' . $invoiceNumber . '</td>';
+                                                                echo '<td class="text-center quantity-change px-5">'. $quantity .'</td>';
+                                                                echo '<td>' . '$' . $subTotal . '</td>';
+                                                                echo '<td>' . $status . '</td>';
+                                                                echo '<td><a href="confirmpayment.php"><i class="fa-solid fa-file" style="color: #cfcfcf;"></i></a></td>';
+                                                            echo '</tr>';
+                                    
+                                                            $count++;
+                                                        }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Footer -->
-        
-        <!-- <div class="container mt-3 mb-0 " style="height: 6vh; background-color: black; color: white;">
-            <div class="w-100 h-100 d-inline-block ps-3 pt-3">
-                <div class="row" style="font-size: 0.77rem;">
-                    <div class="col-7">
-                        <p>© TheLegoEmpire, All rights reserved 2023.</p>
-                    </div>
-                    
-                    <div class="col text-end">
-                        <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
-                        <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-                        <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
-                    </div>                
-                </div>
-            </div>
-        </div> -->
     </div>
     </div>
 
@@ -348,10 +387,10 @@
     <div class="toast-container position-fixed bottom-0 start-0 p-3">
     <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <strong class="me-auto">Update Successful</strong>
+            <strong class="me-auto" id="successToastHead"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <div class="toast-body">Profile data has been updated.</div>
+        <div class="toast-body" id="successToastBody"></div>
     </div>
     </div>
 
@@ -360,18 +399,20 @@
     <div class="toast-container position-fixed bottom-0 start-0 p-3">
     <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <strong class="me-auto">Update Error</strong>
+            <strong class="me-auto" id="errorToastHead"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <div class="toast-body" id="errorToastBody">Fill up all the fields.</div>
+        <div class="toast-body" id="errorToastBody"></div>
     </div>
     </div>
 
     <script>
         <?php
-            if(isset($success) && $success === 1){
+            if(isset($update) && $update === 1){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Update Successful";
+                    document.getElementById("successToastBody").innerHTML = "Profile data has been updated.";
                     successToast.show();
                 });';
             }
@@ -380,9 +421,89 @@
 
     <script>
         <?php
-            if(isset($success) && $success === 0){
+            if(isset($update) && $update === 0){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Update Error";
+                    document.getElementById("errorToastBody").innerHTML = "Fill up all the fields.";
+                    errorToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($change) && $change === 0){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Change Successful";
+                    document.getElementById("successToastBody").innerHTML = "Password has been changed.";
+                    successToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($change) && $change === 1){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Change Error";
+                    document.getElementById("errorToastBody").innerHTML = "Old password does not match.";
+                    errorToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($change) && $change === 2){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Change Error";
+                    document.getElementById("errorToastBody").innerHTML = "New password and confirm password does not match.";
+                    errorToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($change) && $change === 3){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Change Error";
+                    document.getElementById("errorToastBody").innerHTML = "Fill up all the fields.";
+                    errorToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($billing) && $billing === 1){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Change Successful";
+                    document.getElementById("successToastBody").innerHTML = "Billing address has been changed.";
+                    successToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($billing) && $billing === 0){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Update Error";
+                    document.getElementById("errorToastBody").innerHTML = "Fill up all the fields.";
                     errorToast.show();
                 });';
             }
