@@ -45,7 +45,12 @@
             $stmt = $conn->prepare($sql);
 
             if($stmt->execute([$name, $phone, $email, $hashed_password])){
-                $success = 1;
+                $sql = "INSERT INTO profile_data (name, phone, email) VALUES (?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+
+                if($stmt->execute([$name, $phone, $email,])){
+                    $success = 1;
+                }
             }
         }
     }
@@ -66,6 +71,7 @@
     <link rel="stylesheet" href="../css/homepage.css">
 </head>
 <body>
+    
     <div class="register-container">
     <div class="container">
 

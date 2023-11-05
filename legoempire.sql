@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2023 at 02:11 PM
+-- Generation Time: Nov 04, 2023 at 05:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -90,9 +90,7 @@ CREATE TABLE `cart_data` (
 --
 
 INSERT INTO `cart_data` (`itemId`, `userId`, `legoId`, `title`, `price`, `quantity`) VALUES
-(1, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 5),
-(2, 1, 2, 'Endgame Final Battle', 99.99, 3),
-(3, 1, 5, 'Endgame Final Battle', 99.99, 1);
+(22, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +103,7 @@ CREATE TABLE `lego_data` (
   `title` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `stock` text NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `stockQuantity` int(11) NOT NULL,
   `age` int(11) NOT NULL,
   `pieces` int(11) NOT NULL,
   `points` int(11) NOT NULL,
@@ -126,7 +124,7 @@ CREATE TABLE `lego_data` (
 -- Dumping data for table `lego_data`
 --
 
-INSERT INTO `lego_data` (`legoId`, `title`, `price`, `stock`, `quantity`, `age`, `pieces`, `points`, `item-number`, `specifications`, `specifications-point`, `title-one`, `title-two`, `title-three`, `main-image`, `secondary-image`, `image-one`, `image-two`, `image-three`) VALUES
+INSERT INTO `lego_data` (`legoId`, `title`, `price`, `stock`, `stockQuantity`, `age`, `pieces`, `points`, `item-number`, `specifications`, `specifications-point`, `title-one`, `title-two`, `title-three`, `main-image`, `secondary-image`, `image-one`, `image-two`, `image-three`) VALUES
 (1, 'LEGO® Minifigures Marvel Series 2', 5.55, 'Available Now', 0, 5, 10, 32, 71039, 'Marvel fans and kids aged 5+ can recreate action scenes with this incredible set of LEGO® Marvel Minifigures (71039) blind boxes. This eagerly anticipated sequel to the popular Series 1 features iconic characters from some of Marvel Studio’s most beloved Disney+ shows and can be collected, displayed or used to enjoy gripping role play.<br><br>\n\nOpen the blind box for a surprise!<br>\nLittle builders will be excited to discover which Marvel character is in their sealed, sustainable box. The collection features 12 unique characters: Agatha Harkness, Kate Bishop, Hawkeye, Moon Knight, Mr. Knight, She-Hulk, The Werewolf, Goliath, Storm, Beast, Wolverine and Echo.<br><br>\n\nBest gifts for Marvel fans<br>\nAll 12 highly detailed LEGO minifigure Marvel characters come with at least 1 authentic accessory. This is the perfect way to treat a LEGO fan and quickly provide them with lots of play possibilities.', 'Surprise characters – Kids can dive into the exciting world of Marvel Studios with these LEGO® Minifigures Marvel Series 2 (71039) characters. There is a surprise minifigure in every blind box\nCollectible Marvel heroes – Marvel fans can build their collections with 1 of 12 characters from iconic Disney+ shows in every box\nHighly detailed accessories – Each character is accompanied by at least 1 authentic accessory and a collector’s leaflet\nRole-play action – These highly detailed Marvel minifigures let kids aged 5+ play out famous scenes or create their own action-packed stories\nGifts for Marvel fans – These durable LEGO® minifigures can be given to kids aged 5+ and adults as an unexpected treat to expand their collections\nHigh quality – For more than 6 decades, LEGO® building pieces have been made to ensure they are consistent, compatible and work every time\nAlways in safe hands – LEGO® building pieces meet stringent global safety standards', 'Marvel Heroes Unite!', 'Recreate scenes from Hawkeye', 'A Hero and his alter ego', 'marvel-main.jpg', 'marvel-sec.jpg', 'marvel-one.jpg', 'marvel-two.jpg', 'marvel-three.jpg'),
 (2, 'Endgame Final Battle', 99.99, 'Available Now', 0, 10, 795, 650, 76266, 'LEGO® Marvel Endgame Final Battle (76266) recreates the ultimate showdown from Marvel Studios’ Avengers: Endgame. 6 Super Heroes take on the foremost super villain in a 360-degree playset created for kids aged 10 and up.<br><br>\r\n\r\nMultifaceted Marvel action<br>\r\nKids join an iconic cast in a playset packed with innovative features and movie-accurate details. 7 characters are included – Captain Marvel, Okoye, Wanda Maximoff, Shuri, Valkyrie, Thanos and The Wasp. The action takes place among the ruins of the Avengers’ compound. The authentically detailed battleground contains lots of places to attach the minifigures, plus hidden surprises for kids to discover: Captain America\'s shield, Thor\'s hammer, the time stone and the portal-opening rat. Pulling on a pair of built-in handles causes the battleground to expand for even more adventures! For added digital fun, builders can zoom in, rotate sets in 3D and track their progress using the fun, intuitive LEGO Builder app.', 'Avengers battle action – LEGO® Marvel Endgame Final Battle (76266) recreates the decisive showdown at the end of Marvel Studios’ Avengers: Endgame with classic characters in an inspiring setting\r\nFamous minifigures – The set includes Captain Marvel, Okoye, Wanda Maximoff, Shuri and Valkyrie minifigures, plus a Thanos big figure and The Wasp microfigure\r\nMany ways to play – There are lots of places to attach the minifigures around the highly detailed, 360-degree battleground, which also reconfigures to a more shelf-friendly, linear design\r\nHidden surprises – Iconic items from the Marvel Avengers movies are concealed within the set for kids to discover: Captain America\'s Shield, Thor\'s hammer, the time stone and the portal-opening rat\r\nGift for Marvel movie fans – Give this multifaceted playset as a birthday, holiday or any-day gift to a young Super Hero aged 10 and up', 'Iconic location', 'Hidden surprises', 'Expandable fun', 'marvel-main.jpg', 'marvel-sec.jpg', 'marvel-one.jpg', 'marvel-two.jpg', 'marvel-three.jpg'),
 (3, 'Endgame Final Battle', 99.99, 'Available Now', 0, 10, 795, 650, 76266, 'LEGO® Marvel Endgame Final Battle (76266) recreates the ultimate showdown from Marvel Studios’ Avengers: Endgame. 6 Super Heroes take on the foremost super villain in a 360-degree playset created for kids aged 10 and up.<br><br>\r\n\r\nMultifaceted Marvel action<br>\r\nKids join an iconic cast in a playset packed with innovative features and movie-accurate details. 7 characters are included – Captain Marvel, Okoye, Wanda Maximoff, Shuri, Valkyrie, Thanos and The Wasp. The action takes place among the ruins of the Avengers’ compound. The authentically detailed battleground contains lots of places to attach the minifigures, plus hidden surprises for kids to discover: Captain America\'s shield, Thor\'s hammer, the time stone and the portal-opening rat. Pulling on a pair of built-in handles causes the battleground to expand for even more adventures! For added digital fun, builders can zoom in, rotate sets in 3D and track their progress using the fun, intuitive LEGO Builder app.', 'Avengers battle action – LEGO® Marvel Endgame Final Battle (76266) recreates the decisive showdown at the end of Marvel Studios’ Avengers: Endgame with classic characters in an inspiring setting\r\nFamous minifigures – The set includes Captain Marvel, Okoye, Wanda Maximoff, Shuri and Valkyrie minifigures, plus a Thanos big figure and The Wasp microfigure\r\nMany ways to play – There are lots of places to attach the minifigures around the highly detailed, 360-degree battleground, which also reconfigures to a more shelf-friendly, linear design\r\nHidden surprises – Iconic items from the Marvel Avengers movies are concealed within the set for kids to discover: Captain America\'s Shield, Thor\'s hammer, the time stone and the portal-opening rat\r\nGift for Marvel movie fans – Give this multifaceted playset as a birthday, holiday or any-day gift to a young Super Hero aged 10 and up', 'Iconic location', 'Hidden surprises', 'Expandable fun', 'marvel-main.jpg', 'marvel-sec.jpg', 'marvel-one.jpg', 'marvel-two.jpg', 'marvel-three.jpg'),
@@ -150,6 +148,57 @@ CREATE TABLE `order_data` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pending_data`
+--
+
+CREATE TABLE `pending_data` (
+  `orderId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `legoId` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `invoiceNumber` varchar(15) NOT NULL,
+  `status` text NOT NULL DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pending_data`
+--
+
+INSERT INTO `pending_data` (`orderId`, `userId`, `legoId`, `quantity`, `invoiceNumber`, `status`) VALUES
+(1, 1, 1, 1, 'HPRQ90U', 'Pending'),
+(2, 1, 5, 1, 'HPRQ90U', 'Pending'),
+(3, 1, 2, 1, 'HPRQ90U', 'Pending'),
+(4, 1, 4, 1, 'HPRQ90U', 'Pending'),
+(5, 1, 2, 1, 'A18W4LL', 'Pending'),
+(6, 1, 3, 1, 'A18W4LL', 'Pending'),
+(7, 1, 1, 1, 'EQDMWLS', 'Pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profile_data`
+--
+
+CREATE TABLE `profile_data` (
+  `userId` int(11) NOT NULL,
+  `name` varchar(55) NOT NULL,
+  `phone` bigint(20) NOT NULL,
+  `email` varchar(55) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `province` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `profile_data`
+--
+
+INSERT INTO `profile_data` (`userId`, `name`, `phone`, `email`, `address`, `city`, `province`) VALUES
+(1, 'User', 9800000000, 'user@gmail.com', 'Thadatole', 'Chandrapur', 'Madesh');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_data`
 --
 
@@ -166,7 +215,7 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`userId`, `name`, `phone`, `email`, `password`) VALUES
-(1, 'User', 9800000000, 'user@gmail.com', '$2y$10$SH0GMRM7ivufmHwjytuIPe5arsqXX89T.UaT01WYZmB0J4QrMsn/C');
+(1, 'User', 9800000000, 'user@gmail.com', '$2y$10$LZZGhXZrgyvRvJdJSdvBqupKnZSxfwmTpIJ5.qBIlam9yHEXopPbG');
 
 --
 -- Indexes for dumped tables
@@ -205,6 +254,18 @@ ALTER TABLE `order_data`
   ADD PRIMARY KEY (`orderId`);
 
 --
+-- Indexes for table `pending_data`
+--
+ALTER TABLE `pending_data`
+  ADD PRIMARY KEY (`orderId`);
+
+--
+-- Indexes for table `profile_data`
+--
+ALTER TABLE `profile_data`
+  ADD PRIMARY KEY (`userId`);
+
+--
 -- Indexes for table `user_data`
 --
 ALTER TABLE `user_data`
@@ -230,7 +291,7 @@ ALTER TABLE `article_data`
 -- AUTO_INCREMENT for table `cart_data`
 --
 ALTER TABLE `cart_data`
-  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `lego_data`
@@ -243,6 +304,18 @@ ALTER TABLE `lego_data`
 --
 ALTER TABLE `order_data`
   MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pending_data`
+--
+ALTER TABLE `pending_data`
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `profile_data`
+--
+ALTER TABLE `profile_data`
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_data`

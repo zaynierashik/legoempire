@@ -2,6 +2,8 @@
     session_start();
     include 'connect.php';
 
+    $cartTotal = 0;
+
     if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
     }
@@ -70,7 +72,7 @@
 </head>
 <body>
     <div class="cart-container">
-    <div class="container">
+    <div class="container" style="box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);">
         <?php
             if(isset($_SESSION['username'])){
                 echo '<nav class="navbar navbar-expand-lg sticky-top">
@@ -86,7 +88,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a href="cart.php" class="nav-link pe-0">
+                            <a href="cart.php" class="nav-link pe-1">
                                 <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                             </a>
                         </li>
@@ -182,12 +184,14 @@
 
                         <div class="mt-5">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <a href="userpage.php" class="nav-link btn cart-btn py-2 fw-bold" role="button"><i class="fa-solid fa-chevron-left fa-2xs me-1"></i>Continue Shopping</a>
-                                </div>
-                                <div class="col text-end">
-                                    <button class="btn cart-btn px-5 py-2 fw-bold" name="update-cart">Update Cart</button>
-                                </div>
+                                <?php if ($itemCount > 0): ?>
+                                    <div class="col-md-3">
+                                        <a href="userpage.php" class="nav-link btn cart-btn py-2 fw-bold" role="button"><i class="fa-solid fa-chevron-left fa-2xs me-1"></i>Continue Shopping</a>
+                                    </div>
+                                    <div class="col text-end">
+                                        <button class="btn cart-btn px-5 py-2 fw-bold" name="update-cart">Update Cart</button>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -213,17 +217,56 @@
                             </table>
 
                             <div class="mt-5">
-                                <a href="checkout.php" class="nav-link btn cart-btn py-2 fw-bold" role="button">Checkout</a>
+                            <?php
+                                if($itemCount > 0){
+                                    echo '<a href="checkout.php" class="nav-link btn cart-btn py-2 fw-bold" role="button">Checkout</a>';
+                                }else{
+                                    echo '<h6 class="fw-bold">No items in the cart to proceed.</h6>';
+                                }
+                            ?>
                             </div>
                         <div>
                     </div>
                 </div>
             </div>
+
+            <!-- <div class="container sale-container mt-5 pt-5">
+                <h4 class="fw-bold">Recommended For You</h4>
+                <div class="slider-container">
+                <?php
+                    $sql = "SELECT * FROM lego_data ORDER BY RAND() LIMIT 4";
+                    $stmt = $conn->query($sql);
+                    if($stmt->rowCount() > 0){
+                        while($row = $stmt->fetch()){
+                            echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.7vw; margin-left: 0.7vw;">
+                                <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
+                                    <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
+                                </a>
+                                        <div>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        </div>
+                                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
+                                        <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                    </div>
+                                </div>';
+                        }
+                    }else{
+                        echo "<div class='container'>No Products Found.</div>";
+                    }
+                ?>
+                </div>
+            </div> -->
         </div>
-
+        
         <!-- Footer -->
-
-        <!-- <div class="container mb-1 fixed-bottom" style="height: 6vh; background-color: black; color: white;">
+        
+        <!-- <div class="container mt-3 mb-0 " style="height: 6vh; background-color: black; color: white;">
             <div class="w-100 h-100 d-inline-block ps-3 pt-3">
                 <div class="row" style="font-size: 0.77rem;">
                     <div class="col-7">
@@ -257,9 +300,9 @@
             Are you sure you want to remove the item(s)?
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-secondary pt-1" style="border-radius: 0;" data-bs-dismiss="modal">Cancel</button>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <button type="submit" class="btn btn-primary" name="delete" id="delete">Remove Item</button>
+                <button type="submit" class="btn btn-primary pt-1" name="delete" id="delete" style="border-radius: 0;">Remove Item</button>
             </form>
         </div>
     </div>

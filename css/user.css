@@ -21,7 +21,6 @@
 
 .cart-content{
     background-color: white;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
 }
 
 .cart-content i:hover{
@@ -30,6 +29,12 @@
 
 .quantity-change{
     width: 10vw;
+}
+
+/* Checkout */
+
+.checkout-content a{
+    background-color: rgb(248, 248, 248);
 }
 
 /* Lego Details */
@@ -106,4 +111,15 @@
 .badge{
     background-color: white;
     color: black;
+}
+
+/* Manage Account */
+
+.account-content .list-group .active{
+    background-color: rgb(235, 235, 235);
+    color: black;
+}
+
+.update-content-container .form-control, .update-content-container button, .update-content-container select, .update-content-container option{
+    height: 5.5vh;
 }

@@ -44,7 +44,7 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <a href="dashboard.php" class="nav-link"><i class="fa-solid fa-user" style="color: #000000; font-size: 1.1rem;"></i></a>
+                        <a href="account.php" class="nav-link"><i class="fa-solid fa-user" style="color: #000000; font-size: 1.1rem;"></i></a>
                     </li>
                     <li class="nav-item">
                         <a href="cart.php" class="nav-link pe-0">
