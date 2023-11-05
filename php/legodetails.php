@@ -171,10 +171,10 @@
                         <p class="fw-bold text-success"><?php echo $row['stock'] ?></p>
                     </div>
 
-                    <div class="quantity-btn">
-                        <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="fa fa-minus"></i></div>
+                    <div class="quantity-btn rounded">
+                        <div class="value-button rounded-start" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="fa fa-minus"></i></div>
                         <input class="number-field fw-bold" type="number" name="quantity" id="number" value="1">
-                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
+                        <div class="value-button rounded-end" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
                     </div>
 
                     <div>
@@ -182,7 +182,7 @@
                     </div>
                 </form>
 
-                <div class="border mt-3 py-3">
+                <div class="border rounded mt-3 py-3">
                     <img src="../lego-images/<?php echo $row['main-image'] ?>" class="w-25" alt="">
                     <small class="fw-bold">Gift with LEGO® purchases of $100 or more*</small>
                 </div>
@@ -217,7 +217,7 @@
     </div>
 
     <div class="container about-container mt-5">
-        <div class="feature-container border-bottom-0">
+        <div class="feature-container rounded-top border-bottom-0">
             <a class="nav-link p-0 w-100" data-bs-toggle="collapse" href="#collapseFeature" aria-expanded="false" aria-controls="collapseFeature">
             <div class="row">
                 <div class="col">
@@ -295,7 +295,7 @@
             </div>
         </div>
 
-        <div class="review-container">
+        <div class="review-container rounded-bottom">
             <a class="nav-link p-0 w-100" data-bs-toggle="collapse" href="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
             <div class="row">
                 <div class="col">
@@ -322,7 +322,7 @@
                     <h5>Your Review</h5>
                     <form action="" method="POST" class="form">
                         <div class="d-grid">
-                            <button type="submit" class="border-0 rating-btn fw-bold text-center pb-2 pt-2" name="rating-submit" value="Submit">Submit</button>
+                            <button type="submit" class="border-0 rounded rating-btn fw-bold text-center pb-2 pt-2" name="rating-submit" value="Submit">Submit</button>
                         </div>
                     </form>
                 </div>

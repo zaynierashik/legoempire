@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
+    
     <div class="cart-container">
     <div class="container">
         <?php
@@ -83,7 +84,7 @@
 
                 <div class="row row-gap-4 text-center py-3">
                     <div class="col-md-4">
-                        <a href="" class="nav-link border pt-2">
+                        <a href="" class="nav-link border rounded pt-2">
                             <div>
                                 <i class="fa-regular fa-credit-card fa-xl" style="color: #000000;"></i>
                                 <h6 class="fw-bold mt-2">Credit Card</h6>
@@ -91,7 +92,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="offlinepayment.php" class="nav-link border pt-2">
+                        <a href="offlinepayment.php" class="nav-link border rounded pt-2">
                             <div>
                                 <i class="fa-solid fa-file-invoice fa-xl" style="color: #000000;"></i>
                                 <h6 class="fw-bold mt-2">Payment Invoice</h6>
@@ -99,7 +100,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="nav-link border pt-2">
+                        <a href="" class="nav-link border rounded pt-2">
                             <div>
                                 <i class="fa-solid fa-hand-holding-dollar fa-xl" style="color: #000000;"></i>
                                 <h6 class="fw-bold mt-2">Cash on Delivery</h6>
@@ -107,7 +108,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="nav-link border pt-2">
+                        <a href="" class="nav-link border rounded pt-2">
                             <div>
                                 <i class="fa-brands fa-paypal fa-xl" style="color: #000000;"></i>
                                 <h6 class="fw-bold mt-2">PayPal</h6>
@@ -115,7 +116,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="nav-link border pt-2">
+                        <a href="" class="nav-link border rounded pt-2">
                             <div>
                                 <i class="fa-brands fa-stripe fa-xl" style="color: #000000;"></i>
                                 <h6 class="fw-bold mt-2">Stripe</h6>
@@ -123,7 +124,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="nav-link border pt-2">
+                        <a href="" class="nav-link border rounded pt-2">
                             <div>
                                 <i class="fa-solid fa-wallet fa-xl" style="color: #000000;"></i>
                                 <h6 class="fw-bold mt-2">Wallet</h6>
@@ -136,28 +137,27 @@
         
         <!-- Footer -->
         
-        <div class="container fixed-bottom" style="height: 6vh; background-color: black; color: white;">
-            <div class="w-100 h-100 d-inline-block ps-3 pt-3">
-                <div class="row" style="font-size: 0.77rem;">
-                    <div class="col-7">
-                        <p>© TheLegoEmpire, All rights reserved 2023.</p>
-                    </div>
-                    
-                    <div class="col text-end">
-                        <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
-                        <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-                        <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
-                    </div>                
+        <div class="container fixed-bottom mb-1 rounded" style="height: 6vh; background-color: black; color: white;">
+        <div class="w-100 h-100 d-inline-block ps-3 pt-3">
+            <div class="row" style="font-size: 0.77rem;">
+                <div class="col-7">
+                    <p>© TheLegoEmpire, All rights reserved 2023.</p>
                 </div>
+                <div class="col text-end">
+                    <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                    <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
+                </div>                
             </div>
+        </div>
         </div>
     </div>
     </div>
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
-            <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
+            <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
 

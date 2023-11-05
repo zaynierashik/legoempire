@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../css/homepage.css">
 </head>
 <body>
+    
     <div class="container">
 
     <div class="background-img">
@@ -92,7 +93,7 @@
                 $stmt = $conn->query($sql);
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.60vw; margin-right: 0.60vw;">
+                        echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                             <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
                                 <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
@@ -118,7 +119,7 @@
         </div>
     </div>
 
-    <div class="container features-container text-center mt-5 pb-3 px-0">
+    <div class="container features-container text-center rounded mt-5 pb-3 px-0">
         <div class="image-container">
             <img src="../images/return.png" class="img-fluid" alt="Marvel">
             <div class="image-text fw-bold">Easy Return</div>
@@ -155,9 +156,9 @@
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
                         echo '<div class="col">
-                            <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
+                            <div class="card" style="width: 25.5rem; border: none;">
                             <a href="article.php?articleId=' .$row['articleId'].'">
-                                <img src="../news-images/' .$row['main-image']. '" class="card-img-top" style="border-radius: 0;" alt="...">
+                                <img src="../news-images/' .$row['main-image']. '" class="card-img-top rounded" style="" alt="...">
                                 <div class="card-body px-0">
                                     <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>
                                     <p style="text-align: justify;">' .$row['subtext']. '</p>
@@ -176,7 +177,7 @@
 
     <!-- Footer -->
 
-    <div class="container mt-3" style="height: 6vh; background-color: black; color: white;">
+    <div class="container mt-3 rounded" style="height: 6vh; background-color: black; color: white;">
         <div class="w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
@@ -196,7 +197,7 @@
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
-            <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
+            <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
 

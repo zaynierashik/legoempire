@@ -300,9 +300,9 @@
             Are you sure you want to remove the item(s)?
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary pt-1" style="border-radius: 0;" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <button type="submit" class="btn btn-primary pt-1" name="delete" id="delete" style="border-radius: 0;">Remove Item</button>
+                <button type="submit" class="btn btn-primary pt-1" name="delete" id="delete">Remove Item</button>
             </form>
         </div>
     </div>

@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
-    
     <div class="container">
     
     <nav class="navbar navbar-expand-lg sticky-top">
@@ -96,7 +95,7 @@
                 $stmt = $conn->query($sql);
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.60vw; margin-right: 0.60vw;">
+                        echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                             <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
                                 <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
@@ -126,9 +125,9 @@
         <h3 class="fw-bold">Offers & Promotions</h3>
         <div class="row">
             <div class="col">
-                <div class="card" style="width: 39rem; border-radius: 0; border: none;">
+                <div class="card" style="width: 39rem;  border: none;">
                     <a href="">
-                        <img src="../images/offerone.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
+                        <img src="../images/offerone.jpg" class="card-img-top rounded" alt="...">
                         <div class="card-body text-center px-0 pb-0">
                             <h5 class="card-title fw-bold fs-5 mb-2">Earn Double Points</h5>
                             <small><p>LEGO® Insiders get 2X points on all purchases, 10/10-10/15.</p></small>
@@ -138,9 +137,9 @@
             </div>
 
             <div class="col">
-                <div class="card" style="width: 39rem; border-radius: 0; border: none;">
+                <div class="card" style="width: 39rem;  border: none;">
                     <a href="">
-                        <img src="../images/offertwo.jpg" class="card-img-top" style="border-radius: 0;" alt="...">
+                        <img src="../images/offertwo.jpg" class="card-img-top rounded" alt="...">
                         <div class="card-body text-center px-0 pb-0">
                             <h5 class="card-title fw-bold fs-5 mb-2">Get LEGO® Creator Scary Pirate Island</h5>
                             <small><p>Your gift with LEGO® purchases of $100 or more.*</p></small>
@@ -160,7 +159,7 @@
                 $stmt = $conn->query($sql);
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
-                        echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-left: 0.60vw; margin-right: 0.60vw;">
+                        echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                             <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
                                 <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
@@ -195,9 +194,9 @@
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
                         echo '<div class="col">
-                            <div class="card" style="width: 25.5rem; border-radius: 0; border: none;">
+                            <div class="card" style="width: 25.5rem; border: none;">
                             <a href="article.php?articleId=' .$row['articleId'].'">
-                                <img src="../news-images/' .$row['main-image']. '" class="card-img-top" style="border-radius: 0;" alt="...">
+                                <img src="../news-images/' .$row['main-image']. '" class="card-img-top rounded" alt="...">
                                 <div class="card-body px-0">
                                     <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>
                                     <p style="text-align: justify;">' .$row['subtext']. '</p>
@@ -215,7 +214,7 @@
 
     <!-- Footer -->
 
-    <div class="container mt-3" style="height: 6vh; background-color: black; color: white;">
+    <div class="container mt-3 rounded" style="height: 6vh; background-color: black; color: white;">
         <div class="w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
@@ -235,7 +234,7 @@
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
-            <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
+            <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
 

@@ -22,22 +22,88 @@
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
-        $province = $_POST['province'];
-        $city = $_POST['city'];
-        $address = $_POST['address'];
 
-        if(empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['email']) || empty($_POST['province']) || empty($_POST['city']) || empty($_POST['address'])){
+        if(empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['email'])){
             $success = 0;
         }else{
-            $sql = "UPDATE profile_data SET name = :name, phone = :phone, email = :email, province = :province, city = :city, address = :address WHERE userId = :userId";
+            $sql = "UPDATE user_data SET name = :name, phone = :phone, email = :email WHERE userId = :userId";
             $stmt = $conn->prepare($sql);
             $stmt ->bindParam(':userId', $userId);
             $stmt ->bindParam(':name', $name);
             $stmt ->bindParam(':phone', $phone);
             $stmt ->bindParam(':email', $email);
+            $stmt ->execute();
+
+            $sql = "UPDATE profile_data SET name = :name, phone = :phone, email = :email WHERE userId = :userId";
+            $stmt = $conn->prepare($sql);
+            $stmt ->bindParam(':userId', $userId);
+            $stmt ->bindParam(':name', $name);
+            $stmt ->bindParam(':phone', $phone);
+            $stmt ->bindParam(':email', $email);
+
+            if($stmt ->execute()){
+                $success = 1;
+            }
+        }
+    }
+
+    if(isset($_POST['change-submit'])){
+        $oldPassword = $_POST['oldPassword'];
+        $newPassword = $_POST['newPassword'];
+        $confirmPassword = $_POST['confirmPassword'];
+    
+        if(empty($oldPassword) || empty($newPassword) || empty($confirmPassword)){
+            $success = 0;
+        }else if($newPassword !== $confirmPassword){
+            $success = 0;
+        }else{
+            $sql = "SELECT password FROM user_data WHERE userId = :userId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if($result){
+                $storedPassword = $result['password'];
+
+                if(password_verify($oldPassword, $storedPassword)){
+                    $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+                    $sql = "UPDATE user_data SET password = :newPassword WHERE userId = :userId";
+                    $stmt = $conn->prepare($sql);
+                    $stmt ->bindParam(':userId', $userId);
+                    $stmt ->bindParam(':newPassword', $hashedNewPassword);
+    
+                    if($stmt->execute()){
+                        $success = 1;
+                    }
+                }else{
+                    $success = 0; // Old password doesn't match
+                }
+            } else {
+                $success = 0; // Unable to retrieve old password
+            }
+        }
+    }
+
+    if(isset($_POST['billing-submit'])){
+        $province = $_POST['province'];
+        $city = $_POST['city'];
+        $area = $_POST['area'];
+        $address = $_POST['address'];
+        $landmark = $_POST['landmark'];
+
+        if(empty($_POST['province']) || empty($_POST['city']) || empty($_POST['area']) || empty($_POST['address']) || empty($_POST['landmark'])){
+            $success = 0;
+        }else{
+            $sql = "UPDATE profile_data SET province = :province, city = :city, area = :area, address = :address, landmark = :landmark WHERE userId = :userId";
+            $stmt = $conn->prepare($sql);
+            $stmt ->bindParam(':userId', $userId);
             $stmt ->bindParam(':province', $province);
             $stmt ->bindParam(':city', $city);
+            $stmt ->bindParam(':area', $area);
             $stmt ->bindParam(':address', $address);
+            $stmt ->bindParam(':landmark', $landmark);
 
             if($stmt ->execute()){
                 $success = 1;
@@ -123,6 +189,7 @@
                     <div class="col-3">
                         <div class="list-group" id="list-tab" role="tablist">
                             <a href="#list-profile" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold active" id="list-profile-list" data-bs-toggle="list" role="tab" aria-controls="list-profile">Edit Profile</a>
+                            <a href="#list-password" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-password-list" data-bs-toggle="list" role="tab" aria-controls="list-password">Change Password</a>
                             <a href="#list-billing" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-billing-list" data-bs-toggle="list" role="tab" aria-controls="list-billing">Billing Address</a>
                             <a href="#list-order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" data-bs-toggle="list" role="tab" aria-controls="list-order">My Orders</a>
                             <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal">Logout</a>
@@ -149,10 +216,44 @@
                                             <label for="phone" class="form-label fw-bold">Phone Number</label>
                                             <input type="number" class="form-control" name="phone" placeholder="Enter phone number" id="phone" value="<?php echo $result['phone'] ?>">
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="email" class="form-label fw-bold">Email Address</label>
                                             <input type="email" class="form-control" name="email" placeholder="Enter email address" id="email" value="<?php echo $result['email'] ?>">
                                         </div>
+                                        
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn pt-1 px-5 fw-bold" name="update-submit" id="update-submit" value="Update" style="border: none; background-color: black; color: white;">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="list-password" role="tabpanel" aria-labelledby="list-password-list">
+                                <div class="update-content-container" id="update">
+                                    <form action="" method="POST" class="form">
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label fw-bold">Old Password</label>
+                                            <input type="text" class="form-control" name="oldPassword" id="password">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label fw-bold">New Password</label>
+                                            <input type="text" class="form-control" name="newPassword" id="password">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label fw-bold">Confirm New Password</label>
+                                            <input type="text" class="form-control" name="confirmPassword" id="password">
+                                        </div>
+                                        
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn pt-1 px-5 fw-bold" name="change-submit" id="change-submit" value="Change Password" style="border: none; background-color: black; color: white;">Change Password</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="list-billing" role="tabpanel" aria-labelledby="list-billing-list">
+                                <div class="update-content-container" id="update">
+                                    <form action="" method="POST" class="form">
                                         <div class="mb-3">
                                             <label for="province" class="form-label fw-bold">Province</label>
                                             <select class="form-select" name="province" id="province">
@@ -171,19 +272,23 @@
                                             <input type="text" class="form-control" name="city" placeholder="Enter city name" id="city" value="<?php echo $result['city'] ?>">
                                         </div>
                                         <div class="mb-3">
+                                            <label for="area" class="form-label fw-bold">Area</label>
+                                            <input type="text" class="form-control" name="area" placeholder="Enter area name" id="area" value="<?php echo $result['area'] ?>">
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="address" class="form-label fw-bold">Address</label>
                                             <input type="text" class="form-control" name="address" placeholder="Enter building/ street/ house no." id="address" value="<?php echo $result['address'] ?>">
                                         </div>
-                                        
+                                        <div class="mb-3">
+                                            <label for="landmark" class="form-label fw-bold">Landmark</label>
+                                            <input type="text" class="form-control" name="landmark" placeholder="Example: beside bank" id="landmark" value="<?php echo $result['landmark'] ?>">
+                                        </div>
+
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn pt-1 px-5" name="update-submit" id="update-submit" value="Update" style="border: none; background-color: black; color: white;">Save</button>
+                                            <button type="submit" class="btn pt-1 px-5 fw-bold" name="billing-submit" id="billing-submit" value="Billing" style="border: none; background-color: black; color: white;">Save</button>
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="list-billing" role="tabpanel" aria-labelledby="list-billing-list">
-
                             </div>
 
                             <div class="tab-pane fade" id="list-order" role="tabpanel" aria-labelledby="list-order-list">
@@ -231,8 +336,8 @@
                 Are you sure you want to log out?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary pt-1" style="border-radius: 0;" data-bs-dismiss="modal">Cancel</button>
-                <a href="logout.php" class="btn btn-primary pt-1" style="border-radius: 0;">Logout</a>
+                <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
+                <a href="logout.php" class="btn btn-primary pt-1">Logout</a>
             </div>
         </div>
     </div>
