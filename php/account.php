@@ -128,6 +128,7 @@
     <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
+    
     <div class="cart-container">
     <div class="container">
         <?php
@@ -340,7 +341,7 @@
                                                                 echo '<td class="text-center quantity-change px-5">'. $quantity .'</td>';
                                                                 echo '<td>' . '$' . $subTotal . '</td>';
                                                                 echo '<td>' . $status . '</td>';
-                                                                echo '<td><a href="confirmpayment.php"><i class="fa-solid fa-file" style="color: #cfcfcf;"></i></a></td>';
+                                                                echo '<td><a href="confirmpayment.php?invoiceNumber=' . $invoiceNumber . '" target="_blank"><i class="fa-solid fa-file" style="color: #cfcfcf;"></i></a></td>';
                                                             echo '</tr>';
                                     
                                                             $count++;

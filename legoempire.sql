@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2023 at 05:54 PM
+-- Generation Time: Nov 05, 2023 at 05:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -85,13 +85,6 @@ CREATE TABLE `cart_data` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart_data`
---
-
-INSERT INTO `cart_data` (`itemId`, `userId`, `legoId`, `title`, `price`, `quantity`) VALUES
-(22, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -139,6 +132,7 @@ INSERT INTO `lego_data` (`legoId`, `title`, `price`, `stock`, `stockQuantity`, `
 
 CREATE TABLE `order_data` (
   `orderId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
   `legoId` int(11) NOT NULL,
   `title` text NOT NULL,
   `price` float NOT NULL,
@@ -155,6 +149,8 @@ CREATE TABLE `pending_data` (
   `orderId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `legoId` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `quantity` int(11) NOT NULL,
   `invoiceNumber` varchar(15) NOT NULL,
   `status` text NOT NULL DEFAULT 'Pending'
@@ -164,14 +160,8 @@ CREATE TABLE `pending_data` (
 -- Dumping data for table `pending_data`
 --
 
-INSERT INTO `pending_data` (`orderId`, `userId`, `legoId`, `quantity`, `invoiceNumber`, `status`) VALUES
-(1, 1, 1, 1, 'HPRQ90U', 'Pending'),
-(2, 1, 5, 1, 'HPRQ90U', 'Pending'),
-(3, 1, 2, 1, 'HPRQ90U', 'Pending'),
-(4, 1, 4, 1, 'HPRQ90U', 'Pending'),
-(5, 1, 2, 1, 'A18W4LL', 'Pending'),
-(6, 1, 3, 1, 'A18W4LL', 'Pending'),
-(7, 1, 1, 1, 'EQDMWLS', 'Pending');
+INSERT INTO `pending_data` (`orderId`, `userId`, `legoId`, `title`, `price`, `quantity`, `invoiceNumber`, `status`) VALUES
+(1, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 1, 'NF17SEK', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -184,7 +174,9 @@ CREATE TABLE `profile_data` (
   `name` varchar(55) NOT NULL,
   `phone` bigint(20) NOT NULL,
   `email` varchar(55) NOT NULL,
+  `landmark` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
+  `area` varchar(100) NOT NULL,
   `city` varchar(100) NOT NULL,
   `province` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -193,8 +185,8 @@ CREATE TABLE `profile_data` (
 -- Dumping data for table `profile_data`
 --
 
-INSERT INTO `profile_data` (`userId`, `name`, `phone`, `email`, `address`, `city`, `province`) VALUES
-(1, 'User', 9800000000, 'user@gmail.com', 'Thadatole', 'Chandrapur', 'Madesh');
+INSERT INTO `profile_data` (`userId`, `name`, `phone`, `email`, `landmark`, `address`, `area`, `city`, `province`) VALUES
+(1, 'User', 9800000000, 'user@gmail.com', 'Near KUSOM', 'Deko Marg', 'Gwarko', 'Lalitpur', 'Bagmati');
 
 -- --------------------------------------------------------
 
@@ -215,7 +207,7 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`userId`, `name`, `phone`, `email`, `password`) VALUES
-(1, 'User', 9800000000, 'user@gmail.com', '$2y$10$LZZGhXZrgyvRvJdJSdvBqupKnZSxfwmTpIJ5.qBIlam9yHEXopPbG');
+(1, 'User', 9800000000, 'user@gmail.com', '$2y$10$FT9dpP.MLlMY6rNfpvnlyOr7.EkAUOue.zpMixkJD7Y.BIx/F7CHO');
 
 --
 -- Indexes for dumped tables
@@ -291,7 +283,7 @@ ALTER TABLE `article_data`
 -- AUTO_INCREMENT for table `cart_data`
 --
 ALTER TABLE `cart_data`
-  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lego_data`
@@ -309,7 +301,7 @@ ALTER TABLE `order_data`
 -- AUTO_INCREMENT for table `pending_data`
 --
 ALTER TABLE `pending_data`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `profile_data`
