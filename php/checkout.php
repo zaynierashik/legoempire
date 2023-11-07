@@ -77,7 +77,7 @@
             }
         ?>
 
-        <div class="mt-5">
+        <div class="mt-3">
             <div class="checkout-content p-3">
                 <h4 class="fw-bold">Checkout</h4>
                 <h6>Payments Options</h6>

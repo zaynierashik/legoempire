@@ -69,6 +69,9 @@
                 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-1">
+                        <a href="account.php" class="nav-link"><i class="fa-solid fa-user" style="color: #000000; font-size: 1.1rem;"></i></a>
+                    </li>
                     <li class="nav-item">
                         <a href="cart.php" class="nav-link pe-0">
                             <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
@@ -136,9 +139,6 @@
                     <div class="carousel-item">
                         <img src="../lego-images/<?php echo $row['secondary-image'] ?>" class="d-block w-100" alt="...">
                     </div>
-                    <!-- <div class="carousel-item">
-                        <img src="../lego-images/<?php echo $row['image-two'] ?>" class="d-block w-100" alt="...">
-                    </div> -->
                 </div>
     
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

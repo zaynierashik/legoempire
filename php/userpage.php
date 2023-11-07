@@ -85,12 +85,12 @@
         <div class="container">
         <div class="container sale-container mt-5">
             <h3 class="fw-bold">Found items:</h3>
-            <div class="row">
+            <div class="row row-gap-3">
                 <?php
                     foreach($value as $item){
                         if($status == 1){
                             echo '<div class="col">
-                                <div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
+                                <div class="card slider-card" style="width: 18.75rem;">
                                     <a href="legodetails.php?legoId=' .$item[0]['legoId']. '" class="nav-link">
                                         <img src="../lego-images/' .$item[0]['main-image']. '" class="card-img-top my-3" alt="...">
                                         <div class="card-body">

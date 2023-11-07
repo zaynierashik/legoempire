@@ -128,7 +128,7 @@
             }
         ?>
 
-        <div class="mt-5">
+        <div class="mt-3">
             <div class="cart-content p-3">
                 <?php 
                     $sql = "SELECT * FROM cart_data WHERE userId = :userId";

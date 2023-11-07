@@ -15,18 +15,23 @@
         $referenceNumber = $_POST['referenceNumber'];
         $status = "Paid";
 
-        $stmt = $conn->prepare("SELECT * FROM order_data WHERE invoiceNumber = :invoiceNumber");
-        $stmt->bindParam(':invoiceNumber', $invoiceNumber);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(empty($_POST['invoiceNumber']) || empty($_POST['referenceNumber'])){
+            $confirm = 1;
+        }else{
+            $stmt = $conn->prepare("SELECT * FROM order_data WHERE invoiceNumber = :invoiceNumber");
+            $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
+            $stmt ->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = $conn->prepare("UPDATE order_data SET invoiceNumber = :invoiceNumber, referenceNumber = :referenceNumber, status = :status WHERE invoiceNumber = :invoiceNumber");
-        $stmt->bindParam(':invoiceNumber', $invoiceNumber);
-        $stmt->bindParam(':referenceNumber', $referenceNumber);
-        $stmt->bindParam(':status', $status);
-        $stmt->execute();
-
-        header("location: account.php");
+            $stmt = $conn->prepare("UPDATE order_data SET invoiceNumber = :invoiceNumber, referenceNumber = :referenceNumber, status = :status WHERE invoiceNumber = :invoiceNumber");
+            $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
+            $stmt ->bindParam(':referenceNumber', $referenceNumber);
+            $stmt ->bindParam(':status', $status);
+            
+            if($stmt->execute()){
+                $confirm = 0;
+            }
+        }
     }
 ?>
 
@@ -202,11 +207,11 @@
 
     <script>
         <?php
-            if(isset($change) && $change === 0){
+            if(isset($confirm) && $confirm === 0){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
-                    document.getElementById("successToastHead").innerHTML = "Change Successful";
-                    document.getElementById("successToastBody").innerHTML = "Password has been changed.";
+                    document.getElementById("successToastHead").innerHTML = "Payment Successful";
+                    document.getElementById("successToastBody").innerHTML = "Your payment has been paid.";
                     successToast.show();
                 });';
             }
@@ -215,11 +220,11 @@
 
     <script>
         <?php
-            if(isset($change) && $change === 1){
+            if(isset($confirm) && $confirm === 1){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Change Error";
-                    document.getElementById("errorToastBody").innerHTML = "Old password does not match.";
+                    document.getElementById("errorToastHead").innerHTML = "Payment Error";
+                    document.getElementById("errorToastBody").innerHTML = "Fill up all the fields.";
                     errorToast.show();
                 });';
             }
