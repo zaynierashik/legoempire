@@ -211,7 +211,7 @@
             <div class="fw-bold">Insiders Points</div>
         </div>
         <div>
-            <h1>#<?php echo $row['item-number'] ?></h1>
+            <h1>#<?php echo $row['itemNumber'] ?></h1>
             <div class="fw-bold">Item</div>
         </div>
     </div>
@@ -334,7 +334,7 @@
 
     <!-- Footer -->
 
-    <div class="container mt-5" style="height: 6vh; background-color: black; color: white;">
+    <div class="container mt-5 rounded" style="height: 6vh; background-color: black; color: white;">
         <div class="w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
@@ -354,7 +354,7 @@
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
-            <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
+            <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
 

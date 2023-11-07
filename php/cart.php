@@ -71,6 +71,7 @@
     <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
+    
     <div class="cart-container">
     <div class="container" style="box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);">
         <?php
@@ -87,6 +88,9 @@
                     
                     <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item me-1">
+                            <a href="account.php" class="nav-link"><i class="fa-solid fa-user" style="color: #000000; font-size: 1.1rem;"></i></a>
+                        </li>
                         <li class="nav-item">
                             <a href="cart.php" class="nav-link pe-1">
                                 <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>

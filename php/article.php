@@ -42,10 +42,12 @@
                 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item position-relative">
-                        <a href="cart.php" class="nav-link pe-0">
-                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
-                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                    <li class="nav-item me-1">
+                        <a href="account.php" class="nav-link"><i class="fa-solid fa-user" style="color: #000000; font-size: 1.1rem;"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cart.php" class="nav-link pe-1">
+                            <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                         </a>
                     </li>
                 </ul>
@@ -65,10 +67,9 @@
                 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item position-relative me-4">
-                        <a href="cart.php" class="nav-link pe-0">
-                            <i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
-                            <span class="position-absolute top-25 translate-middle badge rounded-3" id="cart-badge">0</span>
+                    <li class="nav-item">
+                        <a href="cart.php" class="nav-link pe-1">
+                            <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -128,7 +129,7 @@
 
     <!-- Footer -->
 
-    <div class="container mt-5" style="height: 6vh; background-color: black; color: white;">
+    <div class="container mt-5 rounded" style="height: 6vh; background-color: black; color: white;">
         <div class="w-100 h-100 d-inline-block ps-3 pt-3">
             <div class="row" style="font-size: 0.77rem;">
                 <div class="col-7">
@@ -148,7 +149,7 @@
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
-            <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
+            <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
     

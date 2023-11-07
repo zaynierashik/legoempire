@@ -12,24 +12,19 @@
 
     if(isset($_POST['confirm-payment'])){
         $invoiceNumber = $_POST['invoiceNumber'];
-        $transactionNumber = $_POST['transactionNumber'];
-        $paidAmount = $_POST['paidAmount'];
+        $referenceNumber = $_POST['referenceNumber'];
+        $status = "Paid";
 
-        $stmt = $conn->prepare("SELECT * FROM pending_data WHERE invoiceNumber = :invoiceNumber");
-        $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
-        $stmt ->execute();
+        $stmt = $conn->prepare("SELECT * FROM order_data WHERE invoiceNumber = :invoiceNumber");
+        $stmt->bindParam(':invoiceNumber', $invoiceNumber);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = $conn->prepare("INSERT INTO payment_data (userId, invoiceNumber, transactionNumber, paidAmount) VALUES (:userId, :invoiceNumber, :transactionNumber, :paidAmount)");
-        $stmt ->bindParam(':userId', $userId);
-        $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
-        $stmt ->bindParam(':transactionNumber', $transactionNumber);
-        $stmt ->bindParam(':paidAmount', $paidAmount);
-        $stmt ->execute();
-
-        $stmt = $conn->prepare("DELETE FROM pending_data WHERE invoiceNumber = :invoiceNumber");
-        $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
-        $stmt ->execute();
+        $stmt = $conn->prepare("UPDATE order_data SET invoiceNumber = :invoiceNumber, referenceNumber = :referenceNumber, status = :status WHERE invoiceNumber = :invoiceNumber");
+        $stmt->bindParam(':invoiceNumber', $invoiceNumber);
+        $stmt->bindParam(':referenceNumber', $referenceNumber);
+        $stmt->bindParam(':status', $status);
+        $stmt->execute();
 
         header("location: account.php");
     }
@@ -110,37 +105,65 @@
 
                 <div class="update-content-container mt-3" id="update">
                 <?php
-                    $stmt = $conn->prepare("SELECT * FROM pending_data WHERE userId = :userId");
+                    $stmt = $conn->prepare("SELECT * FROM order_data WHERE userId = :userId AND invoiceNumber = :invoiceNumber");
                     $stmt ->bindParam(':userId', $userId);
+                    $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
                     $stmt ->execute();
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    if($result[0]['status'] === "Paid"){
                 ?>
-                                    <form action="" method="POST" class="form">
-                                        <div class="row">
-                                            <div class="col">
-                                            <div class="mb-3">
-                                            <label for="invoiceNumber" class="form-label fw-bold">Invoice Number</label>
-                                            <input type="text" class="form-control" name="invoiceNumber" id="invoiceNumber" value="<?php echo $result[0]['invoiceNumber']; ?>" readonly>
-                                        </div>
-                                            </div>
-                                            <div class="col">
-                                            <div class="mb-4">
-                                            <label for="password" class="form-label fw-bold">Transaction/Reference Number</label>
-                                            <input type="text" class="form-control" name="confirmPassword" id="password">
-                                        </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label fw-bold">Paid Amount</label>
-                                            <input type="text" class="form-control" name="newPassword" id="password">
-                                        </div>
-                                        
-                                        
-                                        <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn pt-1 px-5 fw-bold" name="confirm-payment" id="confirm-payment" value="Confirm Payment" style="border: none; background-color: black; color: white;">Confirm Payment</button>
-                                        </div>
-                                    </form>
+                        <form action="" method="POST" class="form">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="invoiceNumber" class="form-label fw-bold">Invoice Number</label>
+                                        <input type="text" class="form-control" name="invoiceNumber" id="invoiceNumber" value="<?php echo $result[0]['invoiceNumber']; ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-4">
+                                        <label for="referenceNumber" class="form-label fw-bold">Transaction/Reference Number</label>
+                                        <input type="text" class="form-control" name="referenceNumber" id="referenceNumber" value="<?php echo $result[0]['referenceNumber']; ?>" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="price" class="form-label fw-bold">Paid Amount</label>
+                                <input type="text" class="form-control" name="price" id="price" value="<?php echo $result[0]['price']; ?>" readonly>
+                            </div>
+                        </form>
+
+                <?php
+                    }else if($result[0]['status'] === "Pending"){
+                ?>
+                        <form action="" method="POST" class="form">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="invoiceNumber" class="form-label fw-bold">Invoice Number</label>
+                                        <input type="text" class="form-control" name="invoiceNumber" id="invoiceNumber" value="<?php echo $result[0]['invoiceNumber']; ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-4">
+                                        <label for="referenceNumber" class="form-label fw-bold">Transaction/Reference Number</label>
+                                        <input type="text" class="form-control" name="referenceNumber" id="referenceNumber">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="price" class="form-label fw-bold">Paid Amount</label>
+                                <input type="text" class="form-control" name="price" id="price">
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn pt-1 px-5 fw-bold" name="confirm-payment" id="confirm-payment" value="Confirm Payment" style="border: none; background-color: black; color: white;">Confirm Payment</button>
+                            </div>
+                        </form>
+                <?php } ?>
                 </div>
             </div>
         </div>

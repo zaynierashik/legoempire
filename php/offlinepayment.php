@@ -12,6 +12,7 @@
     $stmt ->execute();
 
     $cartItems = array();
+    $status= "Pending";
 
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         $cartItems[] = array(
@@ -30,8 +31,10 @@
         for($i = 0; $i < $length; $i++){
             $invoiceNumber .= $characters[random_int(0, $max)];
         }
+
         return $invoiceNumber;
     }
+    
     $invoiceNumber = generateInvoiceNumber();
 
     foreach($cartItems as $item){
@@ -40,7 +43,7 @@
         $price = $item['price'];
         $quantity = $item['quantity'];
 
-        $sql = "INSERT INTO pending_data (userId, legoId, title, price, quantity, invoiceNumber) VALUES (:userId, :legoId, :title, :price, :quantity, :invoiceNumber)";
+        $sql = "INSERT INTO order_data (userId, legoId, title, price, quantity, invoiceNumber, status) VALUES (:userId, :legoId, :title, :price, :quantity, :invoiceNumber, :status)";
         $stmt = $conn->prepare($sql);
         $stmt ->bindParam(':userId', $userId);
         $stmt ->bindParam(':legoId', $legoId);
@@ -48,6 +51,7 @@
         $stmt ->bindParam(':price', $price);
         $stmt ->bindParam(':quantity', $quantity);
         $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
+        $stmt ->bindParam(':status', $status);
         $stmt ->execute();
 
         if($stmt->rowCount() > 0){

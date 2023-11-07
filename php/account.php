@@ -193,7 +193,8 @@
                             <a href="#list-password" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-password-list" data-bs-toggle="list" role="tab" aria-controls="list-password">Change Password</a>
                             <a href="#list-billing" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-billing-list" data-bs-toggle="list" role="tab" aria-controls="list-billing">Billing Address</a>
                             <a href="#list-order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" data-bs-toggle="list" role="tab" aria-controls="list-order">My Orders</a>
-                            <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal">Logout</a>
+                            <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" style="cursor: pointer;">Delete Account</a>
+                            <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal" style="cursor: pointer;">Logout</a>
                         </div>
                     </div>
                     <div class="col border-start border-2 ps-4">
@@ -296,7 +297,7 @@
                                 <div class="update-content-container" id="update">
                                     <div class="cart-content">
                                         <?php 
-                                            $sql = "SELECT * FROM pending_data WHERE userId = :userId";
+                                            $sql = "SELECT * FROM order_data WHERE userId = :userId";
                                             $stmt = $conn->prepare($sql);
                                             $stmt ->bindParam(':userId', $userId);
                                             $stmt ->execute();
@@ -378,6 +379,22 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
                 <a href="logout.php" class="btn btn-primary pt-1">Logout</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                Are you sure you want to delete your account?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
+                <a href="logout.php" class="btn btn-primary pt-1">Delete Account</a>
             </div>
         </div>
     </div>
