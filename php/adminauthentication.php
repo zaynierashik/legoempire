@@ -66,6 +66,7 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
+    
     <div class="register-container">
     <div class="container">
 
@@ -215,6 +216,12 @@
             });';
         }
     ?>
+    </script>
+
+    <script>
+        if( window.history.replaceState ){
+            window.history.replaceState( null, null, window.location.href );
+        }
     </script>
 
     <script src="../js/adminscript.js"></script>

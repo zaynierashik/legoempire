@@ -1,12 +1,5 @@
 @import url(../css/homepage.css);
 
-.register-container{
-    background-image: url('../images/loginbg.png');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-}
-
 .admin-register-container .form-control, .admin-login-container .form-control,
 .admin-register-container button, .admin-login-container button{
     height: 5.5vh;
