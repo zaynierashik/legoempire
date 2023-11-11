@@ -82,15 +82,15 @@
     <?php
         if($searchValue){
     ?>
-        <div class="container">
-        <div class="container sale-container mt-5">
-            <h3 class="fw-bold">Found items:</h3>
+        <div class="container mt-3 p-3">
+        <div class="container sale-container">
+            <h4 class="fw-bold">Found items:</h4>
             <div class="row row-gap-3">
                 <?php
                     foreach($value as $item){
                         if($status == 1){
                             echo '<div class="col">
-                                <div class="card slider-card" style="width: 18.75rem;">
+                                <div class="card" style="width: 18.625rem;">
                                     <a href="legodetails.php?legoId=' .$item[0]['legoId']. '" class="nav-link">
                                         <img src="../lego-images/' .$item[0]['main-image']. '" class="card-img-top my-3" alt="...">
                                         <div class="card-body">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>';
                         }else{
-                            echo "<div class='container'>No Products Found.</div>";
+                            echo "<div class='container'><h5 class='fw-bold'>No products found.</h5></div>";
                         }
                     }
                 ?>
@@ -181,7 +181,7 @@
                                 </div>';
                         }
                     }else{
-                        echo "<div class='container'>No Products Found.</div>";
+                        echo "<div class='container'><h5 class='fw-bold'>No products found.</h5></div>";
                     }
                 ?>
                 </div>
@@ -245,7 +245,7 @@
                                 </div>';
                         }
                     }else{
-                        echo "<div class='container'>No Products Found.</div>";
+                        echo "<div class='container'><h5 class='fw-bold'>No products found.</h5></div>";
                     }
                 ?>
                 </div>
@@ -273,7 +273,7 @@
                             </div>';
                         }
                     }else{
-                        echo "<div class='container'>No Articles Found.</div>";
+                        echo "<div class='container'><h5 class='fw-bold'>No articles found.</h5></div>";
                     }
                 ?>
             </div>

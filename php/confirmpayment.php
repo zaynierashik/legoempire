@@ -136,7 +136,7 @@
 
                             <div class="mb-3">
                                 <label for="price" class="form-label fw-bold">Paid Amount</label>
-                                <input type="text" class="form-control" name="price" id="price" value="<?php echo $result[0]['price']; ?>" readonly>
+                                <input type="text" class="form-control" name="price" id="price" value="$<?php echo $result[0]['price']; ?>" readonly>
                             </div>
                         </form>
 
@@ -161,7 +161,7 @@
 
                             <div class="mb-3">
                                 <label for="price" class="form-label fw-bold">Paid Amount</label>
-                                <input type="text" class="form-control" name="price" id="price">
+                                <input type="text" class="form-control" name="price" id="price" value="$">
                             </div>
 
                             <div class="d-flex justify-content-end">
@@ -169,6 +169,7 @@
                             </div>
                         </form>
                 <?php } ?>
+                
                 </div>
             </div>
         </div>
@@ -213,6 +214,10 @@
                     document.getElementById("successToastHead").innerHTML = "Payment Successful";
                     document.getElementById("successToastBody").innerHTML = "Your payment has been paid.";
                     successToast.show();
+
+                    setTimeout(function(){
+                        window.location.href = "account.php";
+                    }, 3000);
                 });';
             }
         ?>

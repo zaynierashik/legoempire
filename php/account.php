@@ -8,18 +8,6 @@
         $userId = $_SESSION['userId'];
     }
 
-    if(isset($_POST['delete']) && isset($_POST['legoId'])){
-        $legoId = $_POST['legoId'];
-
-        $stmt = $conn->prepare("DELETE FROM cart_data WHERE userId = :userId AND legoId = :legoId");
-        $stmt ->bindParam(':userId', $userId);
-        $stmt ->bindParam(':legoId', $legoId);
-        $stmt ->execute();
-
-        header('location: cart.php');
-        exit();
-    }
-
     if(isset($_POST['update-submit'])){
         $name = $_POST['name'];
         $phone = $_POST['phone'];
@@ -87,18 +75,20 @@
     }
 
     if(isset($_POST['billing-submit'])){
+        $country = $_POST['country'];
         $province = $_POST['province'];
         $city = $_POST['city'];
         $area = $_POST['area'];
         $address = $_POST['address'];
         $landmark = $_POST['landmark'];
 
-        if(empty($_POST['province']) || empty($_POST['city']) || empty($_POST['area']) || empty($_POST['address']) || empty($_POST['landmark'])){
+        if(empty($_POST['country']) || empty($_POST['province']) || empty($_POST['city']) || empty($_POST['area']) || empty($_POST['address']) || empty($_POST['landmark'])){
             $billing = 0;
         }else{
-            $sql = "UPDATE profile_data SET province = :province, city = :city, area = :area, address = :address, landmark = :landmark WHERE userId = :userId";
+            $sql = "UPDATE profile_data SET country = :country, province = :province, city = :city, area = :area, address = :address, landmark = :landmark WHERE userId = :userId";
             $stmt = $conn->prepare($sql);
             $stmt ->bindParam(':userId', $userId);
+            $stmt ->bindParam(':country', $country);
             $stmt ->bindParam(':province', $province);
             $stmt ->bindParam(':city', $city);
             $stmt ->bindParam(':area', $area);
@@ -109,6 +99,23 @@
                 $billing = 1;
             }
         }
+    }
+
+    if(isset($_POST['delete-account'])){
+        $stmt = $conn->prepare("DELETE FROM user_data WHERE userId = :userId");
+        $stmt ->bindParam(':userId', $userId);
+        $stmt ->execute();
+
+        $stmt = $conn->prepare("DELETE FROM profile_data WHERE userId = :userId");
+        $stmt ->bindParam(':userId', $userId);
+        $stmt ->execute();
+
+        $stmt = $conn->prepare("DELETE FROM order_data WHERE userId = :userId");
+        $stmt ->bindParam(':userId', $userId);
+        $stmt ->execute();
+    
+        header('location: logout.php');
+        exit();
     }
 ?>
 
@@ -257,6 +264,10 @@
                                 <div class="update-content-container" id="update">
                                     <form action="" method="POST" class="form">
                                         <div class="mb-3">
+                                            <label for="country" class="form-label fw-bold">Country</label>
+                                            <input type="text" class="form-control" name="country" placeholder="Enter country name" id="country" value="Nepal" readonly>
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="province" class="form-label fw-bold">Province</label>
                                             <select class="form-select" name="province" id="province">
                                                 <option value="<?php echo $result['province'] ?>"><?php echo $result['province'] ?></option>
@@ -281,7 +292,7 @@
                                             <label for="address" class="form-label fw-bold">Address</label>
                                             <input type="text" class="form-control" name="address" placeholder="Enter building/ street/ house no." id="address" value="<?php echo $result['address'] ?>">
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="mb-3">
                                             <label for="landmark" class="form-label fw-bold">Landmark</label>
                                             <input type="text" class="form-control" name="landmark" placeholder="Example: beside bank" id="landmark" value="<?php echo $result['landmark'] ?>">
                                         </div>
@@ -384,8 +395,8 @@
     </div>
     </div>
 
-    <!-- Logout Confirmation Modal -->
-    
+    <!-- Delete Confirmation -->
+
     <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -394,7 +405,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
-                <a href="logout.php" class="btn btn-primary pt-1">Delete Account</a>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <button type="submit" class="btn btn-primary pt-1" name="delete-account" id="delete">Delete account</button>
+                </form>
             </div>
         </div>
     </div>

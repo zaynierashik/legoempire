@@ -71,7 +71,6 @@
     <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
-    
     <div class="cart-container">
     <div class="container" style="box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);">
         <?php
@@ -223,7 +222,18 @@
                             <div class="mt-5">
                             <?php
                                 if($itemCount > 0){
-                                    echo '<a href="checkout.php" class="nav-link btn cart-btn py-2 fw-bold" role="button">Checkout</a>';
+                                    $sql = "SELECT * FROM profile_data WHERE userId = :userId";
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt ->bindParam(':userId', $userId);
+                                    $stmt ->execute();
+                                    $profileData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                                    if(!empty($profileData['landmark'] && $profileData['address'] && $profileData['area'] && $profileData['city'] && $profileData['province'])){
+                                        echo '<a href="checkout.php" class="nav-link btn cart-btn py-2 fw-bold" role="button">Checkout</a>';
+                                    }else{
+                                        echo '<button class="btn cart-btn py-2 fw-bold w-100" disabled>Checkout</button>';
+                                        echo '<p class="text-danger mt-2 fw-bold">Billing address not set. Please update your profile.</p>';
+                                    }
                                 }else{
                                     echo '<h6 class="fw-bold">No items in the cart to proceed.</h6>';
                                 }
