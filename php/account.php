@@ -136,7 +136,7 @@
 </head>
 <body>
     
-    <div class="cart-container">
+    <div>
     <div class="container">
         <?php
             if(isset($_SESSION['username'])){

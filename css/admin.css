@@ -1,7 +1,6 @@
-@import url(../css/homepage.css);
+@import url(user.css);
 
-.admin-register-container .form-control, .admin-login-container .form-control,
-.admin-register-container button, .admin-login-container button{
+.admin-register-container .form-control, .admin-login-container .form-control, .admin-register-container button, .admin-login-container button{
     height: 5.5vh;
     border-radius: 0;
 }
