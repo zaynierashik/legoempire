@@ -54,19 +54,104 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="list-group" id="list-tab" role="tablist">
-                            <a href="?section=dashboard" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold active" id="list-dashboard-list" data-bs-toggle="list" role="tab" aria-controls="list-dashboard">Dashboard</a>
-                            <a href="#list-profile" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" data-bs-toggle="list" role="tab" aria-controls="list-profile">Products</a>
-                            <a href="#list-password" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-password-list" data-bs-toggle="list" role="tab" aria-controls="list-password">Placed Orders</a>
-                            <a href="#list-billing" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-billing-list" data-bs-toggle="list" role="tab" aria-controls="list-billing">Authorized Access</a>
-                            <a href="#list-order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" data-bs-toggle="list" role="tab" aria-controls="list-order">Edit Profile</a>
+                            <a href="adminpage.php" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold active" id="list-dashboard-list" role="tab" aria-controls="list-dashboard">Dashboard</a>
+                            <a href="?section=products" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-product-list" role="tab" aria-controls="list-product">Products</a>
+                            <a href="?section=order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" role="tab" aria-controls="list-order">Placed Orders</a>
+                            <a href="?section=checkout" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-access-list" role="tab" aria-controls="list-access">Authorized Access</a>
+                            <a href="#list-order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Edit Profile</a>
                             <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal" style="cursor: pointer;">Logout</a>
                         </div>
                     </div>
                     <div class="col border-start border-2 ps-4">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                                <div>  
-                                </div>
+                            <div class="tab-pane fade show active" role="tabpanel">
+                            <?php
+                                if(isset($_GET['section'])){
+                                    $section = $_GET['section'];
+
+                                    switch ($section){
+                                        case 'dashboard':
+                                            include('dashboard.php');
+                                            break;
+                                        case 'products':
+                                            include('products.php');
+                                            break;
+                                        case 'order':
+                                            include('order.php');
+                                            break;
+                                        case 'checkout':
+                                            include('checkout.php');
+                                            break;
+                                        default:
+                                            echo "Unknown page";
+                                            break;
+                                    }
+                                }else{
+                            ?>
+                                    <div class="row row-gap-4">  
+                                        <div class="col">
+                                            <div class="card" style="width: 13.37rem;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-cubes-stacked" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="card-link nav-link">Card link</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card" style="width: 13.37rem;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1"><i class="fa-regular fa-circle-user" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="card-link">Card link</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card" style="width: 13.37rem;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-check" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="card-link">Card link</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card" style="width: 13.37rem;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-spinner" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="card-link">Card link</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php } ?>
+                                
                             </div>
                         </div>
                     </div>
