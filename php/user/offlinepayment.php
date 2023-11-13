@@ -1,8 +1,8 @@
 <?php
     session_start();
-    include 'connect.php';
+    include '../connect.php';
 
-    if (isset($_SESSION['userId'])) {
+    if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
     }
 

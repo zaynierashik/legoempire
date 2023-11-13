@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'connect.php';
+    include '../connect.php';
 
     if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
@@ -14,31 +14,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Lego Empire</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
-    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="../../css/user.css">
 </head>
 <body>
-    
-    <div class="cart-container">
     <div class="container">
-        <?php
-            if(isset($_SESSION['username'])){
-                echo '<nav class="navbar navbar-expand-lg sticky-top">
-                <div class="container">
-                    <a class="navbar-brand" href="homepage.php">
-                        <img src="../images/logo.png" alt="The Lego Empire" width="175">
-                    </a>
+        <nav class="navbar navbar-expand-lg sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="userpage.php">
+                    <img src="../../images/logo.png" alt="The Lego Empire" width="175">
+                </a>
         
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    
-                    <div class="collapse navbar-collapse" id="navbarNav">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a href="cart.php" class="nav-link pe-0">
@@ -46,36 +42,9 @@
                             </a>
                         </li>
                     </ul>
-                    </div>
                 </div>
-                </nav>';
-            }else{
-                echo '<nav class="navbar navbar-expand-lg">
-                <div class="container">
-                    <a class="navbar-brand" href="homepage.php">
-                        <img src="../images/logo.png" alt="The Lego Empire" width="175">
-                    </a>
-        
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item me-4">
-                            <a href="cart.php" class="nav-link pe-0">
-                                <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
-                </nav>';
-            }
-        ?>
+            </div>
+        </nav>
 
         <div class="mt-3">
             <div class="checkout-content p-3">
@@ -153,7 +122,6 @@
         </div>
         </div>
     </div>
-    </div>
 
     <div class="text-end fixed-top-container" id="top-container">
         <a href="" id="scroll-to-top">
@@ -167,7 +135,7 @@
         }
     </script>
     
-    <script src="../js/userscript.js"></script>
+    <script src="../../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
