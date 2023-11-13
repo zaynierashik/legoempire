@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'connect.php';
+    include '../connect.php';
 
     if(!isset($_SESSION['adminname'])){
         header('location: adminauthentication.php');
@@ -14,13 +14,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Lego Empire</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin.css">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="adminpage.php">
-                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                    <img src="../../images/logo.png" alt="The Lego Empire" width="175">
                 </a>
         
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,7 +172,7 @@
         }
     </script>
     
-    <script src="../js/adminscript.js"></script>
+    <script src="../../js/adminscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 

@@ -3,9 +3,7 @@
     include 'connect.php';
 
     if(isset($_SESSION['username'])){
-        header('location: userpage.php');
-    }elseif(isset($_SESSION['adminname'])){
-        header('location: adminpage.php');
+        header('location: user/userpage.php');
     }
 ?>
 
@@ -42,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-4">
-                        <a href="cart.php" class="nav-link pe-0">
+                        <a href="../php/user/cart.php" class="nav-link pe-0">
                             <i class="fa-solid fa-cart-shopping" style="color: #000000; font-size: 1.1rem;"></i>
                         </a>
                     </li>
@@ -63,23 +61,23 @@
 
     <div class="container base-category mt-4 mb-3 text-center">
         <div class="image-container">
-            <a href=""><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
+            <a href="user/category.php?category=Marvel"><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
             <div class="image-text fw-bold">MARVEL</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
+            <a href="user/category.php?category=Halloween"><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
             <div class="image-text fw-bold">HALLOWEEN</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
+            <a href="user/category.php?category=LEGO"><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
             <div class="image-text fw-bold">LEGO</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
+            <a href="user/category.php?category=Offers"><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
             <div class="image-text fw-bold">OFFERS</div>
         </div>
         <div class="image-container">
-            <a href=""><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
+            <a href="user/category.php?category=DC"><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
             <div class="image-text fw-bold">DC</div>
         </div>
     </div>
@@ -94,7 +92,7 @@
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
                         echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
-                            <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
+                            <a href="user/legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
                                 <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
@@ -107,7 +105,7 @@
                                         <i class="fa-solid fa-star" style="color: #ffb234;"></i>
                                     </div>
                                     <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
-                                    <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                    <a href="user/legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                 </div>
                             </div>';
                     }
@@ -157,7 +155,7 @@
                     while($row = $stmt->fetch()){
                         echo '<div class="col">
                             <div class="card" style="width: 25.5rem; border: none;">
-                            <a href="article.php?articleId=' .$row['articleId'].'">
+                            <a href="user/article.php?articleId=' .$row['articleId'].'">
                                 <img src="../news-images/' .$row['main-image']. '" class="card-img-top rounded" style="" alt="...">
                                 <div class="card-body px-0">
                                     <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>

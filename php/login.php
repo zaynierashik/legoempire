@@ -3,7 +3,7 @@
     include 'connect.php';
 
     if(isset($_SESSION['username'])){
-        header('location: homepage.php');
+        header('location: user/userpage.php');
     }
 
     if(isset($_POST['login-submit'])){
@@ -20,7 +20,7 @@
                 session_start();
                 $_SESSION['username'] = $userauth['email'];
                 $_SESSION['userId'] = $userauth['userId'];
-                header('location: userpage.php');
+                header('location: user/userpage.php');
                 exit();
             }
         }

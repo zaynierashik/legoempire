@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'connect.php';
+    include '../connect.php';
 
     if(isset($_GET['legoId'])){
         $legoId = $_GET['legoId'];
@@ -42,25 +42,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Lego Empire</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="../../css/user.css">
 </head>
 <body>
     <div class="container">
-
     <?php
         if(isset($_SESSION['username'])){
             echo '<nav class="navbar navbar-expand-lg sticky-top">
             <div class="container">
-                <a class="navbar-brand" href="homepage.php">
-                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                <a class="navbar-brand" href="userpage.php">
+                    <img src="../../images/logo.png" alt="The Lego Empire" width="175">
                 </a>
     
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,8 +83,8 @@
         }else{
             echo '<nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="homepage.php">
-                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                <a class="navbar-brand" href="../homepage.php">
+                    <img src="../../images/logo.png" alt="The Lego Empire" width="175">
                 </a>
     
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,7 +99,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
+                        <a href="../login.php" class="nav-link btn px-4 login-btn" role="button">LOGIN</a>
                     </li>
                 </ul>
                 </div>
@@ -134,10 +133,10 @@
             <div id="carouselExample" class="carousel slide carousel-dark">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../lego-images/<?php echo $row['main-image'] ?>" class="d-block w-100" alt="...">
+                        <img src="../../lego-images/<?php echo $row['main-image'] ?>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="../lego-images/<?php echo $row['secondary-image'] ?>" class="d-block w-100" alt="...">
+                        <img src="../../lego-images/<?php echo $row['secondary-image'] ?>" class="d-block w-100" alt="...">
                     </div>
                 </div>
     
@@ -183,7 +182,7 @@
                 </form>
 
                 <div class="border rounded mt-3 py-3">
-                    <img src="../lego-images/<?php echo $row['main-image'] ?>" class="w-25" alt="">
+                    <img src="../../lego-images/<?php echo $row['main-image'] ?>" class="w-25" alt="">
                     <small class="fw-bold">Gift with LEGO® purchases of $100 or more*</small>
                 </div>
 
@@ -234,7 +233,7 @@
                 <div class="row text-center">
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/<?php echo $row['image-one'] ?>" alt="...">
+                            <img src="../../lego-images/<?php echo $row['image-one'] ?>" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title fw-bold"><?php echo $row['title-one'] ?></h6>
                             </div>
@@ -243,7 +242,7 @@
 
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/<?php echo $row['image-two'] ?>" alt="...">
+                            <img src="../../lego-images/<?php echo $row['image-two'] ?>" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title fw-bold"><?php echo $row['title-two'] ?></h6>
                             </div>
@@ -252,7 +251,7 @@
 
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../lego-images/<?php echo $row['image-three'] ?>" alt="...">
+                            <img src="../../lego-images/<?php echo $row['image-three'] ?>" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title fw-bold"><?php echo $row['title-three'] ?></h6>
                             </div>
@@ -330,6 +329,7 @@
             </div>
         </div>
     </div>
+    
     <?php } ?>
 
     <!-- Footer -->
@@ -402,7 +402,7 @@
         }
     </script>
     
-    <script src="../js/userscript.js"></script>
+    <script src="../../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 

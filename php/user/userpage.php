@@ -1,9 +1,9 @@
 <?php
     session_start();
-    include 'connect.php';
+    include '../connect.php';
 
     if(!isset($_SESSION['username'])){
-        header('location: homepage.php');
+        header('location: ../homepage.php');
     }
     
     $legoId;
@@ -38,20 +38,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Lego Empire</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
-    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="../../css/user.css">
 </head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="userpage.php">
-                    <img src="../images/logo.png" alt="The Lego Empire" width="175">
+                    <img src="../../images/logo.png" alt="The Lego Empire" width="175">
                 </a>
         
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,7 @@
                             echo '<div class="col">
                                 <div class="card" style="width: 18.625rem;">
                                     <a href="legodetails.php?legoId=' .$item[0]['legoId']. '" class="nav-link">
-                                        <img src="../lego-images/' .$item[0]['main-image']. '" class="card-img-top my-3" alt="...">
+                                        <img src="../../lego-images/' .$item[0]['main-image']. '" class="card-img-top my-3" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title fw-bold fs-6">' .$item[0]['title']. '</h5>
                                     </a>
@@ -132,23 +132,23 @@
 
         <div class="container base-category mt-4 mb-3 text-center">
             <div class="image-container">
-                <a href="category.php?category=Marvel"><img src="../images/marvel.png" class="img-fluid" alt="Marvel"></a>
+                <a href="category.php?category=Marvel"><img src="../../images/marvel.png" class="img-fluid" alt="Marvel"></a>
                 <div class="image-text fw-bold">MARVEL</div>
             </div>
             <div class="image-container">
-                <a href="category.php?category=Halloween"><img src="../images/halloween.png" class="img-fluid" alt="Halloween"></a>
+                <a href="category.php?category=Halloween"><img src="../../images/halloween.png" class="img-fluid" alt="Halloween"></a>
                 <div class="image-text fw-bold">HALLOWEEN</div>
             </div>
             <div class="image-container">
-                <a href="category.php?category=LEGO"><img src="../images/lego.png" class="img-fluid" alt="LEGO"></a>
+                <a href="category.php?category=LEGO"><img src="../../images/lego.png" class="img-fluid" alt="LEGO"></a>
                 <div class="image-text fw-bold">LEGO</div>
             </div>
             <div class="image-container">
-                <a href="category.php?category=Offers"><img src="../images/offer.png" class="img-fluid" alt="Offer"></a>
+                <a href="category.php?category=Offers"><img src="../../images/offer.png" class="img-fluid" alt="Offer"></a>
                 <div class="image-text fw-bold">OFFERS</div>
             </div>
             <div class="image-container">
-                <a href="category.php?category=DC"><img src="../images/dc.png" class="img-fluid" alt="DC"></a>
+                <a href="category.php?category=DC"><img src="../../images/dc.png" class="img-fluid" alt="DC"></a>
                 <div class="image-text fw-bold">DC</div>
             </div>
         </div>
@@ -164,7 +164,7 @@
                         while($row = $stmt->fetch()){
                             echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                                 <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                    <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                    <img src="../../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
                                 </a>
@@ -194,7 +194,7 @@
                 <div class="col">
                     <div class="card" style="width: 39rem;  border: none;">
                         <a href="">
-                            <img src="../images/offerone.jpg" class="card-img-top rounded" alt="...">
+                            <img src="../../images/offerone.jpg" class="card-img-top rounded" alt="...">
                             <div class="card-body text-center px-0 pb-0">
                                 <h5 class="card-title fw-bold fs-5 mb-2">Earn Double Points</h5>
                                 <small><p>LEGO® Insiders get 2X points on all purchases, 10/10-10/15.</p></small>
@@ -206,7 +206,7 @@
                 <div class="col">
                     <div class="card" style="width: 39rem;  border: none;">
                         <a href="">
-                            <img src="../images/offertwo.jpg" class="card-img-top rounded" alt="...">
+                            <img src="../../images/offertwo.jpg" class="card-img-top rounded" alt="...">
                             <div class="card-body text-center px-0 pb-0">
                                 <h5 class="card-title fw-bold fs-5 mb-2">Get LEGO® Creator Scary Pirate Island</h5>
                                 <small><p>Your gift with LEGO® purchases of $100 or more.*</p></small>
@@ -228,7 +228,7 @@
                         while($row = $stmt->fetch()){
                             echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                                 <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                    <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                    <img src="../../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
                                 </a>
@@ -263,7 +263,7 @@
                             echo '<div class="col">
                                 <div class="card" style="width: 25.5rem; border: none;">
                                 <a href="article.php?articleId=' .$row['articleId'].'">
-                                    <img src="../news-images/' .$row['main-image']. '" class="card-img-top rounded" alt="...">
+                                    <img src="../../news-images/' .$row['main-image']. '" class="card-img-top rounded" alt="...">
                                     <div class="card-body px-0">
                                         <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>
                                         <p style="text-align: justify;">' .$row['subtext']. '</p>
@@ -313,7 +313,7 @@
         }
     </script>
     
-    <script src="../js/userscript.js"></script>
+    <script src="../../js/userscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 

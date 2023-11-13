@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'connect.php';
+    include '../connect.php';
 
     if(isset($_SESSION['adminname'])){
         header('location: adminpage.php');
@@ -58,12 +58,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Lego Empire</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin.css">
 </head>
 <body>
     
@@ -72,8 +72,8 @@
 
     <nav class="navbar ps-3 pt-5 container">
         <div class="container d-flex justify-content-center">
-            <a class="navbar-brand mt-3" href="homepage.php">
-                <img src="../images/logo.png" alt="The Lego Empire" width="175">
+            <a class="navbar-brand mt-3" href="adminauthentication.php">
+                <img src="../../images/logo.png" alt="The Lego Empire" width="175">
             </a>
         </div>
     </nav>
@@ -224,7 +224,7 @@
         }
     </script>
 
-    <script src="../js/adminscript.js"></script>
+    <script src="../../js/adminscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
