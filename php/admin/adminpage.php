@@ -21,9 +21,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
     <link rel="stylesheet" href="../../css/admin.css">
+
+    <style>
+        body{
+            background-color: #f2f4f6;
+        }
+    </style>
 </head>
 <body>
-
     <div class="container">
         <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container">
@@ -55,7 +60,7 @@
                     <div class="col-3">
                         <div class="list-group" id="list-tab" role="tablist">
                             <a href="adminpage.php" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold active" id="list-dashboard-list" role="tab" aria-controls="list-dashboard">Dashboard</a>
-                            <a href="?section=products" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-product-list" role="tab" aria-controls="list-product">Products</a>
+                            <a href="?section=product" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-product-list" role="tab" aria-controls="list-product">Products</a>
                             <a href="?section=order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" role="tab" aria-controls="list-order">Placed Orders</a>
                             <a href="?section=checkout" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-access-list" role="tab" aria-controls="list-access">Authorized Access</a>
                             <a href="#list-order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Edit Profile</a>
@@ -73,8 +78,8 @@
                                         case 'dashboard':
                                             include('dashboard.php');
                                             break;
-                                        case 'products':
-                                            include('products.php');
+                                        case 'product':
+                                            include('product.php');
                                             break;
                                         case 'order':
                                             include('order.php');
@@ -100,7 +105,6 @@
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
                                                         </div>
                                                     </div>
-                                                    <a href="#" class="card-link nav-link">Card link</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,10 +116,9 @@
                                                             <div class="mt-2 pt-1"><i class="fa-regular fa-circle-user" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Users</div>
                                                         </div>
                                                     </div>
-                                                    <a href="#" class="card-link">Card link</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,10 +130,9 @@
                                                             <div class="mt-2 pt-1"><i class="fa-solid fa-check" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Delieverd</div>
                                                         </div>
                                                     </div>
-                                                    <a href="#" class="card-link">Card link</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,10 +144,9 @@
                                                             <div class="mt-2 pt-1"><i class="fa-solid fa-spinner" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Pending</div>
                                                         </div>
                                                     </div>
-                                                    <a href="#" class="card-link">Card link</a>
                                                 </div>
                                             </div>
                                         </div>
