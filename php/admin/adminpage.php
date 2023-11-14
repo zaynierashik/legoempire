@@ -63,7 +63,7 @@
                             <a href="?section=product" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-product-list" role="tab" aria-controls="list-product">Products</a>
                             <a href="?section=order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" role="tab" aria-controls="list-order">Placed Orders</a>
                             <a href="?section=checkout" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-access-list" role="tab" aria-controls="list-access">Authorized Access</a>
-                            <a href="#list-order" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Edit Profile</a>
+                            <a href="?section=account" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Edit Profile</a>
                             <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal" style="cursor: pointer;">Logout</a>
                         </div>
                     </div>
@@ -86,6 +86,9 @@
                                             break;
                                         case 'checkout':
                                             include('checkout.php');
+                                            break;
+                                        case 'account':
+                                            include('account.php');
                                             break;
                                         default:
                                             echo "Unknown page";
@@ -165,6 +168,22 @@
         <a href="" id="scroll-to-top">
             <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    
+    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                Are you sure you want to log out?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
+                <a href="logout.php" class="btn btn-primary pt-1">Logout</a>
+            </div>
+        </div>
+    </div>
     </div>
 
     <script>
