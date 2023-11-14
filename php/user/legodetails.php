@@ -133,10 +133,10 @@
             <div id="carouselExample" class="carousel slide carousel-dark">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../../lego-images/<?php echo $row['main-image'] ?>" class="d-block w-100" alt="...">
+                        <img src="../../lego-images/<?php echo $row['mainimage'] ?>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="../../lego-images/<?php echo $row['secondary-image'] ?>" class="d-block w-100" alt="...">
+                        <img src="../../lego-images/<?php echo $row['secondaryimage'] ?>" class="d-block w-100" alt="...">
                     </div>
                 </div>
     
@@ -182,7 +182,7 @@
                 </form>
 
                 <div class="border rounded mt-3 py-3">
-                    <img src="../../lego-images/<?php echo $row['main-image'] ?>" class="w-25" alt="">
+                    <img src="../../lego-images/<?php echo $row['mainimage'] ?>" class="w-25" alt="">
                     <small class="fw-bold">Gift with LEGO® purchases of $100 or more*</small>
                 </div>
 
@@ -233,27 +233,27 @@
                 <div class="row text-center">
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../../lego-images/<?php echo $row['image-one'] ?>" alt="...">
+                            <img src="../../lego-images/<?php echo $row['imageone'] ?>" alt="...">
                             <div class="card-body">
-                                <h6 class="card-title fw-bold"><?php echo $row['title-one'] ?></h6>
+                                <h6 class="card-title fw-bold"><?php echo $row['titleone'] ?></h6>
                             </div>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../../lego-images/<?php echo $row['image-two'] ?>" alt="...">
+                            <img src="../../lego-images/<?php echo $row['imagetwo'] ?>" alt="...">
                             <div class="card-body">
-                                <h6 class="card-title fw-bold"><?php echo $row['title-two'] ?></h6>
+                                <h6 class="card-title fw-bold"><?php echo $row['titletwo'] ?></h6>
                             </div>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="card border-0" style="width: 24.5rem;">
-                            <img src="../../lego-images/<?php echo $row['image-three'] ?>" alt="...">
+                            <img src="../../lego-images/<?php echo $row['imagethree'] ?>" alt="...">
                             <div class="card-body">
-                                <h6 class="card-title fw-bold"><?php echo $row['title-three'] ?></h6>
+                                <h6 class="card-title fw-bold"><?php echo $row['titlethree'] ?></h6>
                             </div>
                         </div>
                     </div>
@@ -281,7 +281,7 @@
 
                     <div>
                         <?php
-                            $specificationspoints = explode("\n", $row['specifications-point']);
+                            $specificationspoints = explode("\n", $row['specificationspoint']);
                             echo "<ul class='mt-3'>";
                             foreach($specificationspoints as $point){
                                 echo "<li class='mt-2'>$point</li>";

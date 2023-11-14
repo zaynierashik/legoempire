@@ -93,7 +93,7 @@
                     while($row = $stmt->fetch()){
                         echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                             <a href="user/legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                <img src="../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                <img src="../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
                             </a>
@@ -156,7 +156,7 @@
                         echo '<div class="col">
                             <div class="card" style="width: 25.5rem; border: none;">
                             <a href="user/article.php?articleId=' .$row['articleId'].'">
-                                <img src="../news-images/' .$row['main-image']. '" class="card-img-top rounded" style="" alt="...">
+                                <img src="../news-images/' .$row['mainimage']. '" class="card-img-top rounded" style="" alt="...">
                                 <div class="card-body px-0">
                                     <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>
                                     <p style="text-align: justify;">' .$row['subtext']. '</p>

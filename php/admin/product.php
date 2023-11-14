@@ -4,6 +4,35 @@
     if(!isset($_SESSION['adminname'])){
         header('location: adminauthentication.php');
     }
+
+    if(isset($_POST['register-product'])){
+        $itemNumber = $_POST['itemNumber'];
+        $category = $_POST['category'];
+        $title = $_POST['title'];
+        $price = $_POST['price'];
+        $age = $_POST['age'];
+        $pieces = $_POST['pieces'];
+        $points = $_POST['points'];
+        $specifications = $_POST['specifications'];
+        $specificationspoint = $_POST['specificationspoint'];
+        $titleone = $_POST['titleone'];
+        $titletwo = $_POST['titletwo'];
+        $titlethree = $_POST['titlethree'];
+        $mainimage = $_POST['mainimage'];
+        $secondaryimage = $_POST['secondaryimage'];
+        $imageone = $_POST['imageone'];
+        $imagetwo = $_POST['imagetwo'];
+        $imagethree = $_POST['imagethree'];
+
+        $sql = "INSERT INTO product (itemNumber, category, title, price, age, pieces, points, specifications, specificationspoint, titleone, image2title, image3title, mainimage, secondaryimage) VALUES ('$itemnumber', '$category', '$name', '$price', '$age', '$legopieces', '$legopoints', '$specifications', '$specificationspoint', '$image1title', '$image2title', '$image3title', '$mainimage', '$secondaryimage')";
+        $result = mysqli_query($conn, $sql);
+
+        if($result){
+            echo "<script>alert('Product Added Successfully!')</script>";
+        }else{
+            echo "<script>alert('Product Not Added!')</script>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -34,17 +63,17 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Item Number" required>
+                            <input type="number" class="form-control mb-3" name="itemNumber" id="itemNumber" placeholder="Item Number" required>
                         </div>
                     </div>
                     <div class="col-md-3 ps-0">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Category" required>
+                            <input type="text" class="form-control mb-3" name="category" id="category" placeholder="Category" required>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Product Name" required>
+                            <input type="text" class="form-control mb-3" name="title" id="title" placeholder="Product Name" required>
                         </div>
                     </div>
                 </div>
@@ -52,53 +81,91 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Price" required>
+                            <input type="number" class="form-control mb-3" name="price" id="price" placeholder="Price" required>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Appropiate Age" required>
+                            <input type="number" class="form-control mb-3" name="age" id="age" placeholder="Appropiate Age" required>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Lego Pieces" required>
+                            <input type="number" class="form-control mb-3" name="pieces" id="pieces" placeholder="Lego Pieces" required>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Lego Points" required>
+                            <input type="number" class="form-control mb-3" name="points" id="points" placeholder="Lego Points" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="input-wrapper">
+                            <label class="fw-bold" for="main-image">Main Image</label>
+                            <input type="file" class="form-control mb-3" id="main-image" name="main-image" accept="image/png, image/jpeg"/>
+                        </div>
+                    </div>
+                    <div class="col ps-0">
+                        <div class="input-wrapper">
+                            <label class="fw-bold" for="secondary-image">Secondary Image</label>
+                            <input type="file" class="form-control mb-3" id="secondary-image" name="secondary-image" accept="image/png, image/jpeg"/>
                         </div>
                     </div>
                 </div>
                 
                 <div class="input-wrapper">
-                    <textarea class="form-control mb-3" id="message" rows="5" placeholder="Specifications" required></textarea>
+                    <textarea class="form-control mb-3" name="specifications" id="specifications" rows="3" placeholder="Specifications" required></textarea>
                 </div>
                 <div class="input-wrapper">
-                    <textarea class="form-control mb-3" id="message" rows="5" placeholder="Specifications Point" required></textarea>
+                    <textarea class="form-control mb-3" name="specifications-point" id="specifications-point" rows="5" placeholder="Specifications Point" required></textarea>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-5">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Item Number" required>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ps-0">
-                        <div class="input-wrapper">
-                            <input type="email" class="form-control mb-3" name="email" id="email" placeholder="Category" required>
+                            <input type="file" class="form-control" id="image-one" name="image-one" accept="image/png, image/jpeg"/>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Product Name" required>
+                            <input type="text" class="form-control mb-3" name="title-one" id="title-one" placeholder="Image 1 Title" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-wrapper">
+                            <input type="file" class="form-control" id="image-two" name="image-two" accept="image/png, image/jpeg"/>
+                        </div>
+                    </div>
+                    <div class="col ps-0">
+                        <div class="input-wrapper">
+                            <input type="text" class="form-control mb-3" name="title-two" id="title-two" placeholder="Image 2 Title" required>
                         </div>
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-wrapper">
+                            <input type="file" class="form-control" id="image-three" name="image-three" accept="image/png, image/jpeg"/>
+                        </div>
+                    </div>
+                    <div class="col ps-0">
+                        <div class="input-wrapper">
+                            <input type="text" class="form-control mb-3" name="title-three" id="title-three" placeholder="Image 3 Title" required>
+                        </div>
+                    </div>
+                </div>
+
+                
+
                 <div class="d-grid">
-                    <button type="submit" class="btn pt-1" name="register-submit" id="register-submit" value="Register" style="border: none; background-color: black; color: white;">Add Product</button>
+                    <button type="submit" class="btn pt-1" name="register-product" id="register-product" value="Register" style="border: none; background-color: black; color: white;">Add Product</button>
                 </div>
             </form>
         </div>

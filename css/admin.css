@@ -5,6 +5,10 @@
     height: 5.5vh;
 }
 
+.product-register-container .input-wrapper textarea{
+    height: auto;
+}
+
 .product-register-container .input-wrapper input{
     padding-left: 1vw;
 }

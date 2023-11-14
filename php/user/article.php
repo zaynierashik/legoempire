@@ -100,7 +100,7 @@
     <div class="vl"></div>
 
     <div class="container mt-3">
-        <img src="../../news-images/<?php echo $row['display-image'] ?>" class="w-100" alt="">
+        <img src="../../news-images/<?php echo $row['displayimage'] ?>" class="w-100" alt="">
         <div class="container text-center mt-4">
             <h2><?php echo $row['title'] ?></h2>
             <h6 class="lh-base" style="font-size: 1.11rem; text-align: justify;"><?php echo $row['description'] ?></h6>
@@ -109,17 +109,17 @@
         <div class="container mt-4">
             <div class="row mb-4">
                 <div class="col-4">
-                    <img src="../../news-images/<?php echo $row['image-one'] ?>" class="w-100" alt="">
+                    <img src="../../news-images/<?php echo $row['imageone'] ?>" class="w-100" alt="">
                 </div>
                 <div class="col-4">
-                    <img src="../../news-images/<?php echo $row['image-two'] ?>" class="w-100" alt="">
+                    <img src="../../news-images/<?php echo $row['imagetwo'] ?>" class="w-100" alt="">
                 </div>
                 <div class="col-4">
-                    <img src="../../news-images/<?php echo $row['image-three'] ?>" class="w-100" alt="">
+                    <img src="../../news-images/<?php echo $row['imagethree'] ?>" class="w-100" alt="">
                 </div>
             </div>
 
-            <h6 class="lh-base" style="font-size: 1.11rem; text-align: justify;"><?php echo $row['rem-description'] ?></h6>
+            <h6 class="lh-base" style="font-size: 1.11rem; text-align: justify;"><?php echo $row['remdescription'] ?></h6>
         </div>
     </div>
     <?php } ?>
