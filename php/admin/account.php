@@ -68,33 +68,6 @@
         }
     }
 
-    if(isset($_POST['billing-submit'])){
-        $country = $_POST['country'];
-        $province = $_POST['province'];
-        $city = $_POST['city'];
-        $area = $_POST['area'];
-        $address = $_POST['address'];
-        $landmark = $_POST['landmark'];
-
-        if(empty($_POST['country']) || empty($_POST['province']) || empty($_POST['city']) || empty($_POST['area']) || empty($_POST['address']) || empty($_POST['landmark'])){
-            $billing = 0;
-        }else{
-            $sql = "UPDATE profile_data SET country = :country, province = :province, city = :city, area = :area, address = :address, landmark = :landmark WHERE userId = :userId";
-            $stmt = $conn->prepare($sql);
-            $stmt ->bindParam(':userId', $userId);
-            $stmt ->bindParam(':country', $country);
-            $stmt ->bindParam(':province', $province);
-            $stmt ->bindParam(':city', $city);
-            $stmt ->bindParam(':area', $area);
-            $stmt ->bindParam(':address', $address);
-            $stmt ->bindParam(':landmark', $landmark);
-
-            if($stmt->execute()){
-                $billing = 1;
-            }
-        }
-    }
-
     if(isset($_POST['delete-account'])){
         $stmt = $conn->prepare("DELETE FROM user_data WHERE userId = :userId");
         $stmt ->bindParam(':userId', $userId);
@@ -126,7 +99,13 @@
     <link rel="manifest" href="../../favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/user.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+
+    <style>
+        body{
+            background-color: #f2f4f6;
+        }
+    </style>
 </head>
 <body>
     
@@ -140,55 +119,23 @@
     ?>
 
         <form action="" method="POST" class="form">
-                <div class="mb-3">
-                    <label for="name" class="form-label fw-bold">Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter name" id="name" value="<?php echo $result['name'] ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label fw-bold">Phone Number</label>
-                    <input type="number" class="form-control" name="phone" placeholder="Enter phone number" id="phone" value="<?php echo $result['phone'] ?>">
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="form-label fw-bold">Email Address</label>
-                    <input type="email" class="form-control" name="email" placeholder="Enter email address" id="email" value="<?php echo $result['email'] ?>">
-                </div>
-                                        
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn pt-1 px-5 fw-bold" name="update-submit" id="update-submit" value="Update" style="border: none; background-color: black; color: white;">Save</button>
-                </div>
-        </form>
-    </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="list-password" role="tabpanel" aria-labelledby="list-password-list">
-                                <div class="update-content-container" id="update">
-                                    <form action="" method="POST" class="form">
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label fw-bold">Old Password</label>
-                                            <input type="text" class="form-control" name="oldPassword" id="password">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label fw-bold">New Password</label>
-                                            <input type="text" class="form-control" name="newPassword" id="password">
-                                        </div>
-                                        <div class="mb-4">
-                                            <label for="password" class="form-label fw-bold">Confirm New Password</label>
-                                            <input type="text" class="form-control" name="confirmPassword" id="password">
-                                        </div>
-                                        
-                                        <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn pt-1 px-5 fw-bold" name="change-submit" id="change-submit" value="Change Password" style="border: none; background-color: black; color: white;">Change Password</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label for="name" class="form-label fw-bold">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter name" id="name" value="<?php echo $result['name'] ?>">
             </div>
-        </div>
-    </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label fw-bold">Phone Number</label>
+                <input type="number" class="form-control" name="phone" placeholder="Enter phone number" id="phone" value="<?php echo $result['phone'] ?>">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="form-label fw-bold">Email Address</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter email address" id="email" value="<?php echo $result['email'] ?>">
+            </div>
+                                        
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn pt-1 px-5 fw-bold" name="update-submit" id="update-submit" value="Update" style="border: none; background-color: black; color: white;">Save</button>
+            </div>
+        </form>
     </div>
 
     <div class="text-end fixed-top-container" id="top-container">
@@ -365,7 +312,7 @@
         }
     </script>
     
-    <script src="../../js/userscript.js"></script>
+    <script src="../../js/adminscript.js"></script>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
