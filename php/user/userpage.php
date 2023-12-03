@@ -92,7 +92,7 @@
                             echo '<div class="col">
                                 <div class="card" style="width: 18.625rem;">
                                     <a href="legodetails.php?legoId=' .$item[0]['legoId']. '" class="nav-link">
-                                        <img src="../../lego-images/' .$item[0]['main-image']. '" class="card-img-top my-3" alt="...">
+                                        <img src="../../lego-images/' .$item[0]['mainimage']. '" class="card-img-top my-3" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title fw-bold fs-6">' .$item[0]['title']. '</h5>
                                     </a>
@@ -164,7 +164,7 @@
                         while($row = $stmt->fetch()){
                             echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                                 <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                    <img src="../../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                    <img src="../../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
                                 </a>
@@ -228,7 +228,7 @@
                         while($row = $stmt->fetch()){
                             echo '<div class="card slider-card" style="width: 18.75rem; margin-left: 0.60vw; margin-right: 0.60vw;">
                                 <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                    <img src="../../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
+                                    <img src="../../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
                                 </a>
@@ -263,7 +263,7 @@
                             echo '<div class="col">
                                 <div class="card" style="width: 25.5rem; border: none;">
                                 <a href="article.php?articleId=' .$row['articleId'].'">
-                                    <img src="../../news-images/' .$row['main-image']. '" class="card-img-top rounded" alt="...">
+                                    <img src="../../news-images/' .$row['mainimage']. '" class="card-img-top rounded" alt="...">
                                     <div class="card-body px-0">
                                         <h5 class="card-title fw-bold fs-5 mb-3">' .$row['title']. '</h5>
                                         <p style="text-align: justify;">' .$row['subtext']. '</p>

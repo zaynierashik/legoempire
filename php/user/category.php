@@ -94,7 +94,7 @@
                         <div class="col">
                         <div class="card" style="width: 18.37rem;">
                             <a href="legodetails.php?legoId=<?php echo $lego['legoId'] ?>" class="nav-link">
-                                <img src="../../lego-images/<?php echo $lego['main-image'] ?>" class="card-img-top my-3" alt="...">
+                                <img src="../../lego-images/<?php echo $lego['mainimage'] ?>" class="card-img-top my-3" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold fs-6"><?php echo $lego['title'] ?></h5>
                             </a>
