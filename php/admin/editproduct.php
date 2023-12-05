@@ -5,7 +5,7 @@
         header('location: adminauthentication.php');
     }
 
-    if(isset($_POST['register-product'])){
+    if(isset($_POST['update-product'])){
         $title = $_POST['title'];
         $price = $_POST['price'];
         $category = $_POST['category'];
@@ -25,13 +25,29 @@
         $imagethree = $_POST['imagethree'];
 
         if(empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint']) || empty($_POST['titleone']) || empty($_POST['titletwo']) || empty($_POST['titlethree']) || empty($_POST['mainimage']) || empty($_POST['secondaryimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['imagethree'])){
-            $error = 0;
+            $success = 0;
         }else{
-            $sql = "INSERT INTO lego_data (title, price, category, age, pieces, points, itemNumber, specifications, specificationspoint, titleone, titletwo, titlethree, mainimage, secondaryimage, imageone, imagetwo, imagethree) VALUES ('$title', '$price', '$category', '$age', '$pieces', '$points', '$itemNumber', '$specifications', '$specificationspoint', '$titleone', '$titletwo', '$titlethree', '$mainimage', '$secondaryimage', '$imageone', '$imagetwo', '$imagethree')";
+            $sql = "UPDATE lego_data SET title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint', titleone = '$titleone', titletwo = '$titletwo', titlethree = '$titlethree', mainimage = '$mainimage', secondaryimage = '$secondaryimage', imageone = '$imageone', imagetwo = '$imagetwo', imagethree = '$imagethree' WHERE itemNumber = '$itemNumber'";
             $stmt = $conn->prepare($sql);
-            $result = $stmt->execute();
-    
-            if($result){
+            $stmt ->bindParam(':itemNumber', $itemNumber);
+            $stmt ->bindParam(':title', $title);
+            $stmt ->bindParam(':price', $price);
+            $stmt ->bindParam(':category', $category);
+            $stmt ->bindParam(':age', $age);
+            $stmt ->bindParam(':pieces', $pieces);
+            $stmt ->bindParam(':points', $points);
+            $stmt ->bindParam(':specifications', $specifications);
+            $stmt ->bindParam(':specificationspoint', $specificationspoint);
+            $stmt ->bindParam(':titleone', $titleone);
+            $stmt ->bindParam(':titletwo', $titletwo);
+            $stmt ->bindParam(':titlethree', $titlethree);
+            $stmt ->bindParam(':mainimage', $mainimage);
+            $stmt ->bindParam(':secondaryimage', $secondaryimage);
+            $stmt ->bindParam(':imageone', $imageone);
+            $stmt ->bindParam(':imagetwo', $imagetwo);
+            $stmt ->bindParam(':imagethree', $imagethree);
+            
+            if($stmt->execute()){
                 $success = 1;
             }
         }
@@ -61,7 +77,7 @@
 </head>
 <body>
     
-    <div class="product-register-container">
+    <!-- <div class=" product-register-container">
             <form action="" method="POST" class="form">
                 <div class="row">
                     <div class="col-md-2">
@@ -166,22 +182,36 @@
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn pt-1" name="register-product" id="register-product" value="Register" style="border: none; background-color: black; color: white;">Add Product</button>
+                    <button type="submit" class="btn pt-1" name="update-product" id="update-product" value="Register" style="border: none; background-color: black; color: white;">Save</button>
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
 
-    <!-- Product Insertion Error Message -->
-
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto">Product Insertion Error</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body" id="errorToastBody">Fill in the blanks.</div>
-    </div>
+    <div class="container">
+            <div class="row">
+                <?php
+                    $sql = "SELECT * FROM lego_data ORDER BY RAND()";
+                    $stmt = $conn->query($sql);
+                    if($stmt->rowCount() > 0){
+                        while($row = $stmt->fetch()){
+                            echo '<div class="col">
+                            <div class="card slider-card" style="width: 13rem;">
+                                <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
+                                    <img src="../../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
+                                </a>
+                                    
+                                    </div>
+                                </div>
+                                </div>';
+                        }
+                    }else{
+                        echo "<div class='container'><h5 class='fw-bold'>No articles found.</h5></div>";
+                    }
+                ?>
+            </div>
     </div>
 
     <!-- Product Insertion Success Message -->
@@ -189,23 +219,12 @@
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <strong class="me-auto">Registration Successful</strong>
+            <strong class="me-auto" id="successToastHead"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <div class="toast-body">Your account has been created.</div>
+        <div class="toast-body" id="successToastBody"></div>
     </div>
     </div>
-
-    <script>
-        <?php
-            if(isset($error) && $error === 0){
-                echo 'document.addEventListener("DOMContentLoaded", function() {
-                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    errorToast.show();
-                });';
-            }
-        ?>
-    </script>
 
     <script>
         <?php
@@ -214,6 +233,19 @@
                     var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
                     document.getElementById("successToastHead").innerHTML = "Product Insertion Successful";
                     document.getElementById("successToastBody").innerHTML = "The product has been added successfully.";
+                    successToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($success) && $success === 0){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Product Insertion Error";
+                    document.getElementById("successToastBody").innerHTML = "Fill in the blanks.";
                     successToast.show();
                 });';
             }
