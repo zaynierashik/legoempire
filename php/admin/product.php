@@ -6,13 +6,13 @@
     }
 
     if(isset($_POST['register-product'])){
-        $itemNumber = $_POST['itemNumber'];
-        $category = $_POST['category'];
         $title = $_POST['title'];
         $price = $_POST['price'];
+        $category = $_POST['category'];
         $age = $_POST['age'];
         $pieces = $_POST['pieces'];
         $points = $_POST['points'];
+        $itemNumber = $_POST['itemNumber'];
         $specifications = $_POST['specifications'];
         $specificationspoint = $_POST['specificationspoint'];
         $titleone = $_POST['titleone'];
@@ -24,13 +24,16 @@
         $imagetwo = $_POST['imagetwo'];
         $imagethree = $_POST['imagethree'];
 
-        $sql = "INSERT INTO product (itemNumber, category, title, price, age, pieces, points, specifications, specificationspoint, titleone, image2title, image3title, mainimage, secondaryimage) VALUES ('$itemnumber', '$category', '$name', '$price', '$age', '$legopieces', '$legopoints', '$specifications', '$specificationspoint', '$image1title', '$image2title', '$image3title', '$mainimage', '$secondaryimage')";
-        $result = mysqli_query($conn, $sql);
-
-        if($result){
-            echo "<script>alert('Product Added Successfully!')</script>";
+        if(empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint']) || empty($_POST['titleone']) || empty($_POST['titletwo']) || empty($_POST['titlethree']) || empty($_POST['mainimage']) || empty($_POST['secondaryimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['imagethree'])){
+            $error = 0;
         }else{
-            echo "<script>alert('Product Not Added!')</script>";
+            $sql = "INSERT INTO lego_data (title, price, category, age, pieces, points, itemNumber, specifications, specificationspoint, titleone, titletwo, titlethree, mainimage, secondaryimage, imageone, imagetwo, imagethree) VALUES ('$title', '$price', '$category', '$age', '$pieces', '$points', '$itemNumber', '$specifications', '$specificationspoint', '$titleone', '$titletwo', '$titlethree', '$mainimage', '$secondaryimage', '$imageone', '$imagetwo', '$imagethree')";
+            $stmt = $conn->prepare($sql);
+            $result = $stmt->execute();
+    
+            if($result){
+                $success = 1;
+            }
         }
     }
 ?>
@@ -57,7 +60,7 @@
     </style>
 </head>
 <body>
-
+    
     <div class=" product-register-container">
             <form action="" method="POST" class="form">
                 <div class="row">
@@ -104,14 +107,14 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-wrapper">
-                            <label class="fw-bold" for="main-image">Main Image</label>
-                            <input type="file" class="form-control mb-3" id="main-image" name="main-image" accept="image/png, image/jpeg"/>
+                            <label class="fw-bold" for="mainimage">Main Image</label>
+                            <input type="file" class="form-control mb-3" id="mainimage" name="mainimage" accept="image/png, image/jpeg" required/>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <label class="fw-bold" for="secondary-image">Secondary Image</label>
-                            <input type="file" class="form-control mb-3" id="secondary-image" name="secondary-image" accept="image/png, image/jpeg"/>
+                            <label class="fw-bold" for="secondaryimage">Secondary Image</label>
+                            <input type="file" class="form-control mb-3" id="secondaryimage" name="secondaryimage" accept="image/png, image/jpeg" required/>
                         </div>
                     </div>
                 </div>
@@ -120,18 +123,18 @@
                     <textarea class="form-control mb-3" name="specifications" id="specifications" rows="3" placeholder="Specifications" required></textarea>
                 </div>
                 <div class="input-wrapper">
-                    <textarea class="form-control mb-3" name="specifications-point" id="specifications-point" rows="5" placeholder="Specifications Point" required></textarea>
+                    <textarea class="form-control mb-3" name="specificationspoint" id="specificationspoint" rows="5" placeholder="Specifications Point" required></textarea>
                 </div>
 
                 <div class="row">
                     <div class="col-md-5">
                         <div class="input-wrapper">
-                            <input type="file" class="form-control" id="image-one" name="image-one" accept="image/png, image/jpeg"/>
+                            <input type="file" class="form-control" id="imageone" name="imageone" accept="image/png, image/jpeg" required/>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="title-one" id="title-one" placeholder="Image 1 Title" required>
+                            <input type="text" class="form-control mb-3" name="titleone" id="titleone" placeholder="Image 1 Title" required>
                         </div>
                     </div>
                 </div>
@@ -139,12 +142,12 @@
                 <div class="row">
                     <div class="col-md-5">
                         <div class="input-wrapper">
-                            <input type="file" class="form-control" id="image-two" name="image-two" accept="image/png, image/jpeg"/>
+                            <input type="file" class="form-control" id="imagetwo" name="imagetwo" accept="image/png, image/jpeg" required/>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="title-two" id="title-two" placeholder="Image 2 Title" required>
+                            <input type="text" class="form-control mb-3" name="titletwo" id="titletwo" placeholder="Image 2 Title" required>
                         </div>
                     </div>
                 </div>
@@ -152,17 +155,15 @@
                 <div class="row">
                     <div class="col-md-5">
                         <div class="input-wrapper">
-                            <input type="file" class="form-control" id="image-three" name="image-three" accept="image/png, image/jpeg"/>
+                            <input type="file" class="form-control" id="imagethree" name="imagethree" accept="image/png, image/jpeg" required/>
                         </div>
                     </div>
                     <div class="col ps-0">
                         <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="title-three" id="title-three" placeholder="Image 3 Title" required>
+                            <input type="text" class="form-control mb-3" name="titlethree" id="titlethree" placeholder="Image 3 Title" required>
                         </div>
                     </div>
                 </div>
-
-                
 
                 <div class="d-grid">
                     <button type="submit" class="btn pt-1" name="register-product" id="register-product" value="Register" style="border: none; background-color: black; color: white;">Add Product</button>
@@ -170,6 +171,54 @@
             </form>
         </div>
     </div>
+
+    <!-- Product Insertion Error Message -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Product Insertion Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="errorToastBody">Fill in the blanks.</div>
+    </div>
+    </div>
+
+    <!-- Product Insertion Success Message -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Registration Successful</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Your account has been created.</div>
+    </div>
+    </div>
+
+    <script>
+        <?php
+            if(isset($error) && $error === 0){
+                echo 'document.addEventListener("DOMContentLoaded", function() {
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    errorToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($success) && $success === 1){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Product Insertion Successful";
+                    document.getElementById("successToastBody").innerHTML = "The product has been added successfully.";
+                    successToast.show();
+                });';
+            }
+        ?>
+    </script>
 
     <script>
         if( window.history.replaceState ){

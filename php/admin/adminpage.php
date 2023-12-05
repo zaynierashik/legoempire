@@ -153,6 +153,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col">
+                                            <div class="card" style="width: 13.37rem;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-dolly" style="color: #000000; font-size: 3.5rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Orders</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                             <?php } ?>
                                 
