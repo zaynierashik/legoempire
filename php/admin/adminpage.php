@@ -61,7 +61,7 @@
                         <div class="list-group" id="list-tab" role="tablist">
                             <a href="adminpage.php" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold active" id="list-dashboard-list" role="tab" aria-controls="list-dashboard">Dashboard</a>
                             <a href="?section=product" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-product-list" role="tab" aria-controls="list-product">Products</a>
-                            <a href="?section=editproduct" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" role="tab" aria-controls="list-order">Edit Products</a>
+                            <a href="?section=viewproduct" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" role="tab" aria-controls="list-order">Edit Products</a>
                             <a href="?section=checkout" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-access-list" role="tab" aria-controls="list-access">Authorized Access</a>
                             <a href="?section=account" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Edit Profile</a>
                             <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal" style="cursor: pointer;">Logout</a>
@@ -78,8 +78,8 @@
                                         case 'product':
                                             include('product.php');
                                             break;
-                                        case 'editproduct':
-                                            include('editproduct.php');
+                                        case 'viewproduct':
+                                            include('viewproduct.php');
                                             break;
                                         case 'checkout':
                                             include('checkout.php');
