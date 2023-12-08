@@ -59,11 +59,12 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="list-group" id="list-tab" role="tablist">
-                            <a href="adminpage.php" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold active" id="list-dashboard-list" role="tab" aria-controls="list-dashboard">Dashboard</a>
+                            <a href="adminpage.php" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-dashboard-list" role="tab" aria-controls="list-dashboard">Dashboard</a>
                             <a href="?section=product" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-product-list" role="tab" aria-controls="list-product">Products</a>
                             <a href="?section=viewproduct" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" role="tab" aria-controls="list-order">Edit Products</a>
-                            <a href="?section=checkout" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-access-list" role="tab" aria-controls="list-access">Authorized Access</a>
+                            <a href="?section=access" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-access-list" role="tab" aria-controls="list-access">Authorized Access</a>
                             <a href="?section=account" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Edit Profile</a>
+                            <a href="?section=changepassword" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Change Password</a>
                             <a class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" data-bs-toggle="modal" data-bs-target="#logoutConfirmationModal" style="cursor: pointer;">Logout</a>
                         </div>
                     </div>
@@ -81,11 +82,14 @@
                                         case 'viewproduct':
                                             include('viewproduct.php');
                                             break;
-                                        case 'checkout':
-                                            include('checkout.php');
+                                        case 'access':
+                                            include('access.php');
                                             break;
                                         case 'account':
                                             include('account.php');
+                                            break;
+                                        case 'changepassword':
+                                            include('changepassword.php');
                                             break;
                                         default:
                                             echo "Unknown page";
@@ -94,6 +98,34 @@
                                 }else{
                             ?>
                                     <div class="row row-gap-4">  
+                                        <div class="col">
+                                            <div class="card" style="width: 13.37rem;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-user-tie" style="color: #000000; font-size: 3.5rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Admins</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card" style="width: 13.37rem;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1"><i class="fa-regular fa-circle-user" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Users</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col">
                                             <div class="card" style="width: 13.37rem;">
                                                 <div class="card-body">
@@ -113,10 +145,10 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-regular fa-circle-user" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-dolly" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Users</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Orders</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -145,20 +177,6 @@
                                                         </div>
                                                         <div class="col">
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Pending</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="card" style="width: 13.37rem;">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-dolly" style="color: #000000; font-size: 3.5rem"></i></div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Orders</div>
                                                         </div>
                                                     </div>
                                                 </div>

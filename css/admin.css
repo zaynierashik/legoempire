@@ -37,3 +37,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .navbar, .list-group-item{
     background-color: #f2f4f6;
 }
+
+/* Admin Access */
+
+.admin-content{
+    background-color: white;
+}
