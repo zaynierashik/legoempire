@@ -17,9 +17,9 @@
         if(empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['email'])){
             $update = 0;
         }else{
-            $sql = "UPDATE admin_data SET name = :name, phone = :phone, email = :email WHERE userId = :userId";
+            $sql = "UPDATE admin_data SET name = :name, phone = :phone, email = :email WHERE adminId = :adminId";
             $stmt = $conn->prepare($sql);
-            $stmt ->bindParam(':userId', $userId);
+            $stmt ->bindParam(':adminId', $adminId);
             $stmt ->bindParam(':name', $name);
             $stmt ->bindParam(':phone', $phone);
             $stmt ->bindParam(':email', $email);
@@ -29,60 +29,6 @@
                 $update = 1;
             }
         }
-    }
-
-    if(isset($_POST['change-submit'])){
-        $oldPassword = $_POST['oldPassword'];
-        $newPassword = $_POST['newPassword'];
-        $confirmPassword = $_POST['confirmPassword'];
-    
-        if(empty($oldPassword) || empty($newPassword) || empty($confirmPassword)){
-            $change = 3;
-        }else if($newPassword !== $confirmPassword){
-            $change = 2;
-        }else{
-            $sql = "SELECT password FROM user_data WHERE userId = :userId";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':userId', $userId);
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-            if($result) {
-                $storedPassword = $result['password'];
-            
-                if(password_verify($oldPassword, $storedPassword)){
-                    $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            
-                    $sql = "UPDATE user_data SET password = :newPassword WHERE userId = :userId";
-                    $stmt = $conn->prepare($sql);
-                    $stmt ->bindParam(':userId', $userId);
-                    $stmt ->bindParam(':newPassword', $hashedNewPassword);
-            
-                    if($stmt->execute()){
-                        $change = 0;
-                    }
-                }else{
-                    $change = 1;
-                }
-            }
-        }
-    }
-
-    if(isset($_POST['delete-account'])){
-        $stmt = $conn->prepare("DELETE FROM user_data WHERE userId = :userId");
-        $stmt ->bindParam(':userId', $userId);
-        $stmt ->execute();
-
-        $stmt = $conn->prepare("DELETE FROM profile_data WHERE userId = :userId");
-        $stmt ->bindParam(':userId', $userId);
-        $stmt ->execute();
-
-        $stmt = $conn->prepare("DELETE FROM order_data WHERE userId = :userId");
-        $stmt ->bindParam(':userId', $userId);
-        $stmt ->execute();
-    
-        header('location: logout.php');
-        exit();
     }
 ?>
 
@@ -110,13 +56,13 @@
 <body>
     
     <div class="update-content-container" id="update">
-    <?php
-        $sql = "SELECT * FROM admin_data WHERE adminId = :adminId";
-        $stmt = $conn->prepare($sql);
-        $stmt ->bindParam(':adminId', $adminId);
-        $stmt ->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    ?>
+        <?php
+            $sql = "SELECT * FROM admin_data WHERE adminId = :adminId";
+            $stmt = $conn->prepare($sql);
+            $stmt ->bindParam(':adminId', $adminId);
+            $stmt ->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>
 
         <form action="" method="POST" class="form">
             <div class="mb-3">
@@ -136,46 +82,6 @@
                 <button type="submit" class="btn pt-1 px-5 fw-bold" name="update-submit" id="update-submit" value="Update" style="border: none; background-color: black; color: white;">Save</button>
             </div>
         </form>
-    </div>
-
-    <div class="text-end fixed-top-container" id="top-container">
-        <a href="" id="scroll-to-top">
-            <i class="fa-solid fa-angle-up" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
-        </a>
-    </div>
-
-    <!-- Logout Confirmation Modal -->
-    
-    <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                Are you sure you want to log out?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
-                <a href="logout.php" class="btn btn-primary pt-1">Logout</a>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- Delete Confirmation -->
-
-    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                Are you sure you want to delete your account?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                    <button type="submit" class="btn btn-primary pt-1" name="delete-account" id="delete">Delete account</button>
-                </form>
-            </div>
-        </div>
-    </div>
     </div>
 
     <!-- Success Message -->

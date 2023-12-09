@@ -29,26 +29,13 @@
     </style>
 </head>
 <body>
+    
     <div class="container">
         <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="adminpage.php">
                     <img src="../../images/logo.png" alt="The Lego Empire" width="175">
                 </a>
-        
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                    
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="cart.php" class="nav-link pe-1">
-                            <i class="fa-solid fa-user" style="color: #000000; font-size: 1.1rem;"></i>
-                        </a>
-                    </li>
-                </ul>
-                </div>
             </div>
         </nav>
 
@@ -99,11 +86,11 @@
                             ?>
                                     <div class="row row-gap-4">  
                                         <div class="col">
-                                            <div class="card" style="width: 13.37rem;">
+                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                    <div class="row pt-3">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-user-tie" style="color: #000000; font-size: 3.5rem"></i></div>
+                                                            <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-user-tie" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Admins</div>
@@ -113,11 +100,11 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card" style="width: 13.37rem;">
+                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                    <div class="row pt-3">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-regular fa-circle-user" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                            <div class="mt-2 pt-1 ps-1"><i class="fa-regular fa-circle-user" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Users</div>
@@ -127,11 +114,11 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card" style="width: 13.37rem;">
+                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                    <div class="row pt-3">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-cubes-stacked" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                            <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-cubes-stacked" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
@@ -141,11 +128,11 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card" style="width: 13.37rem;">
+                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                    <div class="row pt-3">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-dolly" style="color: #000000; font-size: 3.5rem"></i></div>
+                                                            <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-dolly" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Orders</div>
@@ -155,11 +142,11 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card" style="width: 13.37rem;">
+                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                    <div class="row pt-3">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-check" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                            <div class="mt-2 ps-1"><i class="fa-solid fa-check" style="color: #000000; font-size: 3.85rem"></i></div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Delieverd</div>
@@ -169,14 +156,28 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card" style="width: 13.37rem;">
+                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                    <div class="row pt-3">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1"><i class="fa-solid fa-spinner" style="color: #000000; font-size: 3.7rem"></i></div>
+                                                            <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-spinner" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Pending</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
+                                                <div class="card-body">
+                                                    <div class="row pt-3">
+                                                        <div class="col">
+                                                            <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-sack-dollar" style="color: #000000; font-size: 3.5rem"></i></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Earnings</div>
                                                         </div>
                                                     </div>
                                                 </div>
