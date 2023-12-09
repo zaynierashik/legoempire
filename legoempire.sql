@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2023 at 05:07 AM
+-- Generation Time: Dec 09, 2023 at 08:51 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,7 +40,7 @@ CREATE TABLE `admin_data` (
 --
 
 INSERT INTO `admin_data` (`adminId`, `name`, `phone`, `email`, `password`) VALUES
-(1, 'Admin', 9800000000, 'admin@gmail.com', '$2y$10$fsjrjrmYGS6pF4BNFpX/Guz5CZADJ.dDGwxfFr/9Pj0S64Gir5IC2');
+(1, 'Admin', 9800000000, 'admin@gmail.com', '$2y$10$QtQfLap.LlrNtwiQVy6HmurYqMicVS1eQYr7HbkaygSogytUhAWuW');
 
 -- --------------------------------------------------------
 
@@ -139,17 +139,22 @@ CREATE TABLE `order_data` (
   `quantity` int(11) NOT NULL,
   `invoiceNumber` varchar(15) NOT NULL,
   `referenceNumber` varchar(55) NOT NULL,
-  `status` text NOT NULL
+  `status` text NOT NULL,
+  `delieverStatus` varchar(55) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_data`
 --
 
-INSERT INTO `order_data` (`orderId`, `userId`, `legoId`, `title`, `price`, `quantity`, `invoiceNumber`, `referenceNumber`, `status`) VALUES
-(1, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 1, '5FBOWMT', 'REF12345', 'Paid'),
-(2, 1, 5, 'Endgame Final Battle', 99.99, 1, 'LAPUQ71', 'REF123', 'Paid'),
-(3, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 1, 'PVMMFLL', 'ref', 'Paid');
+INSERT INTO `order_data` (`orderId`, `userId`, `legoId`, `title`, `price`, `quantity`, `invoiceNumber`, `referenceNumber`, `status`, `delieverStatus`) VALUES
+(1, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 1, '5FBOWMT', 'REF12345', 'Paid', 'Pending'),
+(2, 1, 5, 'Endgame Final Battle', 99.99, 1, 'LAPUQ71', 'REF123', 'Paid', 'Pending'),
+(3, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 1, 'PVMMFLL', 'ref', 'Paid', 'Pending'),
+(4, 1, 1, 'LEGO® Minifigures Marvel Series 2', 5.55, 5, '0P39N1Z', 'asdasdasd', 'Paid', 'Pending'),
+(5, 1, 2, 'Endgame Final Battle', 99.99, 1, '5T688M0', 'dfsdf', 'Paid', 'Pending'),
+(6, 1, 2, 'Endgame Final Battle', 99.99, 1, 'PCXOF59', '', 'Pending', 'Pending'),
+(7, 1, 2, 'Endgame Final Battle', 99.99, 1, 'PCXOF59', '', 'Pending', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -265,19 +270,19 @@ ALTER TABLE `article_data`
 -- AUTO_INCREMENT for table `cart_data`
 --
 ALTER TABLE `cart_data`
-  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `lego_data`
 --
 ALTER TABLE `lego_data`
-  MODIFY `legoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `legoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_data`
 --
 ALTER TABLE `order_data`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `profile_data`
