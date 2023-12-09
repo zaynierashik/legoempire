@@ -25,7 +25,7 @@
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
-            if($result) {
+            if($result){
                 $storedPassword = $result['password'];
             
                 if(password_verify($oldPassword, $storedPassword)){
@@ -69,7 +69,7 @@
     </style>
 </head>
 <body>
-    
+
     <div class="update-content-container" id="update">
         <?php
             $sql = "SELECT * FROM admin_data WHERE adminId = :adminId";
@@ -79,26 +79,24 @@
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
         ?>
 
-        <div class="update-content-container" id="update">
-            <form action="" method="POST" class="form">
-                <div class="mb-3">
-                    <label for="password" class="form-label fw-bold">Old Password</label>
-                    <input type="text" class="form-control" name="oldPassword" id="password">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label fw-bold">New Password</label>
-                    <input type="text" class="form-control" name="newPassword" id="password">
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="form-label fw-bold">Confirm New Password</label>
-                    <input type="text" class="form-control" name="confirmPassword" id="password">
-                </div>
+        <form action="" method="POST" class="form">
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">Old Password</label>
+                <input type="text" class="form-control" name="oldPassword" id="password">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">New Password</label>
+                <input type="text" class="form-control" name="newPassword" id="password">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label fw-bold">Confirm New Password</label>
+                <input type="text" class="form-control" name="confirmPassword" id="password">
+            </div>
                                         
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn pt-1 px-5 fw-bold" name="change-submit" id="change-submit" value="Change Password" style="border: none; background-color: black; color: white;">Change Password</button>
-                </div>
-            </form>
-        </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn pt-1 px-5 fw-bold" name="change-submit" id="change-submit" value="Change Password" style="border: none; background-color: black; color: white;">Change Password</button>
+            </div>
+        </form>
     </div>
 
     <!-- Success Message -->

@@ -5,6 +5,16 @@
     if(!isset($_SESSION['adminname'])){
         header('location: adminauthentication.php');
     }
+
+    $adminCount = $conn->query("SELECT COUNT(adminId) FROM admin_data") -> fetchColumn();
+    $userCount = $conn->query("SELECT COUNT(userId) FROM user_data") -> fetchColumn();
+    $legoCount = $conn->query("SELECT COUNT(legoId) FROM lego_data") -> fetchColumn();
+    $orderCount = $conn->query("SELECT COUNT(orderId) FROM order_data") -> fetchColumn();
+    $delieverCount = $conn->query("SELECT COUNT(delieverStatus) FROM order_data WHERE delieverStatus='Delievered'") -> fetchColumn();
+    $pendingCount = $conn->query("SELECT COUNT(delieverStatus) FROM order_data WHERE delieverStatus='Pending'") -> fetchColumn();
+    $earningCount = $conn->query("SELECT SUM(price) FROM order_data")->fetchColumn();
+
+    $formattedEarning = number_format($earningCount, 2);
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +103,7 @@
                                                             <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-user-tie" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Admins</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $adminCount ?></span> <br> Admins</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,7 +117,7 @@
                                                             <div class="mt-2 pt-1 ps-1"><i class="fa-regular fa-circle-user" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Users</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $userCount ?></span> <br> Users</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,7 +131,7 @@
                                                             <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-cubes-stacked" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Products</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $legoCount ?></span> <br> Products</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,7 +145,7 @@
                                                             <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-dolly" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Orders</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $orderCount ?></span> <br> Orders</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -149,7 +159,7 @@
                                                             <div class="mt-2 ps-1"><i class="fa-solid fa-check" style="color: #000000; font-size: 3.85rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Delieverd</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $delieverCount ?></span> <br> Delieverd</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,21 +173,21 @@
                                                             <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-spinner" style="color: #000000; font-size: 3.7rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Pending</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $pendingCount ?></span> <br> Pending</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="card" style="width: 13.37rem; min-height: 19vh;">
+                                            <div class="card" style="min-width: 13.37rem; min-height: 19vh;">
                                                 <div class="card-body">
                                                     <div class="row pt-3">
                                                         <div class="col">
-                                                            <div class="mt-2 pt-1 ps-1"><i class="fa-solid fa-sack-dollar" style="color: #000000; font-size: 3.5rem"></i></div>
+                                                            <div class="mt-2 pt-1 text-center"><i class="fa-solid fa-sack-dollar" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">7</span> <br> Earnings</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $formattedEarning ?></span> <br> Earnings</div>
                                                         </div>
                                                     </div>
                                                 </div>

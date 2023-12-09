@@ -54,7 +54,6 @@
     </style>
 </head>
 <body>
-    
     <div class="update-content-container" id="update">
         <?php
             $sql = "SELECT * FROM admin_data WHERE adminId = :adminId";
@@ -124,84 +123,6 @@
     <script>
         <?php
             if(isset($update) && $update === 0){
-                echo 'document.addEventListener("DOMContentLoaded", function(){
-                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Update Error";
-                    document.getElementById("errorToastBody").innerHTML = "Fill up all the fields.";
-                    errorToast.show();
-                });';
-            }
-        ?>
-    </script>
-
-    <script>
-        <?php
-            if(isset($change) && $change === 0){
-                echo 'document.addEventListener("DOMContentLoaded", function(){
-                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
-                    document.getElementById("successToastHead").innerHTML = "Change Successful";
-                    document.getElementById("successToastBody").innerHTML = "Password has been changed.";
-                    successToast.show();
-                });';
-            }
-        ?>
-    </script>
-
-    <script>
-        <?php
-            if(isset($change) && $change === 1){
-                echo 'document.addEventListener("DOMContentLoaded", function(){
-                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Change Error";
-                    document.getElementById("errorToastBody").innerHTML = "Old password does not match.";
-                    errorToast.show();
-                });';
-            }
-        ?>
-    </script>
-
-    <script>
-        <?php
-            if(isset($change) && $change === 2){
-                echo 'document.addEventListener("DOMContentLoaded", function(){
-                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Change Error";
-                    document.getElementById("errorToastBody").innerHTML = "New password and confirm password does not match.";
-                    errorToast.show();
-                });';
-            }
-        ?>
-    </script>
-
-    <script>
-        <?php
-            if(isset($change) && $change === 3){
-                echo 'document.addEventListener("DOMContentLoaded", function(){
-                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Change Error";
-                    document.getElementById("errorToastBody").innerHTML = "Fill up all the fields.";
-                    errorToast.show();
-                });';
-            }
-        ?>
-    </script>
-
-    <script>
-        <?php
-            if(isset($billing) && $billing === 1){
-                echo 'document.addEventListener("DOMContentLoaded", function(){
-                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
-                    document.getElementById("successToastHead").innerHTML = "Change Successful";
-                    document.getElementById("successToastBody").innerHTML = "Billing address has been changed.";
-                    successToast.show();
-                });';
-            }
-        ?>
-    </script>
-
-    <script>
-        <?php
-            if(isset($billing) && $billing === 0){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
                     document.getElementById("errorToastHead").innerHTML = "Update Error";
