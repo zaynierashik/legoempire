@@ -64,11 +64,26 @@
     <!-- Details Edit Form -->
 
     <div class="product-edit-container">
+        <?php
+            if(isset($_GET['itemNumber'])){
+                $itemNumber = $_GET['itemNumber'];
+
+                $sql = "SELECT * FROM lego_data WHERE itemNumber=:itemNumber";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':itemNumber', $itemNumber);
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            if(count($result)>0){
+                $i=0;
+                foreach($result as $row){
+        ?>
+
         <form action="" method="POST" class="form">
             <div class="row">
                 <div class="col-md-2">
                     <div class="input-wrapper">
-                        <input type="number" class="form-control mb-3" name="itemNumber" id="itemNumber" placeholder="Item Number" required>
+                        <input type="number" class="form-control mb-3" name="itemNumber" id="itemNumber" placeholder="Item Number" value="<?php echo $result['itemNumber'] ?>" required>
                     </div>
                 </div>
                 <div class="col-md-3 ps-0">
@@ -171,6 +186,12 @@
                 <button type="submit" class="btn pt-1" name="update-product" id="update-product" value="Update" style="border: none; background-color: black; color: white;">Update Product</button>
             </div>
         </form>
+
+        <?php
+                $i++;
+                }
+            }
+            ?>
     </div>
 
     <!-- Product Insertion Success Message -->
