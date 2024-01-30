@@ -77,115 +77,114 @@
 </head>
 <body>
     
-    <div class="product-register-container">
-            <form action="" method="POST" class="form">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="input-wrapper">
-                            <input type="number" class="form-control mb-3" name="itemNumber" id="itemNumber" placeholder="Item Number" required>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ps-0">
-                        <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="category" id="category" placeholder="Category" required>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="title" id="title" placeholder="Product Name" required>
-                        </div>
+    <div class="product-edit-container">
+        <form action="" method="POST" class="form">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="itemNumber" id="itemNumber" placeholder="Item Number" required>
                     </div>
                 </div>
+                <div class="col-md-3 ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="category" id="category" placeholder="Category" required>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="title" id="title" placeholder="Product Name" required>
+                    </div>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="input-wrapper">
-                            <input type="number" class="form-control mb-3" name="price" id="price" placeholder="Price" required>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <input type="number" class="form-control mb-3" name="age" id="age" placeholder="Appropiate Age" required>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <input type="number" class="form-control mb-3" name="pieces" id="pieces" placeholder="Lego Pieces" required>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <input type="number" class="form-control mb-3" name="points" id="points" placeholder="Lego Points" required>
-                        </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="price" id="price" placeholder="Price" required>
                     </div>
                 </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="age" id="age" placeholder="Appropiate Age" required>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="pieces" id="pieces" placeholder="Lego Pieces" required>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="points" id="points" placeholder="Lego Points" required>
+                    </div>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="input-wrapper">
-                            <label class="fw-bold" for="mainimage">Main Image</label>
-                            <input type="file" class="form-control mb-3" id="mainimage" name="mainimage" accept="image/png, image/jpeg" required/>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <label class="fw-bold" for="secondaryimage">Secondary Image</label>
-                            <input type="file" class="form-control mb-3" id="secondaryimage" name="secondaryimage" accept="image/png, image/jpeg" required/>
-                        </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-wrapper">
+                        <label class="fw-bold" for="mainimage">Main Image</label>
+                        <input type="file" class="form-control mb-3" id="mainimage" name="mainimage" accept="image/png, image/jpeg" required/>
                     </div>
                 </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <label class="fw-bold" for="secondaryimage">Secondary Image</label>
+                        <input type="file" class="form-control mb-3" id="secondaryimage" name="secondaryimage" accept="image/png, image/jpeg" required/>
+                    </div>
+                </div>
+            </div>
                 
-                <div class="input-wrapper">
-                    <textarea class="form-control mb-3" name="specifications" id="specifications" rows="3" placeholder="Specifications" required></textarea>
-                </div>
-                <div class="input-wrapper">
-                    <textarea class="form-control mb-3" name="specificationspoint" id="specificationspoint" rows="5" placeholder="Specifications Point" required></textarea>
-                </div>
+            <div class="input-wrapper">
+                <textarea class="form-control mb-3" name="specifications" id="specifications" rows="3" placeholder="Specifications" required></textarea>
+            </div>
+            <div class="input-wrapper">
+                <textarea class="form-control mb-3" name="specificationspoint" id="specificationspoint" rows="5" placeholder="Specifications Point" required></textarea>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="input-wrapper">
-                            <input type="file" class="form-control" id="imageone" name="imageone" accept="image/png, image/jpeg" required/>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="titleone" id="titleone" placeholder="Image 1 Title" required>
-                        </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-wrapper">
+                        <input type="file" class="form-control" id="imageone" name="imageone" accept="image/png, image/jpeg" required/>
                     </div>
                 </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="titleone" id="titleone" placeholder="Image 1 Title" required>
+                    </div>
+                </div>
+            </div>
                 
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="input-wrapper">
-                            <input type="file" class="form-control" id="imagetwo" name="imagetwo" accept="image/png, image/jpeg" required/>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="titletwo" id="titletwo" placeholder="Image 2 Title" required>
-                        </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-wrapper">
+                        <input type="file" class="form-control" id="imagetwo" name="imagetwo" accept="image/png, image/jpeg" required/>
                     </div>
                 </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="titletwo" id="titletwo" placeholder="Image 2 Title" required>
+                    </div>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="input-wrapper">
-                            <input type="file" class="form-control" id="imagethree" name="imagethree" accept="image/png, image/jpeg" required/>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <div class="input-wrapper">
-                            <input type="text" class="form-control mb-3" name="titlethree" id="titlethree" placeholder="Image 3 Title" required>
-                        </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-wrapper">
+                        <input type="file" class="form-control" id="imagethree" name="imagethree" accept="image/png, image/jpeg" required/>
                     </div>
                 </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="titlethree" id="titlethree" placeholder="Image 3 Title" required>
+                    </div>
+                </div>
+            </div>
 
-                <div class="d-grid">
-                    <button type="submit" class="btn pt-1" name="update-product" id="update-product" value="Register" style="border: none; background-color: black; color: white;">Save</button>
-                </div>
-            </form>
-        </div>
+            <div class="d-grid">
+                <button type="submit" class="btn pt-1" name="update-product" id="update-product" value="Register" style="border: none; background-color: black; color: white;">Save</button>
+            </div>
+        </form>
     </div>
 
     <!-- Product Insertion Success Message -->

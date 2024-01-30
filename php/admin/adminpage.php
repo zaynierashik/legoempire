@@ -187,7 +187,7 @@
                                                             <div class="mt-2 pt-1 text-center"><i class="fa-solid fa-sack-dollar" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;"><?php echo $formattedEarning ?></span> <br> Earnings</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;">$ <?php echo $formattedEarning ?></span> <br> Earnings</div>
                                                         </div>
                                                     </div>
                                                 </div>

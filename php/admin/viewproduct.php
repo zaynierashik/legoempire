@@ -15,19 +15,11 @@
         $itemNumber = $_POST['itemNumber'];
         $specifications = $_POST['specifications'];
         $specificationspoint = $_POST['specificationspoint'];
-        $titleone = $_POST['titleone'];
-        $titletwo = $_POST['titletwo'];
-        $titlethree = $_POST['titlethree'];
-        $mainimage = $_POST['mainimage'];
-        $secondaryimage = $_POST['secondaryimage'];
-        $imageone = $_POST['imageone'];
-        $imagetwo = $_POST['imagetwo'];
-        $imagethree = $_POST['imagethree'];
 
-        if(empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint']) || empty($_POST['titleone']) || empty($_POST['titletwo']) || empty($_POST['titlethree']) || empty($_POST['mainimage']) || empty($_POST['secondaryimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['imagethree'])){
+        if(empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint'])){
             $success = 0;
         }else{
-            $sql = "UPDATE lego_data SET title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint', titleone = '$titleone', titletwo = '$titletwo', titlethree = '$titlethree', mainimage = '$mainimage', secondaryimage = '$secondaryimage', imageone = '$imageone', imagetwo = '$imagetwo', imagethree = '$imagethree' WHERE itemNumber = '$itemNumber'";
+            $sql = "UPDATE lego_data SET title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint'";
             $stmt = $conn->prepare($sql);
             $stmt ->bindParam(':itemNumber', $itemNumber);
             $stmt ->bindParam(':title', $title);
@@ -38,14 +30,6 @@
             $stmt ->bindParam(':points', $points);
             $stmt ->bindParam(':specifications', $specifications);
             $stmt ->bindParam(':specificationspoint', $specificationspoint);
-            $stmt ->bindParam(':titleone', $titleone);
-            $stmt ->bindParam(':titletwo', $titletwo);
-            $stmt ->bindParam(':titlethree', $titlethree);
-            $stmt ->bindParam(':mainimage', $mainimage);
-            $stmt ->bindParam(':secondaryimage', $secondaryimage);
-            $stmt ->bindParam(':imageone', $imageone);
-            $stmt ->bindParam(':imagetwo', $imagetwo);
-            $stmt ->bindParam(':imagethree', $imagethree);
             
             if($stmt->execute()){
                 $success = 1;
@@ -77,30 +61,116 @@
 </head>
 <body>
 
-    <div class="container px-0">
-            <div class="row row-gap-2">
-                <?php
-                    $sql = "SELECT * FROM lego_data ORDER BY RAND()";
-                    $stmt = $conn->query($sql);
-                    if($stmt->rowCount() > 0){
-                        while($row = $stmt->fetch()){
-                            echo '<div class="col">
-                            <div class="card" style="width: 13.37rem; min-height: 31vh">
-                                <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                    <img src="../../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
-                                </a>
-                                    
-                                    </div>
-                                </div>
-                                </div>';
-                        }
-                    }else{
-                        echo "<div class='container'><h5 class='fw-bold'>No articles found.</h5></div>";
-                    }
-                ?>
+    <!-- Details Edit Form -->
+
+    <div class="product-edit-container">
+        <form action="" method="POST" class="form">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="itemNumber" id="itemNumber" placeholder="Item Number" required>
+                    </div>
+                </div>
+                <div class="col-md-3 ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="category" id="category" placeholder="Category" required>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="title" id="title" placeholder="Product Name" required>
+                    </div>
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="price" id="price" placeholder="Price" required>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="age" id="age" placeholder="Appropiate Age" required>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="pieces" id="pieces" placeholder="Lego Pieces" required>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control mb-3" name="points" id="points" placeholder="Lego Points" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="input-wrapper">
+                        <label class="fw-bold" for="mainimage">Main Image</label>
+                        <input type="file" class="form-control mb-3" id="mainimage" name="mainimage" accept="image/png, image/jpeg" required/>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <label class="fw-bold" for="secondaryimage">Secondary Image</label>
+                        <input type="file" class="form-control mb-3" id="secondaryimage" name="secondaryimage" accept="image/png, image/jpeg" required/>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="input-wrapper">
+                <textarea class="form-control mb-3" name="specifications" id="specifications" rows="3" placeholder="Specifications" required></textarea>
+            </div>
+            <div class="input-wrapper">
+                <textarea class="form-control mb-3" name="specificationspoint" id="specificationspoint" rows="5" placeholder="Specifications Point" required></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-wrapper">
+                        <input type="file" class="form-control" id="imageone" name="imageone" accept="image/png, image/jpeg" required/>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="titleone" id="titleone" placeholder="Image 1 Title" required>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-wrapper">
+                        <input type="file" class="form-control" id="imagetwo" name="imagetwo" accept="image/png, image/jpeg" required/>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="titletwo" id="titletwo" placeholder="Image 2 Title" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-wrapper">
+                        <input type="file" class="form-control" id="imagethree" name="imagethree" accept="image/png, image/jpeg" required/>
+                    </div>
+                </div>
+                <div class="col ps-0">
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control mb-3" name="titlethree" id="titlethree" placeholder="Image 3 Title" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn pt-1" name="update-product" id="update-product" value="Update" style="border: none; background-color: black; color: white;">Update Product</button>
+            </div>
+        </form>
     </div>
 
     <!-- Product Insertion Success Message -->
