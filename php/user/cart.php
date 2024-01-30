@@ -27,11 +27,11 @@
         exit();
     }
 
-    if (isset($_POST['update-cart'])) {
-        if (isset($_POST['quantity']) && is_array($_POST['quantity'])) {
+    if(isset($_POST['update-cart'])){
+        if(isset($_POST['quantity']) && is_array($_POST['quantity'])){
             $quantities = $_POST['quantity'];
     
-            foreach ($quantities as $legoId => $newQuantity) {
+            foreach($quantities as $legoId => $newQuantity){
                 $legoId = intval($legoId);
                 $newQuantity = intval($newQuantity);
     
