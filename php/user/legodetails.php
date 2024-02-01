@@ -33,6 +33,39 @@
             echo "<script>alert('Item added to cart!')</script>";
         }
     }
+
+    if(isset($_POST['rating-submit'])){
+        $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
+        $legoId = $_POST['legoId'];
+        $rating = $_POST['rating'];
+    
+        // Check if the user has already rated
+        $checkSql = "SELECT * FROM lego_rating WHERE legoId = :legoId AND userId = :userId";
+        $checkStmt = $conn->prepare($checkSql);
+        $checkStmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+        $checkStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $checkStmt->execute();
+    
+        if($checkStmt->rowCount() > 0){
+            echo "<script>alert('You have already rated this product!')</script>";
+        }else{
+            $insertSql = "INSERT INTO lego_rating (legoId, userId, rating) VALUES (:legoId, :userId, :rating)";
+            $insertStmt = $conn->prepare($insertSql);
+            $insertStmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+            $insertStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $insertStmt->bindParam(':rating', $rating, PDO::PARAM_INT);
+            $insertStmt->execute();
+    
+            echo "<script>alert('Rating submitted successfully!')</script>";
+        }
+    }
+
+    $averageRatingSql = "SELECT AVG(rating) as avgRating FROM lego_rating WHERE legoId = :legoId";
+    $averageRatingStmt = $conn->prepare($averageRatingSql);
+    $averageRatingStmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+    $averageRatingStmt->execute();
+
+    $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +84,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../../css/user.css">
+
+    <style>
+        .stars{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .star{
+            font-size: 2rem;
+            color: black;
+            cursor: pointer;
+        }
+
+        .star.selected{
+            color: #ffbb00;
+        }
+
+        .star:hover{
+            color: #ffbb00;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -294,41 +350,46 @@
             </div>
         </div>
 
-        <div class="review-container rounded-bottom">
-            <a class="nav-link p-0 w-100" data-bs-toggle="collapse" href="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
-            <div class="row">
-                <div class="col">
-                    <h4>Customer Reviews</h4>
-                </div>
-                <div class="col-1 text-center d-flex justify-content-end pt-2">
-                    <i class="fa fa-plus" id="icon-toggle"></i>
-                </div>
-            </div>
-            </a>
+        <div class="rating-container rounded-bottom">
+            <h4><label for="rating">Product Review & Ratings</label></h4>
 
-            <div class="collapse" id="collapseReview">
-            <div class="card card-body border-0 p-0 pt-3">
-                <h5>Overall Rating</h5>
-                <div style="font-size: 0.87rem;">
-                    <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                    <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                </div>
-
-                <div class="rating-container mt-5">
-                    <h5>Your Review</h5>
-                    <form action="" method="POST" class="form">
-                        <div class="d-grid">
-                            <button type="submit" class="border-0 rounded rating-btn fw-bold text-center pb-2 pt-2" name="rating-submit" value="Submit">Submit</button>
+            <form action="" method="POST">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-wrapper">
+                            <textarea type="text" class="form-control mb-3" name="review" id="review" rows="3" placeholder="Review about the product . . ."></textarea>
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="col-md-4 pt-1">
+                        <div class="stars" id="stars">
+                            <i class="star fa fa-star" data-rating="1"></i>
+                            <i class="star fa fa-star" data-rating="2"></i>
+                            <i class="star fa fa-star" data-rating="3"></i>
+                            <i class="star fa fa-star" data-rating="4"></i>
+                            <i class="star fa fa-star" data-rating="5"></i>
+                            <input type="hidden" name="rating" id="rating" value="1">
+                            <input type="hidden" name="legoId" id="legoId" value="<?php echo $row['legoId'] ?>">
+                        </div>
+
+                        <button class="nav-link btn rating-btn mt-4 py-2 fw-bold w-100" type="submit" name="rating-submit" id="rating-submit">Submit</button>
+                    </div>
                 </div>
-            </div>
-            </div>
+            </form>
         </div>
     </div>
+
+    <!-- <div class="stars" id="average-stars" data-average-rating="<?php echo $averageRating; ?>">
+    <?php
+        $averageRatingRounded = round($averageRating);
+        for ($i = 1; $i <= 5; $i++) {
+            $selected = ($i <= $averageRatingRounded) ? 'selected' : '';
+            echo "<i class='star fa fa-star $selected'></i>";
+        }
+    ?>
+    </div> -->
+
+    <p>Average Rating: <?php echo number_format($averageRating, 1); ?>/5</p>
     
     <?php } ?>
 
@@ -400,6 +461,43 @@
         if( window.history.replaceState ){
             window.history.replaceState( null, null, window.location.href );
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const stars = document.querySelectorAll(".star");
+            const ratingInput = document.getElementById("rating");
+
+            stars.forEach(star => {
+                star.addEventListener("mouseenter", function(){
+                    const hoveredRating = this.getAttribute("data-rating");
+
+                    stars.forEach(s => {
+                        if(s.getAttribute("data-rating") <= hoveredRating){
+                            s.classList.add("hovered");
+                        }else{
+                            s.classList.remove("hovered");
+                        }
+                    });
+                });
+
+                star.addEventListener("mouseleave", function(){
+                    stars.forEach(s => s.classList.remove("hovered"));
+                });
+
+                star.addEventListener("click", function(){
+                    const selectedRating = this.getAttribute("data-rating");
+                    ratingInput.value = selectedRating;
+
+                    stars.forEach(s => s.classList.remove("hovered", "selected"));
+                    stars.forEach(s => {
+                        if(s.getAttribute("data-rating") <= selectedRating){
+                            s.classList.add("selected");
+                        }
+                    });
+                });
+            });
+        });
     </script>
     
     <script src="../../js/userscript.js"></script>

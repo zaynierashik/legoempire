@@ -79,12 +79,15 @@
         textarea{
             overflow: hidden;
         }
+
+        select{
+            height: 5.5vh;
+        }
     </style>
 </head>
 <body>
 
     <!-- Product Edit Form -->
-
     <div class="product-edit-container">
         <form action="" method="POST" class="form" onsubmit="return validateForm()" onkeydown="return handleEnterKey(event)">
             <div class="row">
@@ -167,13 +170,13 @@
     <!-- Product Update Success Message -->
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto" id="successToastHead"></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="successToastHead"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="successToastBody"></div>
         </div>
-        <div class="toast-body" id="successToastBody"></div>
-    </div>
     </div>
 
     <script>

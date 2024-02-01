@@ -21,16 +21,14 @@
         }else{
             $sql = "SELECT password FROM admin_data WHERE adminId = :adminId";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':adminId', $adminId);
-            $stmt->execute();
+            $stmt ->bindParam(':adminId', $adminId);
+            $stmt ->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
             if($result){
                 $storedPassword = $result['password'];
-            
                 if(password_verify($oldPassword, $storedPassword)){
                     $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            
                     $sql = "UPDATE admin_data SET password = :newPassword WHERE adminId = :adminId";
                     $stmt = $conn->prepare($sql);
                     $stmt ->bindParam(':adminId', $adminId);
@@ -102,25 +100,25 @@
     <!-- Success Message -->
 
     <div class="toast-container position-fixed bottom-0 start-0 p-3">
-    <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto" id="successToastHead"></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="successToastHead"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="successToastBody"></div>
         </div>
-        <div class="toast-body" id="successToastBody"></div>
-    </div>
     </div>
 
     <!-- Error Message -->
 
     <div class="toast-container position-fixed bottom-0 start-0 p-3">
-    <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto" id="errorToastHead"></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="errorToastHead"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="errorToastBody"></div>
         </div>
-        <div class="toast-body" id="errorToastBody"></div>
-    </div>
     </div>
 
     <script>
