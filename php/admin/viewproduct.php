@@ -5,7 +5,27 @@
         header('location: adminauthentication.php');
     }
 
+    if(isset($_POST['itemNumber'])){
+        $itemNumber = $_POST['itemNumber'];
+    }
+
+    $stmt = $conn->prepare("SELECT * FROM lego_data WHERE itemNumber = :itemNumber");
+    $stmt ->bindParam(':itemNumber', $itemNumber);
+    $stmt ->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $legoId = isset($value['legoId']) ? $value['legoId'] : '';
+    $title = isset($value['title']) ? $value['title'] : '';
+    $price = isset($value['price']) ? $value['price'] : '';
+    $category = isset($value['category']) ? $value['category'] : '';
+    $age = isset($value['age']) ? $value['age'] : '';
+    $pieces = isset($value['pieces']) ? $value['pieces'] : '';
+    $points = isset($value['points']) ? $value['points'] : '';
+    $specifications = isset($value['specifications']) ? $value['specifications'] : '';
+    $specificationspoint = isset($value['specificationspoint']) ? $value['specificationspoint'] : '';
+
     if(isset($_POST['update-product'])){
+        $legoId = $_POST['legoId'];
         $title = $_POST['title'];
         $price = $_POST['price'];
         $category = $_POST['category'];
@@ -16,18 +36,18 @@
         $specifications = $_POST['specifications'];
         $specificationspoint = $_POST['specificationspoint'];
 
-        if(empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint'])){
+        if(empty($_POST['legoId']) || empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint'])){
             $success = 0;
         }else{
-            $sql = "UPDATE lego_data SET title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint'";
-            $stmt = $conn->prepare($sql);
-            $stmt ->bindParam(':itemNumber', $itemNumber);
+            $stmt = $conn->prepare("UPDATE lego_data SET legoId = '$legoId', title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint'");
+            $stmt ->bindParam(':legoId', $legoId);
             $stmt ->bindParam(':title', $title);
             $stmt ->bindParam(':price', $price);
             $stmt ->bindParam(':category', $category);
             $stmt ->bindParam(':age', $age);
             $stmt ->bindParam(':pieces', $pieces);
             $stmt ->bindParam(':points', $points);
+            $stmt ->bindParam(':itemNumber', $itemNumber);
             $stmt ->bindParam(':specifications', $specifications);
             $stmt ->bindParam(':specificationspoint', $specificationspoint);
             
@@ -64,36 +84,32 @@
     <!-- Details Edit Form -->
 
     <div class="product-edit-container">
-        <?php
-            if(isset($_GET['itemNumber'])){
-                $itemNumber = $_GET['itemNumber'];
-
-                $sql = "SELECT * FROM lego_data WHERE itemNumber=:itemNumber";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':itemNumber', $itemNumber);
-                $stmt->execute();
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }
-            if(count($result)>0){
-                $i=0;
-                foreach($result as $row){
-        ?>
-
         <form action="" method="POST" class="form">
             <div class="row">
                 <div class="col-md-2">
-                    <div class="input-wrapper">
-                        <input type="number" class="form-control mb-3" name="itemNumber" id="itemNumber" placeholder="Item Number" value="<?php echo $result['itemNumber'] ?>" required>
-                    </div>
+                    <select class="form-select" name="itemNumber" id="itemNumber" style="font-size: 0.87rem;" onchange="this.form.submit()">
+                        <option value="">itemNumber</option>
+                        <?php
+                            $stmt = $conn->prepare("SELECT * FROM lego_data WHERE itemNumber = :itemNumber");
+                            $stmt ->bindParam(":itemNumber", $itemNumber);
+                            $stmt ->execute();
+                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($result as $row) {
+                                $selected = ($row['itemNumber'] == $itemNumber) ? "selected" : "";
+                                echo "<option value='".$row['itemNumber']."' ".$selected.">".$row['itemNumber']."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
                 <div class="col-md-3 ps-0">
                     <div class="input-wrapper">
-                        <input type="text" class="form-control mb-3" name="category" id="category" placeholder="Category" required>
+                        <input type="text" class="form-control mb-3" name="category" id="category" placeholder="Category" value="<?php echo $category ?>" required>
                     </div>
                 </div>
                 <div class="col ps-0">
                     <div class="input-wrapper">
-                        <input type="text" class="form-control mb-3" name="title" id="title" placeholder="Product Name" required>
+                        <input type="text" class="form-control mb-3" name="title" id="title" placeholder="Product Name" value="<?php echo $title ?>" required>
                     </div>
                 </div>
             </div>
@@ -186,12 +202,6 @@
                 <button type="submit" class="btn pt-1" name="update-product" id="update-product" value="Update" style="border: none; background-color: black; color: white;">Update Product</button>
             </div>
         </form>
-
-        <?php
-                $i++;
-                }
-            }
-            ?>
     </div>
 
     <!-- Product Insertion Success Message -->
