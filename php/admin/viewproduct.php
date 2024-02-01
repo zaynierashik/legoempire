@@ -34,26 +34,26 @@
         $itemNumber = $_POST['itemNumber'];
         $specifications = $_POST['specifications'];
         $specificationspoint = $_POST['specificationspoint'];
-
+    
         if(empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint'])){
             $success = 0;
         }else{
-            $stmt = $conn->prepare("UPDATE lego_data SET title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint'");
-            $stmt ->bindParam(':title', $title);
-            $stmt ->bindParam(':price', $price);
-            $stmt ->bindParam(':category', $category);
-            $stmt ->bindParam(':age', $age);
-            $stmt ->bindParam(':pieces', $pieces);
-            $stmt ->bindParam(':points', $points);
-            $stmt ->bindParam(':itemNumber', $itemNumber);
-            $stmt ->bindParam(':specifications', $specifications);
-            $stmt ->bindParam(':specificationspoint', $specificationspoint);
-            
+            $stmt = $conn->prepare("UPDATE lego_data SET title = :title, price = :price, category = :category, age = :age, pieces = :pieces, points = :points, specifications = :specifications, specificationspoint = :specificationspoint WHERE itemNumber = :itemNumber");
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':age', $age);
+            $stmt->bindParam(':pieces', $pieces);
+            $stmt->bindParam(':points', $points);
+            $stmt->bindParam(':itemNumber', $itemNumber);
+            $stmt->bindParam(':specifications', $specifications);
+            $stmt->bindParam(':specificationspoint', $specificationspoint);
+    
             if($stmt->execute()){
                 $success = 1;
             }
         }
-    }
+    }    
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +86,7 @@
     <!-- Product Edit Form -->
 
     <div class="product-edit-container">
-        <form action="" method="POST" class="form">
+        <form action="" method="POST" class="form" onsubmit="return validateForm()" onkeydown="return handleEnterKey(event)">
             <div class="row">
                 <div class="col-md-2">
                     <div class="input-wrapper">
@@ -164,7 +164,7 @@
         </form>
     </div>
 
-    <!-- Product Insertion Success Message -->
+    <!-- Product Update Success Message -->
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -181,8 +181,8 @@
             if(isset($success) && $success === 1){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
-                    document.getElementById("successToastHead").innerHTML = "Product Insertion Successful";
-                    document.getElementById("successToastBody").innerHTML = "The product has been added successfully.";
+                    document.getElementById("successToastHead").innerHTML = "Product Update Successful";
+                    document.getElementById("successToastBody").innerHTML = "The product has been updated successfully.";
                     successToast.show();
                 });';
             }
@@ -194,12 +194,25 @@
             if(isset($success) && $success === 0){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
-                    document.getElementById("successToastHead").innerHTML = "Product Insertion Error";
+                    document.getElementById("successToastHead").innerHTML = "Product Update Error";
                     document.getElementById("successToastBody").innerHTML = "Fill in the blanks.";
                     successToast.show();
                 });';
             }
         ?>
+    </script>
+
+    <script>
+        function validateForm(){
+            return true;
+        }
+
+        function handleEnterKey(event){
+            if(event.key === 'Enter'){
+                event.preventDefault();
+                return false;
+            }
+        }
     </script>
 
     <script>
