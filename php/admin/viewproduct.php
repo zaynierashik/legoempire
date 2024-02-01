@@ -14,18 +14,17 @@
     $stmt ->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $legoId = isset($value['legoId']) ? $value['legoId'] : '';
-    $title = isset($value['title']) ? $value['title'] : '';
-    $price = isset($value['price']) ? $value['price'] : '';
-    $category = isset($value['category']) ? $value['category'] : '';
-    $age = isset($value['age']) ? $value['age'] : '';
-    $pieces = isset($value['pieces']) ? $value['pieces'] : '';
-    $points = isset($value['points']) ? $value['points'] : '';
-    $specifications = isset($value['specifications']) ? $value['specifications'] : '';
-    $specificationspoint = isset($value['specificationspoint']) ? $value['specificationspoint'] : '';
+    $title = isset($result['title']) ? $result['title'] : '';
+    $price = isset($result['price']) ? $result['price'] : '';
+    $category = isset($result['category']) ? $result['category'] : '';
+    $age = isset($result['age']) ? $result['age'] : '';
+    $pieces = isset($result['pieces']) ? $result['pieces'] : '';
+    $points = isset($result['points']) ? $result['points'] : '';
+    $itemNumber = isset($result['itemNumber']) ? $result['itemNumber'] : '';
+    $specifications = isset($result['specifications']) ? $result['specifications'] : '';
+    $specificationspoint = isset($result['specificationspoint']) ? $result['specificationspoint'] : '';
 
     if(isset($_POST['update-product'])){
-        $legoId = $_POST['legoId'];
         $title = $_POST['title'];
         $price = $_POST['price'];
         $category = $_POST['category'];
@@ -36,11 +35,10 @@
         $specifications = $_POST['specifications'];
         $specificationspoint = $_POST['specificationspoint'];
 
-        if(empty($_POST['legoId']) || empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint'])){
+        if(empty($_POST['title']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['age']) || empty($_POST['pieces']) || empty($_POST['points']) || empty($_POST['itemNumber']) || empty($_POST['specifications']) || empty($_POST['specificationspoint'])){
             $success = 0;
         }else{
-            $stmt = $conn->prepare("UPDATE lego_data SET legoId = '$legoId', title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint'");
-            $stmt ->bindParam(':legoId', $legoId);
+            $stmt = $conn->prepare("UPDATE lego_data SET title = '$title', price = '$price', category = '$category', age = '$age', pieces = '$pieces', points = '$points', itemNumber = '$itemNumber', specifications = '$specifications', specificationspoint = '$specificationspoint'");
             $stmt ->bindParam(':title', $title);
             $stmt ->bindParam(':price', $price);
             $stmt ->bindParam(':category', $category);
@@ -77,39 +75,49 @@
         body{
             background-color: #f2f4f6;
         }
+
+        textarea{
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Details Edit Form -->
+    <!-- Product Edit Form -->
 
     <div class="product-edit-container">
         <form action="" method="POST" class="form">
             <div class="row">
                 <div class="col-md-2">
-                    <select class="form-select" name="itemNumber" id="itemNumber" style="font-size: 0.87rem;" onchange="this.form.submit()">
-                        <option value="">itemNumber</option>
-                        <?php
-                            $stmt = $conn->prepare("SELECT * FROM lego_data WHERE itemNumber = :itemNumber");
-                            $stmt ->bindParam(":itemNumber", $itemNumber);
-                            $stmt ->execute();
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    <div class="input-wrapper">
+                        <label class="fw-bold" for="mainimage">Item Number</label>
+                        <select class="form-select" name="itemNumber" id="itemNumber" onchange="this.form.submit()">
+                            <option value=""></option>
+                            <?php
+                                $stmt = $conn->prepare("SELECT DISTINCT itemNumber FROM lego_data ORDER BY itemNumber ASC");
+                                $stmt ->execute();
+                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                
+                                foreach ($result as $row) {
+                                    $selected = ($row['itemNumber'] == $itemNumber) ? "selected" : "";
+                                    echo "<option value='".$row['itemNumber']."' ".$selected.">".$row['itemNumber']."</option>";
+                                }
+                                ?>
+                        </select>
 
-                            foreach ($result as $row) {
-                                $selected = ($row['itemNumber'] == $itemNumber) ? "selected" : "";
-                                echo "<option value='".$row['itemNumber']."' ".$selected.">".$row['itemNumber']."</option>";
-                            }
-                        ?>
-                    </select>
+                        <!-- <input type="number" class="form-control" name="itemNumber" id="itemNumber" value="<?php echo $itemNumber ?>" onchange="this.form.submit()" required> -->
+                    </div>
                 </div>
                 <div class="col-md-3 ps-0">
                     <div class="input-wrapper">
-                        <input type="text" class="form-control mb-3" name="category" id="category" placeholder="Category" value="<?php echo $category ?>" required>
+                        <label class="fw-bold" for="mainimage">Category</label>
+                        <input type="text" class="form-control mb-3" name="category" id="category" value="<?php echo $category ?>" required>
                     </div>
                 </div>
                 <div class="col ps-0">
                     <div class="input-wrapper">
-                        <input type="text" class="form-control mb-3" name="title" id="title" placeholder="Product Name" value="<?php echo $title ?>" required>
+                        <label class="fw-bold" for="mainimage">Product Name</label>
+                        <input type="text" class="form-control mb-3" name="title" id="title" value="<?php echo $title ?>" required>
                     </div>
                 </div>
             </div>
@@ -117,85 +125,37 @@
             <div class="row">
                 <div class="col">
                     <div class="input-wrapper">
-                        <input type="number" class="form-control mb-3" name="price" id="price" placeholder="Price" required>
+                        <label class="fw-bold" for="mainimage">Price</label>
+                        <input type="number" class="form-control mb-3" name="price" id="price" value="<?php echo $price ?>" required>
                     </div>
                 </div>
                 <div class="col ps-0">
                     <div class="input-wrapper">
-                        <input type="number" class="form-control mb-3" name="age" id="age" placeholder="Appropiate Age" required>
+                        <label class="fw-bold" for="mainimage">Appropiate Age</label>
+                        <input type="number" class="form-control mb-3" name="age" id="age" value="<?php echo $age ?>" required>
                     </div>
                 </div>
                 <div class="col ps-0">
                     <div class="input-wrapper">
-                        <input type="number" class="form-control mb-3" name="pieces" id="pieces" placeholder="Lego Pieces" required>
+                        <label class="fw-bold" for="mainimage">Lego Pieces</label>
+                        <input type="number" class="form-control mb-3" name="pieces" id="pieces" value="<?php echo $pieces ?>" required>
                     </div>
                 </div>
                 <div class="col ps-0">
                     <div class="input-wrapper">
-                        <input type="number" class="form-control mb-3" name="points" id="points" placeholder="Lego Points" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="input-wrapper">
-                        <label class="fw-bold" for="mainimage">Main Image</label>
-                        <input type="file" class="form-control mb-3" id="mainimage" name="mainimage" accept="image/png, image/jpeg" required/>
-                    </div>
-                </div>
-                <div class="col ps-0">
-                    <div class="input-wrapper">
-                        <label class="fw-bold" for="secondaryimage">Secondary Image</label>
-                        <input type="file" class="form-control mb-3" id="secondaryimage" name="secondaryimage" accept="image/png, image/jpeg" required/>
+                        <label class="fw-bold" for="mainimage">Lego Points</label>
+                        <input type="number" class="form-control mb-3" name="points" id="points" value="<?php echo $points ?>" required>
                     </div>
                 </div>
             </div>
                 
             <div class="input-wrapper">
-                <textarea class="form-control mb-3" name="specifications" id="specifications" rows="3" placeholder="Specifications" required></textarea>
+                <label class="fw-bold" for="mainimage">Specifications</label>
+                <textarea class="form-control mb-3" name="specifications" id="specifications" rows="7" required><?php echo $specifications ?></textarea>
             </div>
             <div class="input-wrapper">
-                <textarea class="form-control mb-3" name="specificationspoint" id="specificationspoint" rows="5" placeholder="Specifications Point" required></textarea>
-            </div>
-
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="input-wrapper">
-                        <input type="file" class="form-control" id="imageone" name="imageone" accept="image/png, image/jpeg" required/>
-                    </div>
-                </div>
-                <div class="col ps-0">
-                    <div class="input-wrapper">
-                        <input type="text" class="form-control mb-3" name="titleone" id="titleone" placeholder="Image 1 Title" required>
-                    </div>
-                </div>
-            </div>
-                
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="input-wrapper">
-                        <input type="file" class="form-control" id="imagetwo" name="imagetwo" accept="image/png, image/jpeg" required/>
-                    </div>
-                </div>
-                <div class="col ps-0">
-                    <div class="input-wrapper">
-                        <input type="text" class="form-control mb-3" name="titletwo" id="titletwo" placeholder="Image 2 Title" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="input-wrapper">
-                        <input type="file" class="form-control" id="imagethree" name="imagethree" accept="image/png, image/jpeg" required/>
-                    </div>
-                </div>
-                <div class="col ps-0">
-                    <div class="input-wrapper">
-                        <input type="text" class="form-control mb-3" name="titlethree" id="titlethree" placeholder="Image 3 Title" required>
-                    </div>
-                </div>
+                <label class="fw-bold" for="mainimage">Specifications Point</label>
+                <textarea class="form-control mb-3" name="specificationspoint" id="specificationspoint" rows="7" required><?php echo $specificationspoint ?></textarea>
             </div>
 
             <div class="d-grid">
