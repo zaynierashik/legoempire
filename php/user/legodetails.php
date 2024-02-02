@@ -7,63 +7,73 @@
     }
 
     if(isset($_POST['order-submit'])){
-        $userId = $_SESSION['userId'];
-        $legoId = $_POST['legoId'];
-        $title = $_POST['title'];
-        $price = $_POST['price'];
-        $quantity = $_POST['quantity'];
-
-        $sql = "SELECT legoId FROM cart_data WHERE userId = :userId AND legoId = :legoId";
-        $stmt = $conn->prepare($sql);
-        $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-        $stmt ->execute();
-
-        if($stmt->rowCount() > 0){
-            echo "<script>alert('Product already exists in the cart!')</script>";
+        if(!isset($_SESSION['userId'])){
+            $success = 2;
         }else{
-            $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, title, price, quantity) VALUES (:userId, :legoId, :title, :price, :quantity)");
+            $userId = $_SESSION['userId'];
+            $legoId = $_POST['legoId'];
+            $title = $_POST['title'];
+            $price = $_POST['price'];
+            $quantity = $_POST['quantity'];
+
+            $sql = "SELECT legoId FROM cart_data WHERE userId = :userId AND legoId = :legoId";
+            $stmt = $conn->prepare($sql);
             $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
             $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-            $stmt ->bindParam(':title', $title, PDO::PARAM_STR);
-            $stmt ->bindParam(':price', $price, PDO::PARAM_STR);
-            $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $stmt ->execute();
 
-            echo "<script>alert('Item added to cart!')</script>";
+            if($stmt->rowCount() > 0){
+                $success = 0;
+            }else{
+                $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, title, price, quantity) VALUES (:userId, :legoId, :title, :price, :quantity)");
+                $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                $stmt ->bindParam(':title', $title, PDO::PARAM_STR);
+                $stmt ->bindParam(':price', $price, PDO::PARAM_STR);
+                $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                
+                if($stmt->execute()){
+                    $success = 1;
+                }
+            }
         }
     }
 
     if(isset($_POST['rating-submit'])){
-        $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
-        $legoId = $_POST['legoId'];
-        $rating = $_POST['rating'];
-    
-        // Check if the user has already rated
-        $checkSql = "SELECT * FROM lego_rating WHERE legoId = :legoId AND userId = :userId";
-        $checkStmt = $conn->prepare($checkSql);
-        $checkStmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-        $checkStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $checkStmt->execute();
-    
-        if($checkStmt->rowCount() > 0){
-            echo "<script>alert('You have already rated this product!')</script>";
+        if(!isset($_SESSION['userId'])){
+            $error = 2;
         }else{
-            $insertSql = "INSERT INTO lego_rating (legoId, userId, rating) VALUES (:legoId, :userId, :rating)";
-            $insertStmt = $conn->prepare($insertSql);
-            $insertStmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-            $insertStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-            $insertStmt->bindParam(':rating', $rating, PDO::PARAM_INT);
-            $insertStmt->execute();
+            $userId = $_SESSION['userId'];
+            $legoId = $_POST['legoId'];
+            $rating = $_POST['rating'];
+            $review = $_POST['review'];
     
-            echo "<script>alert('Rating submitted successfully!')</script>";
+            $checkSql = "SELECT * FROM lego_rating WHERE legoId = :legoId AND userId = :userId";
+            $checkStmt = $conn->prepare($checkSql);
+            $checkStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+            $checkStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $checkStmt ->execute();
+        
+            if($checkStmt->rowCount() > 0){
+                $error = 0;
+            }else{
+                $insertStmt = $conn->prepare("INSERT INTO lego_rating (legoId, userId, rating, review) VALUES (:legoId, :userId, :rating, :review)");
+                $insertStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                $insertStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                $insertStmt ->bindParam(':rating', $rating, PDO::PARAM_INT);
+                $insertStmt ->bindParam(':review', $review, PDO::PARAM_STR);
+
+                if($insertStmt->execute()){
+                    $error = 1;
+                }
+            }
         }
     }
 
     $averageRatingSql = "SELECT AVG(rating) as avgRating FROM lego_rating WHERE legoId = :legoId";
     $averageRatingStmt = $conn->prepare($averageRatingSql);
-    $averageRatingStmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-    $averageRatingStmt->execute();
+    $averageRatingStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+    $averageRatingStmt ->execute();
 
     $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
 ?>
@@ -93,10 +103,10 @@
             gap: 15px;
         }
 
-        .star{
-            font-size: 2rem;
-            color: black;
-            cursor: pointer;
+        .averageRating{
+            display: flex;
+            font-size: 0.87rem;
+            gap: 3.4px;
         }
 
         .star.selected{
@@ -109,6 +119,7 @@
     </style>
 </head>
 <body>
+
     <div class="container">
     <?php
         if(isset($_SESSION['username'])){
@@ -167,8 +178,8 @@
     <?php
         $sql = "SELECT * FROM lego_data WHERE legoId = :legoId";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+        $stmt ->execute();
 
         if($stmt->rowCount() > 0){
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -214,13 +225,20 @@
                         <input type="hidden" name="legoId" id="legoId" value="<?php echo $row['legoId'] ?>">
                         <input type="hidden" name="title" id="title" value="<?php echo $row['title'] ?>">
                         <h5 class="fw-bold pt-2" name="title"><?php echo $row['title'] ?></h5>
-                        <div style="font-size: 0.87rem;">
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+
+                        <div class="averageRating" id="average-stars" data-average-rating="<?php echo $averageRating; ?>">
+                            <?php
+                                $averageRatingRounded = round($averageRating);
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if($i <= $averageRatingRounded){
+                                        echo '<i class="fa-solid fa-star" style="color: #FFB234;"></i>';
+                                    } else {    
+                                        echo '<i class="fa-regular fa-star" style="color: #FFB234;"></i>';
+                                    }
+                                }
+                            ?>
                         </div>
+                        
                         <input type="hidden" name="price" id="price" value="<?php echo $row['price'] ?>">
                         <h5 class="fw-bold mt-3" name="price">$<?php echo $row['price'] ?></h5>
                         <p class="fw-bold text-success"><?php echo $row['stock'] ?></p>
@@ -279,12 +297,12 @@
                     <h4>Features</h4>
                 </div>
                 <div class="col-1 text-center d-flex justify-content-end pt-2">
-                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-minus"></i>
                 </div>
             </div>
             </a>
 
-            <div class="collapse" id="collapseFeature">
+            <div class="collapse show" id="collapseFeature">
             <div class="card card-body border-0 p-0 pt-3">
                 <div class="row text-center">
                     <div class="col">
@@ -354,7 +372,7 @@
             <h4><label for="rating">Product Review & Ratings</label></h4>
 
             <form action="" method="POST">
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col">
                         <div class="input-wrapper">
                             <textarea type="text" class="form-control mb-3" name="review" id="review" rows="3" placeholder="Review about the product . . ."></textarea>
@@ -368,6 +386,7 @@
                             <i class="star fa fa-star" data-rating="3"></i>
                             <i class="star fa fa-star" data-rating="4"></i>
                             <i class="star fa fa-star" data-rating="5"></i>
+                            
                             <input type="hidden" name="rating" id="rating" value="1">
                             <input type="hidden" name="legoId" id="legoId" value="<?php echo $row['legoId'] ?>">
                         </div>
@@ -378,18 +397,6 @@
             </form>
         </div>
     </div>
-
-    <!-- <div class="stars" id="average-stars" data-average-rating="<?php echo $averageRating; ?>">
-    <?php
-        $averageRatingRounded = round($averageRating);
-        for ($i = 1; $i <= 5; $i++) {
-            $selected = ($i <= $averageRatingRounded) ? 'selected' : '';
-            echo "<i class='star fa fa-star $selected'></i>";
-        }
-    ?>
-    </div> -->
-
-    <p>Average Rating: <?php echo number_format($averageRating, 1); ?>/5</p>
     
     <?php } ?>
 
@@ -418,6 +425,88 @@
             <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
         </a>
     </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="userSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="successToastHead"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="successToastBody"></div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="userErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="errorToastHead"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="errorToastBody"></div>
+        </div>
+    </div>
+
+    <script>
+        <?php
+            if(isset($success) && $success === 0){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Product Already Exists";
+                    document.getElementById("successToastBody").innerHTML = "The product is already in the cart.";
+                    successToast.show();
+                });';
+            }
+
+            if(isset($success) && $success === 1){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Product Added";
+                    document.getElementById("successToastBody").innerHTML = "The product has been added to the cart.";
+                    successToast.show();
+                });';
+            }
+
+            if(isset($success) && $success === 2){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Login First";
+                    document.getElementById("successToastBody").innerHTML = "You should login first to add a product.";
+                    successToast.show();
+                });';
+            }
+        ?>
+    </script>
+
+    <script>
+        <?php
+            if(isset($error) && $error === 0){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Already Rated";
+                    document.getElementById("errorToastBody").innerHTML = "You have already rated this product.";
+                    errorToast.show();
+                });';
+            }
+
+            if(isset($error) && $error === 1){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Product Rated";
+                    document.getElementById("errorToastBody").innerHTML = "The product has been rated.";
+                    errorToast.show();
+                });';
+            }
+
+            if(isset($error) && $error === 2){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Login First";
+                    document.getElementById("errorToastBody").innerHTML = "You should login first to rate a product.";
+                    errorToast.show();
+                });';
+            }
+        ?>
+    </script>
 
     <script>
         function increaseValue(){

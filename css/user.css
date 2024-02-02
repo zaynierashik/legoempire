@@ -104,6 +104,7 @@
 
 .rating-container .star{
     font-size: 1.15rem;
+    cursor: pointer;
 }
 
 .rating-btn{
