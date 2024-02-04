@@ -254,6 +254,7 @@
                         
                         <input type="hidden" name="price" id="price" value="<?php echo $row['price'] ?>">
                         <h5 class="fw-bold mt-3" name="price">$<?php echo $row['price'] ?></h5>
+                        
                         <?php 
                             if($row['stock'] > 0){
                                 echo "<p class='fw-bold text-success'>Available Now</p>";
@@ -265,7 +266,7 @@
 
                     <div class="quantity-btn rounded">
                         <div class="value-button rounded-start" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="fa fa-minus"></i></div>
-                        <input class="number-field fw-bold" type="number" name="quantity" id="number" value="1">
+                        <input class="number-field fw-bold" type="number" name="quantity" id="number" value="1" readonly>
                         <div class="value-button rounded-end" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
                     </div>
 
