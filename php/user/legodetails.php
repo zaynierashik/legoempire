@@ -6,76 +6,89 @@
         $legoId = $_GET['legoId'];
     }
 
-    if(isset($_POST['order-submit'])){
-        if(!isset($_SESSION['userId'])){
-            $success = 2;
-        }else{
-            $userId = $_SESSION['userId'];
-            $legoId = $_POST['legoId'];
-            $title = $_POST['title'];
-            $price = $_POST['price'];
-            $quantity = $_POST['quantity'];
+    $stmt = $conn->prepare("SELECT * FROM lego_data WHERE legoId = :legoId");
+    $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+    $stmt ->execute();
 
-            $sql = "SELECT legoId FROM cart_data WHERE userId = :userId AND legoId = :legoId";
-            $stmt = $conn->prepare($sql);
-            $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-            $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-            $stmt ->execute();
+    if($stmt->rowCount() > 0){
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if($stmt->rowCount() > 0){
-                $success = 0;
+        if(isset($_POST['order-submit'])){
+            if(!isset($_SESSION['userId'])){
+                $success = 2;
             }else{
-                $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, title, price, quantity) VALUES (:userId, :legoId, :title, :price, :quantity)");
-                $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-                $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-                $stmt ->bindParam(':title', $title, PDO::PARAM_STR);
-                $stmt ->bindParam(':price', $price, PDO::PARAM_STR);
-                $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                $userId = $_SESSION['userId'];
+                $legoId = $_POST['legoId'];
+                $title = $_POST['title'];
+                $price = $_POST['price'];
+                $quantity = $_POST['quantity'];
+
+                $quantityInStock = $row['stock'];
                 
-                if($stmt->execute()){
-                    $success = 1;
+                if($quantity <= $quantityInStock){
+                    $stmt = $conn->prepare("SELECT legoId FROM cart_data WHERE userId = :userId AND legoId = :legoId");
+                    $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                    $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                    $stmt ->execute();
+
+                    if($stmt->rowCount() > 0){
+                        $success = 0;
+                    }else{
+                        $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, title, price, quantity) VALUES (:userId, :legoId, :title, :price, :quantity)");
+                        $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                        $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                        $stmt ->bindParam(':title', $title, PDO::PARAM_STR);
+                        $stmt ->bindParam(':price', $price, PDO::PARAM_STR);
+                        $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                        
+                        if($stmt->execute()){
+                            $success = 1;
+                        }
+                    }
+                }else{
+                    $success = 3;
                 }
             }
         }
-    }
 
-    if(isset($_POST['rating-submit'])){
-        if(!isset($_SESSION['userId'])){
-            $error = 2;
-        }else{
-            $userId = $_SESSION['userId'];
-            $legoId = $_POST['legoId'];
-            $rating = $_POST['rating'];
-            $review = $_POST['review'];
-    
-            $checkSql = "SELECT * FROM lego_rating WHERE legoId = :legoId AND userId = :userId";
-            $checkStmt = $conn->prepare($checkSql);
-            $checkStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-            $checkStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-            $checkStmt ->execute();
-        
-            if($checkStmt->rowCount() > 0){
-                $error = 0;
+        if(isset($_POST['rating-submit'])){
+            if(!isset($_SESSION['userId'])){
+                $error = 2;
             }else{
-                $insertStmt = $conn->prepare("INSERT INTO lego_rating (legoId, userId, rating, review) VALUES (:legoId, :userId, :rating, :review)");
-                $insertStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-                $insertStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-                $insertStmt ->bindParam(':rating', $rating, PDO::PARAM_INT);
-                $insertStmt ->bindParam(':review', $review, PDO::PARAM_STR);
+                $userId = $_SESSION['userId'];
+                $legoId = $_POST['legoId'];
+                $rating = $_POST['rating'];
+                $review = $_POST['review'];
+        
+                $checkSql = "SELECT * FROM lego_rating WHERE legoId = :legoId AND userId = :userId";
+                $checkStmt = $conn->prepare($checkSql);
+                $checkStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                $checkStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                $checkStmt ->execute();
+            
+                if($checkStmt->rowCount() > 0){
+                    $error = 0;
+                }else{
+                    $insertStmt = $conn->prepare("INSERT INTO lego_rating (legoId, userId, rating, review) VALUES (:legoId, :userId, :rating, :review)");
+                    $insertStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                    $insertStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                    $insertStmt ->bindParam(':rating', $rating, PDO::PARAM_INT);
+                    $insertStmt ->bindParam(':review', $review, PDO::PARAM_STR);
 
-                if($insertStmt->execute()){
-                    $error = 1;
+                    if($insertStmt->execute()){
+                        $error = 1;
+                    }
                 }
             }
         }
+
+        $averageRatingSql = "SELECT AVG(rating) as avgRating FROM lego_rating WHERE legoId = :legoId";
+        $averageRatingStmt = $conn->prepare($averageRatingSql);
+        $averageRatingStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+        $averageRatingStmt ->execute();
+
+        $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
     }
-
-    $averageRatingSql = "SELECT AVG(rating) as avgRating FROM lego_rating WHERE legoId = :legoId";
-    $averageRatingStmt = $conn->prepare($averageRatingSql);
-    $averageRatingStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-    $averageRatingStmt ->execute();
-
-    $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
 ?>
 
 <!DOCTYPE html>
@@ -241,7 +254,13 @@
                         
                         <input type="hidden" name="price" id="price" value="<?php echo $row['price'] ?>">
                         <h5 class="fw-bold mt-3" name="price">$<?php echo $row['price'] ?></h5>
-                        <p class="fw-bold text-success"><?php echo $row['stock'] ?></p>
+                        <?php 
+                            if($row['stock'] > 0){
+                                echo "<p class='fw-bold text-success'>Available Now</p>";
+                            }else{
+                                echo "<p class='fw-bold text-danger'>Out of Stock</p>";
+                            }
+                        ?>
                     </div>
 
                     <div class="quantity-btn rounded">
@@ -250,9 +269,13 @@
                         <div class="value-button rounded-end" id="increase" onclick="increaseValue()" value="Increase Value"><i class="fa fa-plus"></i></div>
                     </div>
 
-                    <div>
-                        <button class="nav-link btn cart-btn mt-1 py-2 fw-bold w-100" name="order-submit">Add to Cart</button>
-                    </div>
+                    <?php
+                        if($row['stock'] > 0){
+                            echo '<button class="nav-link btn cart-btn mt-1 py-2 fw-bold w-100" name="order-submit">Add to Cart</button>';
+                        }else{
+                            echo '<button class="nav-link btn cart-btn mt-1 py-2 fw-bold w-100" name="order-submit" disabled>Add to Cart</button>';
+                        }    
+                    ?>
                 </form>
 
                 <div class="border rounded mt-3 py-3">
@@ -471,6 +494,15 @@
                     var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
                     document.getElementById("successToastHead").innerHTML = "Login First";
                     document.getElementById("successToastBody").innerHTML = "You should login first to add a product.";
+                    successToast.show();
+                });';
+            }
+
+            if(isset($success) && $success === 3){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var successToast = new bootstrap.Toast(document.getElementById("userSuccessToast"));
+                    document.getElementById("successToastHead").innerHTML = "Inventory Error";
+                    document.getElementById("successToastBody").innerHTML = "The required quantity is not available.";
                     successToast.show();
                 });';
             }
