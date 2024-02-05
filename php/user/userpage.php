@@ -141,7 +141,7 @@
             </div>
             <div class="image-container">
                 <a href="category.php?category=LEGO"><img src="../../images/lego.png" class="img-fluid" alt="LEGO"></a>
-                <div class="image-text fw-bold">LEGO</div>
+                <div class="image-text fw-bold">ALL PRODUCTS</div>
             </div>
             <div class="image-container">
                 <a href="category.php?category=Offers"><img src="../../images/offer.png" class="img-fluid" alt="Offer"></a>
