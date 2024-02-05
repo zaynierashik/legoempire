@@ -140,7 +140,7 @@
                 <div class="image-text fw-bold">HALLOWEEN</div>
             </div>
             <div class="image-container">
-                <a href="category.php?category=LEGO"><img src="../../images/lego.png" class="img-fluid" alt="LEGO"></a>
+                <a href="category.php?category=ALL PRODUCTS"><img src="../../images/lego.png" class="img-fluid" alt="LEGO"></a>
                 <div class="image-text fw-bold">ALL PRODUCTS</div>
             </div>
             <div class="image-container">

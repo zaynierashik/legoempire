@@ -11,6 +11,25 @@
         $stmt ->execute();
         $legos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    if(isset($_GET['category']) && $_GET['category'] == "ALL PRODUCTS"){
+        $stmt = $conn->prepare("SELECT * FROM lego_data");
+        $stmt ->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    if(isset($_GET['filter'])){
+        $filter = $_GET['filter'];
+        switch($filter){
+            case 'low_high':
+                $stmt = $conn->prepare("SELECT * FROM lego_data ORDER BY price ASC");
+                break;
+
+            case 'high_low':
+                    $stmt = $conn->prepare("SELECT * FROM lego_data ORDER BY price ASC");
+                    break;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -81,70 +100,92 @@
             }
         ?>
 
-        <?php
-            if(isset($category) && !empty($legos)):
-        ?>
+        <?php if(isset($category) && !empty($legos)): ?>
             <div class="container sale-container mt-5 mb-5">
                 <h4 class="fw-bold">Category: <?php echo $category ?></h4>
-                    <div class="container">
-                    <div class="row row-gap-4">
-                    <?php
-                        foreach($legos as $lego):
-                    ?>
-                        <div class="col">
-                        <div class="card" style="width: 18.37rem;">
-                            <a href="legodetails.php?legoId=<?php echo $lego['legoId'] ?>" class="nav-link">
-                                <img src="../../lego-images/<?php echo $lego['mainimage'] ?>" class="card-img-top my-3" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold fs-6"><?php echo $lego['title'] ?></h5>
-                            </a>
-                                    <div>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                <div class="container">
+                    <div class="row row-gap-4 mt-3">
+                        <?php foreach($legos as $lego): ?>
+                            <div class="col">
+                                <div class="card" style="width: 18.37rem;">
+                                    <a href="legodetails.php?legoId=<?php echo $lego['legoId'] ?>" class="nav-link">
+                                        <img src="../../lego-images/<?php echo $lego['mainimage'] ?>" class="card-img-top my-3" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title fw-bold fs-6"><?php echo $lego['title'] ?></h5>
+                                        </a>
+                                        <div>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        </div>
+                                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$<?php echo $lego['price'] ?></span></p>
+                                        <a href="legodetails.php?legoId=<?php echo $lego['legoId'] ?>" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                     </div>
-                                    <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$<?php echo $lego['price'] ?></span></p>
-                                    <a href="legodetails.php?legoId=<?php echo $lego['legoId'] ?>" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                 </div>
-                        </div>
-                        </div>
-                        
-                    <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-    
-        <?php else: ?>
-        <div class="container mt-5 mb-5">
-            <h5 class="fw-bold">No products found in this category.</h5>
-        </div>
-    <?php endif; ?>
-
-        <!-- Footer -->
-
-        <!-- <div class="container mt-3 rounded" style="height: 6vh; background-color: black; color: white;">
-            <div class="w-100 h-100 d-inline-block ps-3 pt-3">
-                <div class="row" style="font-size: 0.77rem;">
-                    <div class="col-7">
-                        <p>© TheLegoEmpire, All rights reserved 2023.</p>
-                    </div>
-                    <div class="col text-end">
-                        <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
-                        <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-                        <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
-                    </div>                
                 </div>
             </div>
-        </div> -->
 
-        </div>
+        <?php elseif(isset($_GET['category']) && $_GET['category'] == "ALL PRODUCTS" && isset($products)): ?>
+            <div class="container sale-container mt-5 mb-5">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="fw-bold">All Products</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" name="itemNumber" id="itemNumber" onchange="this.form.submit()">
+                            <option value="">Filter</option>
+                            <option value="">Price: Low to High</option>
+                            <option value="">Price: High to Low</option>
+                            <option value="">A - Z</option>
+                            <option value="">Rating</option>
+                        </select>
+                    </div>
+                </div>
 
-        <div class="text-end fixed-top-container" id="top-container">
-            <a href="" id="scroll-to-top">
-                <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
-            </a>
-        </div>
+                <div class="container">
+                    <div class="row row-gap-4 mt-2">
+                        <?php foreach($products as $product): ?>
+                            <div class="col">
+                                <div class="card" style="width: 18.37rem;">
+                                <a href="legodetails.php?legoId=<?php echo $product['legoId'] ?>" class="nav-link">
+                                    <img src="../../lego-images/<?php echo $product['mainimage'] ?>" class="card-img-top my-3" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold fs-6"><?php echo $product['title'] ?></h5>
+                                </a>
+                                        <div>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
+                                        </div>
+                                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$<?php echo $product['price'] ?></span></p>
+                                        <a href="legodetails.php?legoId=<?php echo $product['legoId'] ?>" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+
+        <?php else: ?>
+            <div class="container mt-5 mb-5">
+                <h5 class="fw-bold">No products found in this category.</h5>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="text-end fixed-top-container" id="top-container">
+        <a href="" id="scroll-to-top">
+            <i class="fa-solid fa-angle-up rounded" style="background-color: black; color: #ffffff; padding: 13px; font-size: larger;"></i>
+        </a>
+    </div>
 
     <script>
         if( window.history.replaceState ){
