@@ -8,8 +8,7 @@
         $userId = $_SESSION['userId'];
     }
 
-    $sql = "SELECT COUNT(itemId) AS item_count FROM cart_data WHERE userId = :userId";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare("SELECT COUNT(itemId) AS item_count FROM cart_data WHERE userId = :userId");
     $stmt ->bindParam(':userId', $userId);
     $stmt ->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -71,6 +70,7 @@
     <link rel="stylesheet" href="../../css/user.css">
 </head>
 <body>
+    
     <div class="cart-container">
     <div class="container" style="box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);">
         <?php

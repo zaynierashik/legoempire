@@ -1,6 +1,8 @@
 <?php
     session_start();
     include '../connect.php';
+
+    $activeFilter = '';
     
     if(isset($_GET['category'])){
         $category = $_GET['category'];
@@ -19,6 +21,8 @@
 
     if(isset($_GET['filter'])){
         $filter = $_GET['filter'];
+        $activeFilter = getFilterName($filter);
+
         switch($filter){
             case 'low_high':
                 $stmt = $conn->prepare("SELECT * FROM lego_data ORDER BY price ASC");
@@ -35,6 +39,22 @@
 
         $stmt->execute();
         $filteredProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getFilterName($filter){
+        switch($filter){
+            case 'low_high':
+                return 'Price: Low to High';
+                break;
+
+            case 'high_low':
+                return 'Price: High to Low';
+                break;
+
+            case 'alphabetical':
+                return 'A - Z';
+                break;
+        }
     }
 ?>
 
@@ -55,6 +75,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
+    
     <div class="container">
         <?php
             if(isset($_SESSION['username'])){
@@ -194,10 +215,9 @@
                     </div>
                     <div class="col-md-2">
                         <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
-                            <option value="">Filter</option>
-                            <option value="low_high">Price: Low to High</option>
-                            <option value="high_low">Price: High to Low</option>
-                            <option value="alphabetical">A - Z</option>
+                            <option value="low_high" <?php echo $filter === 'low_high' ? 'selected' : ''; ?>>Price: Low to High</option>
+                            <option value="high_low" <?php echo $filter === 'high_low' ? 'selected' : ''; ?>>Price: High to Low</option>
+                            <option value="alphabetical" <?php echo $filter === 'alphabetical' ? 'selected' : ''; ?>>A - Z</option>
                         </select>
                     </div>
                 </div>

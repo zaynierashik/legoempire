@@ -34,15 +34,33 @@
                     if($stmt->rowCount() > 0){
                         $success = 0;
                     }else{
-                        $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, title, price, quantity) VALUES (:userId, :legoId, :title, :price, :quantity)");
-                        $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-                        $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-                        $stmt ->bindParam(':title', $title, PDO::PARAM_STR);
-                        $stmt ->bindParam(':price', $price, PDO::PARAM_STR);
-                        $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-                        
-                        if($stmt->execute()){
-                            $success = 1;
+                        try{
+                            $conn->beginTransaction();
+                            $updateStockStmt = $conn->prepare("UPDATE lego_data SET stock = stock - :quantity WHERE legoId = :legoId");
+                            $updateStockStmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                            $updateStockStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                            $updateStockStmt ->execute();
+
+                            if($updateStockStmt->rowCount() > 0){
+                                $stmt = $conn->prepare("INSERT INTO cart_data (userId, legoId, title, price, quantity) VALUES (:userId, :legoId, :title, :price, :quantity)");
+                                $stmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                                $stmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                                $stmt ->bindParam(':title', $title, PDO::PARAM_STR);
+                                $stmt ->bindParam(':price', $price, PDO::PARAM_STR);
+                                $stmt ->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+
+                                if($stmt->execute()){
+                                    $conn->commit();
+                                    $success = 1;
+                                }else{
+                                    $conn->rollBack();
+                                }
+                            }else{
+                                $conn->rollBack();
+                            }
+                        }catch(PDOException $e){
+                            $conn->rollBack();
+                            echo "Error: " . $e->getMessage();
                         }
                     }
                 }else{
@@ -132,7 +150,6 @@
     </style>
 </head>
 <body>
-
     <div class="container">
     <?php
         if(isset($_SESSION['username'])){
