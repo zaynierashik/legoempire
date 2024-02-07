@@ -75,26 +75,27 @@
             }else{
                 $userId = $_SESSION['userId'];
                 $legoId = $_POST['legoId'];
-                $rating = $_POST['rating'];
-                $review = $_POST['review'];
-        
-                $checkSql = "SELECT * FROM lego_rating WHERE legoId = :legoId AND userId = :userId";
-                $checkStmt = $conn->prepare($checkSql);
-                $checkStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-                $checkStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-                $checkStmt ->execute();
-            
-                if($checkStmt->rowCount() > 0){
-                    $error = 0;
+                
+                if(empty($_POST['rating'])){
+                    $error = 3;
                 }else{
-                    $insertStmt = $conn->prepare("INSERT INTO lego_rating (legoId, userId, rating, review) VALUES (:legoId, :userId, :rating, :review)");
-                    $insertStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
-                    $insertStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
-                    $insertStmt ->bindParam(':rating', $rating, PDO::PARAM_INT);
-                    $insertStmt ->bindParam(':review', $review, PDO::PARAM_STR);
+                    $rating = $_POST['rating'];
+                    $checkStmt = $conn->prepare("SELECT * FROM lego_rating WHERE legoId = :legoId AND userId = :userId");
+                    $checkStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                    $checkStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                    $checkStmt ->execute();
+                
+                    if($checkStmt->rowCount() > 0){
+                        $error = 0;
+                    }else{
+                        $insertStmt = $conn->prepare("INSERT INTO lego_rating (legoId, userId, rating) VALUES (:legoId, :userId, :rating)");
+                        $insertStmt ->bindParam(':legoId', $legoId, PDO::PARAM_INT);
+                        $insertStmt ->bindParam(':userId', $userId, PDO::PARAM_INT);
+                        $insertStmt ->bindParam(':rating', $rating, PDO::PARAM_INT);
 
-                    if($insertStmt->execute()){
-                        $error = 1;
+                        if($insertStmt->execute()){
+                            $error = 1;
+                        }
                     }
                 }
             }
@@ -416,7 +417,7 @@
                 <div class="row mt-3">
                     <div class="col">
                         <div class="input-wrapper">
-                            <textarea type="text" class="form-control mb-3" name="review" id="review" rows="3" placeholder="Review about the product . . ."></textarea>
+                            <textarea type="text" class="form-control mb-3" name="review" id="review" rows="3" placeholder="Review about the product . . ." disabled></textarea>
                         </div>
                     </div>
 
@@ -428,7 +429,7 @@
                             <i class="star fa fa-star" data-rating="4"></i>
                             <i class="star fa fa-star" data-rating="5"></i>
                             
-                            <input type="hidden" name="rating" id="rating" value="1">
+                            <input type="hidden" name="rating" id="rating">
                             <input type="hidden" name="legoId" id="legoId" value="<?php echo $row['legoId'] ?>">
                         </div>
 
@@ -532,7 +533,7 @@
             if(isset($error) && $error === 0){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Already Rated";
+                    document.getElementById("errorToastHead").innerHTML = "Rating Error";
                     document.getElementById("errorToastBody").innerHTML = "You have already rated this product.";
                     errorToast.show();
                 });';
@@ -541,7 +542,7 @@
             if(isset($error) && $error === 1){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Product Rated";
+                    document.getElementById("errorToastHead").innerHTML = "Rating Successful";
                     document.getElementById("errorToastBody").innerHTML = "The product has been rated.";
                     errorToast.show();
                 });';
@@ -550,8 +551,17 @@
             if(isset($error) && $error === 2){
                 echo 'document.addEventListener("DOMContentLoaded", function(){
                     var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
-                    document.getElementById("errorToastHead").innerHTML = "Login First";
+                    document.getElementById("errorToastHead").innerHTML = "Rating Error";
                     document.getElementById("errorToastBody").innerHTML = "You should login first to rate a product.";
+                    errorToast.show();
+                });';
+            }
+
+            if(isset($error) && $error === 3){
+                echo 'document.addEventListener("DOMContentLoaded", function(){
+                    var errorToast = new bootstrap.Toast(document.getElementById("userErrorToast"));
+                    document.getElementById("errorToastHead").innerHTML = "Rating Error";
+                    document.getElementById("errorToastBody").innerHTML = "You must provide a rating.";
                     errorToast.show();
                 });';
             }
