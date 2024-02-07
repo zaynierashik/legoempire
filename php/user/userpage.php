@@ -29,6 +29,8 @@
         }
         $i++;
     }while($i<$count);
+
+    $averageRatingStmt = $conn->prepare("SELECT AVG(rating) as avgRating FROM lego_rating WHERE legoId = :legoId");
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +49,7 @@
     <link rel="stylesheet" href="../../css/user.css">
 </head>
 <body>
+    
     <div class="container">
         <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container">
@@ -89,6 +92,12 @@
                 <?php
                     foreach($value as $item){
                         if($status == 1){
+                            $legoId = $item[0]['legoId'];
+
+                            $averageRatingStmt ->bindParam(':legoId', $legoId);
+                            $averageRatingStmt ->execute();
+                            $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
+
                             echo '<div class="col">
                                 <div class="card" style="width: 18.625rem;">
                                     <a href="legodetails.php?legoId=' .$item[0]['legoId']. '" class="nav-link">
@@ -96,13 +105,16 @@
                                         <div class="card-body">
                                             <h5 class="card-title fw-bold fs-6">' .$item[0]['title']. '</h5>
                                     </a>
-                                            <div>
-                                                <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                                <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                                <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                                <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                                <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            </div>
+                                            <div class="averageRating" id="average-stars" data-average-rating="<?php echo $averageRating; ?>">';
+                                                $averageRatingRounded = round($averageRating);
+                                                for($i = 1; $i <= 5; $i++){
+                                                    if($i <= $averageRatingRounded){
+                                                        echo '<i class="fa-solid fa-star" style="color: #FFB234;"></i>';
+                                                    }else{    
+                                                        echo '<i class="fa-regular fa-star" style="color: #FFB234;"></i>';
+                                                    }
+                                                }
+                                            echo '</div>
                                             <p class="card-text mt-1"><span class="text-decoration-line-through">$10.00</span> <span class="fw-bold">$' .$item[0]['price']. '</span></p>
                                             <a href="legodetails.php?legoId=' .$item[0]['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                         </div>
@@ -113,7 +125,7 @@
                         }
                     }
                 ?>
-                </div>
+            </div>
         </div>
         </div>
 
@@ -167,18 +179,25 @@
                                     <img src="../../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
-                                </a>
-                                        <div>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        </div>
+                                </a>';
+                                        $averageRatingStmt->bindParam(':legoId', $row['legoId']);
+                                        $averageRatingStmt->execute();
+                                        $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
+
+                                        echo '<div class="averageRating" id="average-stars" data-average-rating="' . $averageRating . '">';
+                                            $averageRatingRounded = round($averageRating);
+                                            for($i = 1; $i <= 5; $i++){
+                                                if($i <= $averageRatingRounded){
+                                                    echo '<i class="fa-solid fa-star" style="color: #FFB234;"></i>';
+                                                }else{    
+                                                    echo '<i class="fa-regular fa-star" style="color: #FFB234;"></i>';
+                                                }
+                                            }
+                                        echo '</div>
                                         <p class="card-text mt-1"><span class="text-decoration-line-through">$10.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
                                         <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                     </div>
-                                </div>';
+                            </div>';
                         }
                     }else{
                         echo "<div class='container'><h5 class='fw-bold'>No products found.</h5></div>";
@@ -231,18 +250,25 @@
                                     <img src="../../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
-                                </a>
-                                        <div>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        </div>
+                                </a>';
+                                        $averageRatingStmt->bindParam(':legoId', $row['legoId']);
+                                        $averageRatingStmt->execute();
+                                        $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
+
+                                        echo '<div class="averageRating" id="average-stars" data-average-rating="' . $averageRating . '">';
+                                            $averageRatingRounded = round($averageRating);
+                                            for($i = 1; $i <= 5; $i++){
+                                                if($i <= $averageRatingRounded){
+                                                    echo '<i class="fa-solid fa-star" style="color: #FFB234;"></i>';
+                                                }else{    
+                                                    echo '<i class="fa-regular fa-star" style="color: #FFB234;"></i>';
+                                                }
+                                            }
+                                        echo '</div>
                                         <p class="card-text mt-1"><span class="fw-bold">$' .$row['price']. '</span></p>
                                         <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                     </div>
-                                </div>';
+                            </div>';
                         }
                     }else{
                         echo "<div class='container'><h5 class='fw-bold'>No products found.</h5></div>";

@@ -5,6 +5,8 @@
     if(isset($_SESSION['username'])){
         header('location: user/userpage.php');
     }
+
+    $averageRatingStmt = $conn->prepare("SELECT AVG(rating) as avgRating FROM lego_rating WHERE legoId = :legoId");
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +25,8 @@
     <link rel="stylesheet" href="../css/homepage.css">
 </head>
 <body>
-    
-    <div class="container">
 
+    <div class="container">
         <div class="background-img">
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
@@ -96,18 +97,25 @@
                                     <img src="../lego-images/' .$row['mainimage']. '" class="card-img-top my-3" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
-                                </a>
-                                        <div>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        </div>
+                                </a>';
+                                        $averageRatingStmt->bindParam(':legoId', $row['legoId']);
+                                        $averageRatingStmt->execute();
+                                        $averageRating = $averageRatingStmt->fetch(PDO::FETCH_ASSOC)['avgRating'];
+
+                                        echo '<div class="averageRating" id="average-stars" data-average-rating="' . $averageRating . '">';
+                                            $averageRatingRounded = round($averageRating);
+                                            for($i = 1; $i <= 5; $i++){
+                                                if($i <= $averageRatingRounded){
+                                                    echo '<i class="fa-solid fa-star" style="color: #FFB234;"></i>';
+                                                }else{    
+                                                    echo '<i class="fa-regular fa-star" style="color: #FFB234;"></i>';
+                                                }
+                                            }
+                                        echo '</div>
                                         <p class="card-text mt-1"><span class="text-decoration-line-through">$10.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
                                         <a href="user/legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                     </div>
-                                </div>';
+                            </div>';
                         }
                     }else{
                         echo "<div class='container'>No Products Found.</div>";
@@ -172,8 +180,6 @@
             </div>
         </div>
 
-        <!-- Footer -->
-
         <div class="container mt-3 rounded" style="height: 6vh; background-color: black; color: white;">
             <div class="w-100 h-100 d-inline-block ps-3 pt-3">
                 <div class="row" style="font-size: 0.77rem;">
@@ -189,7 +195,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="text-end fixed-top-container" id="top-container">
