@@ -177,7 +177,7 @@
                                             <form method="POST" action="">
                                                 <input type="hidden" name="legoId" value="' . $legoId . '">
                                                 <i class="fa-solid fa-trash" style="color: #cfcfcf; cursor: pointer" id="showDeleteConfirmation" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
-                                            <!-- </form> -->
+                                            </form>
                                         </td>';
                                     echo '</tr>';
             
@@ -221,34 +221,29 @@
                             </table>
 
                             <div class="mt-5">
-                            <?php
-                                // if($itemCount > 0){
-                                //     $sql = "SELECT * FROM profile_data WHERE userId = :userId";
-                                //     $stmt = $conn->prepare($sql);
-                                //     $stmt ->bindParam(':userId', $userId);
-                                //     $stmt ->execute();
-                                //     $profileData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                                //     if(!empty($profileData['landmark'] && $profileData['address'] && $profileData['area'] && $profileData['city'] && $profileData['province'])){
-                                //         echo '
-                                //             <form action="payment.php" method="POST">
-                                //                 <input type="number" name="amount" id="amount" value="<?php echo $cartTotal ?>" hidden>
-                                //                 <input type="text" name="username" id="username" value="<?php echo $username ?>" hidden>
-                                //                 <input type="submit" class="btn btn-lg btn-primary mt-2" value="Checkout">
-                                //             </form>';
-                                //     }else{
-                                //         echo '<button class="btn cart-btn py-2 fw-bold w-100" disabled>Checkout</button>';
-                                //         echo '<p class="text-danger mt-2 fw-bold">Billing address not set. Please update your profile.</p>';
-                                //     }
-                                // }else{
-                                //     echo '<h6 class="fw-bold">No items in the cart to proceed.</h6>';
-                                // }
-                            ?>
-                            <form action="payment.php" method="POST">
-                                                <input type="number" name="amount" id="amount" value="<?php echo $cartTotal ?>" hidden>
-                                                <input type="text" name="username" id="username" value="<?php echo $username ?>" hidden>
-                                                <input type="submit" class="btn btn-lg btn-primary mt-2" value="Checkout">
-                                            </form>
+                                <?php
+                                    if($itemCount > 0){
+                                        $sql = "SELECT * FROM profile_data WHERE userId = :userId";
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt ->bindParam(':userId', $userId);
+                                        $stmt ->execute();
+                                        $profileData = $stmt->fetch(PDO::FETCH_ASSOC);
+                                
+                                        if(!empty($profileData['landmark'] && $profileData['address'] && $profileData['area'] && $profileData['city'] && $profileData['province'])){
+                                            echo '
+                                                <form action="payment.php" method="POST">
+                                                    <input type="number" name="amount" id="amount" value="' . $cartTotal . '" hidden>
+                                                    <input type="text" name="username" id="username" value="' . $username . '" hidden>
+                                                    <input type="submit" class="btn cart-btn px-5 py-2 fw-bold w-100" value="Checkout">
+                                                </form>';
+                                        } else {
+                                            echo '<button class="btn cart-btn py-2 fw-bold w-100" disabled>Checkout</button>';
+                                            echo '<p class="text-danger mt-2 fw-bold">Billing address not set. Please update your profile.</p>';
+                                        }
+                                    }else{
+                                        echo '<h6 class="fw-bold">No items in the cart to proceed.</h6>';
+                                    }
+                                ?>
                             </div>
                         <div>
                     </div>
