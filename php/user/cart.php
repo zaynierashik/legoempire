@@ -6,6 +6,7 @@
 
     if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
+        $username = $_SESSION['username'];
     }
 
     $stmt = $conn->prepare("SELECT COUNT(itemId) AS item_count FROM cart_data WHERE userId = :userId");
@@ -229,7 +230,12 @@
                                     $profileData = $stmt->fetch(PDO::FETCH_ASSOC);
 
                                     if(!empty($profileData['landmark'] && $profileData['address'] && $profileData['area'] && $profileData['city'] && $profileData['province'])){
-                                        echo '<a href="checkout.php" class="nav-link btn cart-btn py-2 fw-bold" role="button">Checkout</a>';
+                                        echo '
+                                            <form action="payment.php" method="POST">
+                                                <input type="number" name="amount" id="amount" value="<?php echo $cartTotal ?>" hidden>
+                                                <input type="text" name="username" id="username" value="<?php echo $username ?>" hidden>
+                                                <input type="submit" class="btn btn-lg btn-primary mt-2" value="Checkout">
+                                            </form>';
                                     }else{
                                         echo '<button class="btn cart-btn py-2 fw-bold w-100" disabled>Checkout</button>';
                                         echo '<p class="text-danger mt-2 fw-bold">Billing address not set. Please update your profile.</p>';
@@ -243,59 +249,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="container sale-container mt-5 pt-5">
-                <h4 class="fw-bold">Recommended For You</h4>
-                <div class="slider-container">
-                <?php
-                    $sql = "SELECT * FROM lego_data ORDER BY RAND() LIMIT 4";
-                    $stmt = $conn->query($sql);
-                    if($stmt->rowCount() > 0){
-                        while($row = $stmt->fetch()){
-                            echo '<div class="card slider-card" style="width: 18.75rem; border-radius: 0; margin-right: 0.7vw; margin-left: 0.7vw;">
-                                <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link">
-                                    <img src="../../lego-images/' .$row['main-image']. '" class="card-img-top my-3" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title fw-bold fs-6">' .$row['title']. '</h5>
-                                </a>
-                                        <div>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                            <i class="fa-solid fa-star" style="color: #ffb234;"></i>
-                                        </div>
-                                        <p class="card-text mt-1"><span class="text-decoration-line-through">$7.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
-                                        <a href="legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
-                                    </div>
-                                </div>';
-                        }
-                    }else{
-                        echo "<div class='container'>No Products Found.</div>";
-                    }
-                ?>
-                </div>
-            </div> -->
         </div>
-        
-        <!-- Footer -->
-        
-        <!-- <div class="container mt-3 mb-0 " style="height: 6vh; background-color: black; color: white;">
-            <div class="w-100 h-100 d-inline-block ps-3 pt-3">
-                <div class="row" style="font-size: 0.77rem;">
-                    <div class="col-7">
-                        <p>© TheLegoEmpire, All rights reserved 2023.</p>
-                    </div>
-                    
-                    <div class="col text-end">
-                        <a href="https://www.facebook.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
-                        <a href="https://www.twitter.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-                        <a href="https://www.youtube.com/" target="_blank" style="margin-right: 1vw;"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
-                    </div>                
-                </div>
-            </div>
-        </div> -->
     </div>
     </div>
 

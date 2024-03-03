@@ -16,7 +16,7 @@
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'{
-            "return_url": "http://localhost/legoempire/user/paymentsuccess.php",
+            "return_url": "http://localhost/legoempire/php/user/paymentsuccess.php",
             "website_url": "https://127.0.0.1/",
             "amount": "' . $paisa . '",
             "purchase_order_id": "Order01",z
