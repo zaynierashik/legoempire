@@ -93,10 +93,10 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="nav-link border rounded pt-2">
+                        <a href="payment.php" class="nav-link border rounded pt-2">
                             <div>
                                 <i class="fa-solid fa-wallet fa-xl" style="color: #000000;"></i>
-                                <h6 class="fw-bold mt-2">Wallet</h6>
+                                <h6 class="fw-bold mt-2">Khalti Wallet</h6>
                             </div>
                         </a>
                     </div>
