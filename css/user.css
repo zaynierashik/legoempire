@@ -122,3 +122,21 @@
 .update-content-container .form-control, .update-content-container button, .update-content-container select, .update-content-container option{
     height: 5.5vh;
 }
+
+/* Payment Page */
+
+.payment-container{
+    background-color: white;
+    margin-top: 6%;
+    width: 67%;
+    height: 75vh;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.payment-container img{
+    width: 11%;
+}
+
+.payment-container .btn{
+    margin-top: 11%;
+}

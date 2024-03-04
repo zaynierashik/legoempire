@@ -78,25 +78,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/louis-george-cafe" rel="stylesheet">
     <link rel="stylesheet" href="../../css/user.css">
+
+    <style>
+        body{
+            background-color: #f6f4f9;
+        }
+    </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="row">
+    <div class="container payment-container">
+        <div class="row text-center">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        Payment Status
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Payment Status: <?php echo $status; ?></h5>
-                        <p class="card-text">Amount: <?php echo $amount; ?></p>
-                        <a href="userpage.php" class="btn btn-primary">Go to Dashboard</a>
-                    </div>
+                <div class="">
+                    <img src="../../images/success.png" class="mt-5" alt="">
+                    <h3 class="fw-bold mt-5">Payment Success</h3>
+                    <h6 class="mt-3 mb-5">Thank you for purchasing via Khalti Payment Gateway! Your payment has been confirmed successfully.</p>
                 </div>
+            </div>
+            
+            <div class="col-md-12">
+                <a href="userpage.php">
+                    <button class="btn cart-btn py-2 fw-bold w-50">Back to userpage</button>
+                </a>
             </div>
         </div>
     </div>
-
 </body>
 </html>

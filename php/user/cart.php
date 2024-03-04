@@ -3,6 +3,8 @@
     include '../connect.php';
 
     $cartTotal = 0;
+    $total = 0;
+    $charge = 5;
 
     if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
@@ -47,8 +49,8 @@
                     $stmt ->bindParam(':quantity', $newQuantity);
                     $stmt ->execute();
                 }
+                $total = 0;
             }
-    
             header('location: cart.php');
             exit();
         }
@@ -71,7 +73,6 @@
     <link rel="stylesheet" href="../../css/user.css">
 </head>
 <body>
-    
     <div class="cart-container">
     <div class="container" style="box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);">
         <?php
@@ -142,62 +143,57 @@
 
                 <div class="row">
                     <div class="col">
-                        <table class="table">
-                            <tr>
-                                <td class="fw-bold text-center">Item</td>
-                                <td class="fw-bold">Lego Name</td>
-                                <td class="fw-bold">Unit Price</td>
-                                <td class="fw-bold text-center">Quantity</td>
-                                <td class="fw-bold">Sub Total</td>
-                                <td></td>
-                            </tr>
+                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                            <table class="table">
+                                <tr>
+                                    <td class="fw-bold text-center">Item</td>
+                                    <td class="fw-bold">Lego Name</td>
+                                    <td class="fw-bold">Unit Price</td>
+                                    <td class="fw-bold text-center">Quantity</td>
+                                    <td class="fw-bold">Sub Total</td>
+                                    <td></td>
+                                </tr>
 
-                            <?php
-                                $count = 1;
-                                $total = 0;
-                                $charge = 5;
+                                <?php
+                                    $count = 1;
 
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                                    $legoId = $row['legoId'];
-                                    $title = $row['title'];
-                                    $price = $row['price'];
-                                    $quantity = $row['quantity'];
+                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                        $legoId = $row['legoId'];
+                                        $title = $row['title'];
+                                        $price = $row['price'];
+                                        $quantity = $row['quantity'];
 
-                                    $subTotal = $price * $quantity;
-                                    $total += $subTotal;
-                                    $cartTotal = $total + $charge;
-            
-                                    echo '<tr>';
-                                        echo '<td class="text-center">' . $count . '</td>';
-                                        echo '<td>' . $title . '</td>';
-                                        echo '<td>' . '$' . $price . '</td>';
-                                        echo '<td class="text-center quantity-change px-5"><input type="number" class="form-control text-center p-0" name="quantity[]" value="'. $quantity .'"></td>';
-                                        echo '<td>' . '$' . $subTotal . '</td>';
-                                        echo '<td>
-                                            <form method="POST" action="">
-                                                <input type="hidden" name="legoId" value="' . $legoId . '">
-                                                <i class="fa-solid fa-trash" style="color: #cfcfcf; cursor: pointer" id="showDeleteConfirmation" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
-                                            </form>
-                                        </td>';
-                                    echo '</tr>';
-            
-                                    $count++;
-                                }
-                            ?>
-                        </table>
+                                        $subTotal = $price * $quantity;
+                                        $total += $subTotal;
+                                        $cartTotal = $total + $charge;
+                
+                                        echo '<tr>';
+                                            echo '<td class="text-center">' . $count . '</td>';
+                                            echo '<td>' . $title . '</td>';
+                                            echo '<td>' . '$' . $price . '</td>';
+                                            echo '<td class="text-center quantity-change px-5"><input type="number" class="form-control text-center p-0" name="quantity['.$legoId.']" value="'. $quantity .'"></td>';
+                                            echo '<td>' . '$' . $subTotal . '</td>';
+                                            echo '<td><i class="fa-solid fa-trash" style="color: #cfcfcf; cursor: pointer" id="showDeleteConfirmation" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i></td>';
+                                        echo '</tr>';
+                
+                                        $count++;
+                                    }
+                                ?>
+                            </table>
 
-                        <div class="mt-5">
-                            <div class="row">
-                                <?php if ($itemCount > 0): ?>
-                                    <div class="col-md-3">
-                                        <a href="userpage.php" class="nav-link btn cart-btn py-2 fw-bold" role="button"><i class="fa-solid fa-chevron-left fa-2xs me-1"></i>Continue Shopping</a>
-                                    </div>
-                                    <div class="col text-end">
-                                        <button class="btn cart-btn px-5 py-2 fw-bold" name="update-cart">Update Cart</button>
-                                    </div>
-                                <?php endif; ?>
+                            <div class="mt-5">
+                                <div class="row">
+                                    <?php if ($itemCount > 0): ?>
+                                        <div class="col-md-3">
+                                            <a href="userpage.php" class="nav-link btn cart-btn py-2 fw-bold" role="button"><i class="fa-solid fa-chevron-left fa-2xs me-1"></i>Continue Shopping</a>
+                                        </div>
+                                        <div class="col text-end">
+                                            <button class="btn cart-btn px-5 py-2 fw-bold" name="update-cart">Update Cart</button>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
 
                     <div class="col-md-3 border-start border-2">
@@ -236,7 +232,7 @@
                                                     <input type="text" name="username" id="username" value="' . $username . '" hidden>
                                                     <input type="submit" class="btn cart-btn px-5 py-2 fw-bold w-100" value="Checkout">
                                                 </form>';
-                                        } else {
+                                        }else{
                                             echo '<button class="btn cart-btn py-2 fw-bold w-100" disabled>Checkout</button>';
                                             echo '<p class="text-danger mt-2 fw-bold">Billing address not set. Please update your profile.</p>';
                                         }
