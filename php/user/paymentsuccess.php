@@ -9,6 +9,9 @@
     $status = $_GET['status'];
     $amount = $_GET['amount'];
     $userId = $_SESSION['userId'];
+    $transactionId = $_GET['transaction_id'];
+
+    $total = $amount / 100;
 
     $sql = "SELECT * FROM cart_data WHERE userId = :userId";
     $stmt = $conn->prepare($sql);
@@ -16,7 +19,7 @@
     $stmt ->execute();
 
     $cartItems = array();
-    $status= "Pending";
+    $status= "Paid";
 
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         $cartItems[] = array(
@@ -27,34 +30,20 @@
         );
     }
 
-    function generateInvoiceNumber($length = 7) {
-        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $invoiceNumber = '';
-        $max = strlen($characters) - 1;
-
-        for($i = 0; $i < $length; $i++){
-            $invoiceNumber .= $characters[random_int(0, $max)];
-        }
-
-        return $invoiceNumber;
-    }
-    
-    $invoiceNumber = generateInvoiceNumber();
-
     foreach($cartItems as $item){
         $legoId = $item['legoId'];
         $title = $item['title'];
         $price = $item['price'];
         $quantity = $item['quantity'];
 
-        $sql = "INSERT INTO order_data (userId, legoId, title, price, quantity, invoiceNumber, status) VALUES (:userId, :legoId, :title, :price, :quantity, :invoiceNumber, :status)";
+        $sql = "INSERT INTO order_data (userId, legoId, title, price, quantity, transactionId, status) VALUES (:userId, :legoId, :title, :price, :quantity, :transactionId, :status)";
         $stmt = $conn->prepare($sql);
         $stmt ->bindParam(':userId', $userId);
         $stmt ->bindParam(':legoId', $legoId);
         $stmt ->bindParam(':title', $title);
         $stmt ->bindParam(':price', $price);
         $stmt ->bindParam(':quantity', $quantity);
-        $stmt ->bindParam(':invoiceNumber', $invoiceNumber);
+        $stmt ->bindParam(':transactionId', $transactionId);
         $stmt ->bindParam(':status', $status);
         $stmt ->execute();
     }
@@ -89,10 +78,13 @@
     <div class="container payment-container">
         <div class="row text-center">
             <div class="col-md-12">
-                <div class="">
+                <div>
                     <img src="../../images/success.png" class="mt-5" alt="">
                     <h3 class="fw-bold mt-5">Payment Success</h3>
                     <h6 class="mt-3 mb-5">Thank you for purchasing via Khalti Payment Gateway! Your payment has been confirmed successfully.</p>
+
+                    <h6 class="fw-bold">Paid Amount: NRs. <?php echo $total ?></h6>
+                    <h6 class="fw-bold">Transaction ID: <?php echo $transactionId ?></h6>
                 </div>
             </div>
             

@@ -17,14 +17,14 @@
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $itemCount = $result['item_count'];
 
-    if(isset($_POST['delete']) && isset($_POST['legoId'])){
-        $legoId = $_POST['legoId'];
-
+    if(isset($_POST['delete']) && isset($_POST['legoIdToDelete'])){
+        $legoId = $_POST['legoIdToDelete'];
+    
         $stmt = $conn->prepare("DELETE FROM cart_data WHERE userId = :userId AND legoId = :legoId");
         $stmt ->bindParam(':userId', $userId);
         $stmt ->bindParam(':legoId', $legoId);
         $stmt ->execute();
-
+    
         header('location: cart.php');
         exit();
     }
@@ -173,7 +173,7 @@
                                             echo '<td>' . '$' . $price . '</td>';
                                             echo '<td class="text-center quantity-change px-5"><input type="number" class="form-control text-center p-0" name="quantity['.$legoId.']" value="'. $quantity .'"></td>';
                                             echo '<td>' . '$' . $subTotal . '</td>';
-                                            echo '<td><i class="fa-solid fa-trash" style="color: #cfcfcf; cursor: pointer" id="showDeleteConfirmation" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i></td>';
+                                            echo '<td><i class="fa-solid fa-trash" style="color: #cfcfcf; cursor: pointer" id="showDeleteConfirmation" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" data-lego-id="'.$legoId.'" onclick="setLegoIdToDelete(this.getAttribute(\'data-lego-id\'))"></i></td>';
                                         echo '</tr>';
                 
                                         $count++;
@@ -258,20 +258,28 @@
     <!-- Delete Confirmation -->
 
     <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-body">
-            Are you sure you want to remove the item(s)?
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <input type="hidden" name="legoIdToDelete" id="legoIdToDelete" value="">
+                    <div class="modal-body">
+                        Are you sure you want to remove the item(s)?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary pt-1" name="delete" id="delete">Remove Item</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary pt-1" data-bs-dismiss="modal">Cancel</button>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <button type="submit" class="btn btn-primary pt-1" name="delete" id="delete">Remove Item</button>
-            </form>
-        </div>
     </div>
-    </div>
-    </div>
+    
+    <script>
+    function setLegoIdToDelete(legoId) {
+        document.getElementById('legoIdToDelete').value = legoId;
+    }
+</script>
+
 
     <script>
         if( window.history.replaceState ){
