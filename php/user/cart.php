@@ -275,10 +275,10 @@
     </div>
     
     <script>
-    function setLegoIdToDelete(legoId) {
-        document.getElementById('legoIdToDelete').value = legoId;
-    }
-</script>
+        function setLegoIdToDelete(legoId) {
+            document.getElementById('legoIdToDelete').value = legoId;
+        }
+    </script>
 
 
     <script>
