@@ -75,19 +75,24 @@
     </style>
 </head>
 <body>
+
     <div class="container payment-container">
         <div class="row text-center">
-            <div class="col-md-12">
-                <div>
-                    <img src="../../images/success.png" class="mt-5" alt="">
-                    <h3 class="fw-bold mt-5">Payment Success</h3>
-                    <h6 class="mt-3 mb-5">Thank you for purchasing via Khalti Payment Gateway! Your payment has been confirmed successfully.</p>
-
-                    <h6 class="fw-bold">Paid Amount: NRs. <?php echo $total ?></h6>
-                    <h6 class="fw-bold">Transaction ID: <?php echo $transactionId ?></h6>
-                </div>
+            <div class="col-md-12 mb-3">
+                <img src="../../images/success.png" class="mt-5" alt="">
+                <h3 class="fw-bold mt-5">Payment Success</h3>
+                <h6 class="mt-3">Thank you for purchasing via Khalti Payment Gateway! Your payment has been confirmed successfully.</p>
             </div>
-            
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h6 class="fw-bold">Paid Amount: NRs. <?php echo $total ?></h6>
+                <h6 class="fw-bold">Transaction ID: <?php echo $transactionId ?></h6>
+            </div>
+        </div>
+
+        <div class="row text-center">
             <div class="col-md-12">
                 <a href="userpage.php">
                     <button class="btn cart-btn py-2 fw-bold w-50">Back to userpage</button>
@@ -95,5 +100,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
