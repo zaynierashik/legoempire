@@ -112,7 +112,7 @@
                                                 }
                                             }
                                         echo '</div>
-                                        <p class="card-text mt-1"><span class="text-decoration-line-through">$10.00</span> <span class="fw-bold">$' .$row['price']. '</span></p>
+                                        <p class="card-text mt-1"><span class="text-decoration-line-through">NRs 1000</span> <span class="fw-bold">NRs ' .$row['price']. '</span></p>
                                         <a href="user/legodetails.php?legoId=' .$row['legoId']. '" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                     </div>
                             </div>';

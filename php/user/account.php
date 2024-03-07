@@ -234,10 +234,6 @@
                                 <div class="update-content-container" id="update">
                                     <form action="" method="POST" class="form">
                                         <div class="mb-3">
-                                            <label for="country" class="form-label fw-bold">Country</label>
-                                            <input type="text" class="form-control" name="country" placeholder="Enter country name" id="country" value="Nepal" readonly>
-                                        </div>
-                                        <div class="mb-3">
                                             <label for="province" class="form-label fw-bold">Province</label>
                                             <select class="form-select" name="province" id="province">
                                                 <option value="<?php echo $result['province'] ?>"><?php echo $result['province'] ?></option>
@@ -285,18 +281,15 @@
                                         ?>
                                         
                                         <h4 class="fw-bold">My Orders</h4>
-
                                         <div class="row">
                                             <div class="col">
                                                 <table class="table">
                                                     <tr>
                                                         <td class="fw-bold text-center">Item</td>
                                                         <td class="fw-bold">Lego Name</td>
-                                                        <td class="fw-bold">Invoice</td>
-                                                        <td class="fw-bold text-center">Quantity</td>
+                                                        <td class="fw-bold">Transaction ID</td>
+                                                        <td class="fw-bold">Quantity</td>
                                                         <td class="fw-bold">Total</td>
-                                                        <td class="fw-bold">Payment</td>
-                                                        <td class="fw-bold"></td>
                                                     </tr>
 
                                                     <?php
@@ -307,10 +300,9 @@
                                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                                                             $legoId = $row['legoId'];
                                                             $title = $row['title'];
-                                                            $invoiceNumber = $row['invoiceNumber'];
+                                                            $transactionId = $row['transactionId'];
                                                             $quantity = $row['quantity'];
                                                             $price = $row['price'];
-                                                            $status = $row['status'];
 
                                                             $subTotal = $price * $quantity;
                                                             $total += $subTotal;
@@ -319,11 +311,9 @@
                                                             echo '<tr>';
                                                                 echo '<td class="text-center">' . $count . '</td>';
                                                                 echo '<td>' . $title . '</td>';
-                                                                echo '<td>' . $invoiceNumber . '</td>';
-                                                                echo '<td class="text-center quantity-change px-5">'. $quantity .'</td>';
-                                                                echo '<td>' . '$' . $subTotal . '</td>';
-                                                                echo '<td>' . $status . '</td>';
-                                                                echo '<td><a href="confirmpayment.php?invoiceNumber=' . $invoiceNumber . '" target="_blank"><i class="fa-solid fa-file" style="color: #cfcfcf;"></i></a></td>';
+                                                                echo '<td>' . $transactionId . '</td>';
+                                                                echo '<td class=" quantity-change px-4">'. $quantity .'</td>';
+                                                                echo '<td>' . 'NRs ' . $subTotal . '</td>';
                                                             echo '</tr>';
                                     
                                                             $count++;

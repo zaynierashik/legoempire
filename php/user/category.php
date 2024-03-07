@@ -162,7 +162,7 @@
                                                 }
                                             ?>
                                         </div>
-                                        <p class="card-text mt-1"><span class="fw-bold">$<?php echo $lego['price'] ?></span></p>
+                                        <p class="card-text mt-1"><span class="fw-bold">NRs <?php echo $lego['price'] ?></span></p>
                                         <a href="legodetails.php?legoId=<?php echo $lego['legoId'] ?>" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@
                                                 }
                                             ?>
                                         </div>
-                                        <p class="card-text mt-1"><span class="fw-bold">$<?php echo $product['price'] ?></span></p>
+                                        <p class="card-text mt-1"><span class="fw-bold">NRs <?php echo $product['price'] ?></span></p>
                                         <a href="legodetails.php?legoId=<?php echo $product['legoId'] ?>" class="nav-link btn cart-btn mt-1 py-2 fw-bold" role="button">Add to Cart</a>
                                     </div>
                                 </div>

@@ -271,7 +271,7 @@
                         </div>
                         
                         <input type="hidden" name="price" id="price" value="<?php echo $row['price'] ?>">
-                        <h5 class="fw-bold mt-3" name="price">$<?php echo $row['price'] ?></h5>
+                        <h5 class="fw-bold mt-3" name="price">NRs <?php echo $row['price'] ?></h5>
                         
                         <?php 
                             if($row['stock'] > 0){
@@ -299,7 +299,7 @@
 
                 <div class="border rounded mt-3 py-3">
                     <img src="../../lego-images/<?php echo $row['mainimage'] ?>" class="w-25" alt="">
-                    <small class="fw-bold">Gift with LEGO® purchases of $100 or more*</small>
+                    <small class="fw-bold">Gift with the purchase of NRs 700 or more*</small>
                 </div>
 
                 <div class="warning mt-2">

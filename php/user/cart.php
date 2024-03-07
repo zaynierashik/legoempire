@@ -4,7 +4,7 @@
 
     $cartTotal = 0;
     $total = 0;
-    $charge = 5;
+    $charge = 50;
 
     if(isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
@@ -170,9 +170,9 @@
                                         echo '<tr>';
                                             echo '<td class="text-center">' . $count . '</td>';
                                             echo '<td>' . $title . '</td>';
-                                            echo '<td>' . '$' . $price . '</td>';
+                                            echo '<td>' . $price . '</td>';
                                             echo '<td class="text-center quantity-change px-5"><input type="number" class="form-control text-center p-0" name="quantity['.$legoId.']" value="'. $quantity .'"></td>';
-                                            echo '<td>' . '$' . $subTotal . '</td>';
+                                            echo '<td>' . 'NRs ' . $subTotal . '</td>';
                                             echo '<td><i class="fa-solid fa-trash" style="color: #cfcfcf; cursor: pointer" id="showDeleteConfirmation" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" data-lego-id="'.$legoId.'" onclick="setLegoIdToDelete(this.getAttribute(\'data-lego-id\'))"></i></td>';
                                         echo '</tr>';
                 
@@ -204,15 +204,15 @@
                                 </tr>
                                 <tr>
                                     <td>Order Subtotal</td>
-                                    <td><?php echo '$' . $total; ?></td>
+                                    <td><?php echo 'NRs ' . $total; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Delivery Cost</td>
-                                    <td><?php echo '$' . $charge; ?></td>
+                                    <td><?php echo 'NRs ' . $charge; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Total</td>
-                                    <td class="fw-bold"><?php echo '$' . $cartTotal; ?></td>
+                                    <td class="fw-bold"><?php echo 'NRs ' . $cartTotal; ?></td>
                                 </tr>
                             </table>
 
