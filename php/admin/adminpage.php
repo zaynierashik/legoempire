@@ -13,8 +13,6 @@
     $delieverCount = $conn->query("SELECT COUNT(delieverStatus) FROM order_data WHERE delieverStatus='Delievered'") -> fetchColumn();
     $pendingCount = $conn->query("SELECT COUNT(delieverStatus) FROM order_data WHERE delieverStatus='Pending'") -> fetchColumn();
     $earningCount = $conn->query("SELECT SUM(price) FROM order_data")->fetchColumn();
-
-    $formattedEarning = number_format($earningCount, 2);
 ?>
 
 <!DOCTYPE html>
@@ -57,8 +55,9 @@
                     <div class="col-3">
                         <div class="list-group" id="list-tab" role="tablist">
                             <a href="adminpage.php" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-dashboard-list" role="tab" aria-controls="list-dashboard">Dashboard</a>
+                            <a href="?section=vieworder" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-view-list" role="tab" aria-controls="list-view">Orders</a>
                             <a href="?section=product" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-product-list" role="tab" aria-controls="list-product">Products</a>
-                            <a href="?section=viewproduct" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-order-list" role="tab" aria-controls="list-order">Edit Products</a>
+                            <a href="?section=viewproduct" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-view-list" role="tab" aria-controls="list-view">Edit Products</a>
                             <a href="?section=access" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-access-list" role="tab" aria-controls="list-access">Authorized Access</a>
                             <a href="?section=account" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Edit Profile</a>
                             <a href="?section=changepassword" class="list-group-item list-group-item-action border-0 rounded-1 mb-1 fw-bold" id="list-profile-list" role="tab" aria-controls="list-profile">Change Password</a>
@@ -73,6 +72,9 @@
                                     $section = $_GET['section'];
 
                                     switch ($section){
+                                        case 'vieworder':
+                                            include('vieworder.php');
+                                            break;
                                         case 'product':
                                             include('product.php');
                                             break;
@@ -187,7 +189,7 @@
                                                             <div class="mt-2 pt-1 text-center"><i class="fa-solid fa-sack-dollar" style="color: #000000; font-size: 3.5rem"></i></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="card-title"><span style="font-size: 2rem;">$ <?php echo $formattedEarning ?></span> <br> Earnings</div>
+                                                            <div class="card-title"><span style="font-size: 2rem;">NRs. <?php echo $earningCount ?></span> <br> Earnings</div>
                                                         </div>
                                                     </div>
                                                 </div>
